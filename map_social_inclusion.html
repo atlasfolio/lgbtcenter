@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>New York Counties Choropleth Map</title>
+    <script src="https://d3js.org/d3.v7.min.js"></script>
+    <style>
+        #map svg {
+            width: 80vw;   /* Use 80% of the viewport width */
+            height: 80vh;  /* Use 80% of the viewport height */
+            max-width: 100%;
+            max-height: 100%;
+            font-family: Arial;
+        }
+
+        #dataColumnSelect {
+            position: absolute;
+            top: 1%;
+            left: 1%; /* Adjust this value according to your design */
+            z-index: 1000;
+        }
+
+        #tooltip {
+            font-family: Arial;
+            font-size: 1em;
+            position: absolute;
+            visibility: hidden;
+            padding: 10px;
+            background: rgba(255,255,255,0.8);
+            border: 1px solid #ddd;
+            border-radius: 3px;
+            pointer-events: none;
+        }
+
+        select {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            z-index: 1000;
+        }
+    </style>
+</head>
+<body>
+<select id="dataColumnSelect">
+    <option value="feeling_isolated">Over the past year, how often do you feel isolated from others?</option>
+    <option value="feeling_left_out">Over the past year, how often do you feel left out?</option>
+    <option value="lack_companionship">Over the past year, how often do you feel that you lack companionship?</option>
+    <option value="social_support">Over the past year, how often do you feel supported by others?</option>
+</select>
+<br>
+
+<div id="tooltip"></div>
+<br>
+
+<div id="map"></div>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    var selectedColumn = "feeling_isolated";
+    var dataMap = {};
+    var geoData;
+
+    function updateLegendPosition(svg, width) {
+        var legendX = width * 0.1, legendY = 10;
+        var legendWidth = width * 0.2, legendHeight = 20, legendMargin = 10;
+
+        svg.select(".legend")
+            .attr("x", legendX)
+            .attr("y", legendY);
+
+        var xLegendScale = d3.scaleLinear()
+            .domain([50, 100])
+            .range([0, legendWidth]);
+
+        svg.select(".legend-axis")
+            .attr("transform", `translate(${legendX}, ${legendY + legendHeight + legendMargin})`)
+            .call(d3.axisBottom(xLegendScale)
+                .tickSize(5)
+                .tickValues([50, 59, 69, 79, 89, 100])
+                .tickFormat(d => d + "%"));
+    }
+
+    function updateSelectPosition() {
+        var selectX = 10, selectY = 10;
+        d3.select("#dataColumnSelect").style("top", selectY + "px").style("left", selectX + "px");
+    }
+
+    function redraw() {
+        var width = Math.max(document.documentElement.clientWidth, window.innerWidth || 0) * 0.8;
+        d3.select("#map").selectAll("svg").remove();
+        drawMap(selectedColumn, width);
+        updateLegendPosition(d3.select("#map svg"), width);
+        updateSelectPosition();
+    }
+
+    window.addEventListener("resize", redraw);
+
+    // Load GeoJSON and CSV data
+    d3.json("new-york-counties.geojson").then(function(geoJSONData) {
+        geoData = geoJSONData;
+        return d3.csv("data_map_social_inclusion.csv");
+    }).then(function(csvData) {
+        csvData.forEach(function(d) {
+            var countyName = d.county;
+            dataMap[countyName] = {
+                lack_companionship: +d.lack_companionship * 100,
+                feeling_left_out: +d.feeling_left_out * 100,
+                feeling_isolated: +d.feeling_isolated * 100,
+                social_support: +d.social_support * 100,
+            };
+        });
+        
+        var width = Math.max(document.documentElement.clientWidth, window.innerWidth || 0) * 0.8;
+        drawMap(selectedColumn, width);
+        updateLegendPosition(d3.select("#map svg"), width);
+        updateSelectPosition();
+    });
+
+    function drawMap(columnName, width) {
+        var height = Math.max(document.documentElement.clientHeight, window.innerHeight || 0) * 0.8;
+        var svg = d3.select("#map").append("svg")
+            .attr("width", width)
+            .attr("height", height);
+        var projection = d3.geoMercator().fitSize([width, height], geoData);
+        var path = d3.geoPath().projection(projection);
+        var colorScale = createCustomColorScale();
+
+        svg.selectAll("path")
+           .data(geoData.features)
+           .enter()
+           .append("path")
+           .attr("d", path)
+           .attr("stroke", "white")
+           .attr("stroke-width", 1)
+           .style("fill", d => {
+               var countyName = d.properties.name;
+               var value = dataMap[countyName] && dataMap[countyName][columnName];
+               return value != null ? colorScale(value) : "#ccc";
+           })
+           .on("mouseover", function(event, d) {
+               d3.select("#tooltip")
+                 .style("visibility", "visible")
+                 .style("top", (event.pageY - 10) + "px")
+                 .style("left", (event.pageX + 10) + "px")
+                 .text(`${d.properties.name}: ${formatValue(dataMap[d.properties.name][columnName])}`);
+           })
+           .on("mouseout", function() {
+               d3.select("#tooltip").style("visibility", "hidden");
+           });
+
+        drawLegend(svg, width);
+    }
+
+    function drawLegend(svg, width) {
+        var legendX = width * 0.1, legendY = 10;
+        var legendWidth = width * 0.2, legendHeight = 20, legendMargin = 10;
+        var sectionWidth = legendWidth / 9;  // There are 9 color sections
+
+        var colors = [
+            "#b3cde3",  // 50-54
+            "#a6bddb",  // 55-59
+            "#92acd8",  // 60-64
+            "#7b9dd1",  // 65-69
+            "#6292c2",  // 70-74
+            "#4677b5",  // 75-79
+            "#2a5ca8",  // 80-84
+            "#1d4a90",  // 85-89
+            "#08306b"   // 90+
+        ];
+
+        colors.forEach((color, index) => {
+            svg.append("rect")
+                .attr("x", legendX + index * sectionWidth)
+                .attr("y", legendY)
+                .attr("width", sectionWidth)
+                .attr("height", legendHeight)
+                .style("fill", color);
+        });
+
+        var xLegendScale = d3.scaleLinear()
+            .domain([50, 100])
+            .range([0, legendWidth]);
+
+        var legendAxis = d3.axisBottom(xLegendScale)
+            .tickSize(5)
+            .tickValues([50, 54, 59, 64, 69, 74, 79, 84, 89, 100])
+            .tickFormat(d => `${d}%`);
+
+        svg.append("g")
+            .attr("class", "legend-axis")
+            .attr("transform", `translate(${legendX}, ${legendY + legendHeight + legendMargin})`)
+            .call(legendAxis);
+    }
+
+    function createCustomColorScale() {
+        return d3.scaleThreshold()
+            .domain([54, 59, 64, 69, 74, 79, 84, 89])  // Define breaks in the scale
+            .range([
+                "#b3cde3",  // 50-54
+                "#a6bddb",  // 55-59
+                "#92acd8",  // 60-64
+                "#7b9dd1",  // 65-69
+                "#6292c2",  // 70-74
+                "#4677b5",  // 75-79
+                "#2a5ca8",  // 80-84
+                "#1d4a90",  // 85-89
+                "#08306b"   // 90+
+            ]);
+    }
+
+    function formatValue(value) {
+        return value ? d3.format(".0f")(value) + "%" : "N/A";
+    }
+
+    d3.select("#dataColumnSelect").on("change", function() {
+        selectedColumn = d3.select(this).property("value");
+        redraw();
+    });
+});
+</script>
+</body>
+</html>
