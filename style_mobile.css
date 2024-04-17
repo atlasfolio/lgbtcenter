@@ -42,6 +42,7 @@ body, h1, h2, p {
     padding: 0;
     box-sizing: border-box;
     min-width: 0;        /* Fixes issues with flexbox stretching */
+    margin-bottom: 5%;
 }
 
 
@@ -72,6 +73,10 @@ body, h1, h2, p {
 
     #column1, #column2 {
         padding-top: 0; /* Resets top padding for a clean stack */
+    }
+
+    section {
+        margin-bottom: 30px;
     }
 }
 
@@ -251,10 +256,10 @@ a:hover {
 .largest {
     width: 6vw; 
     height: 6vw; 
-    max-width: 150px; 
-    max-height: 150px;
-    min-width: 100px; /* Adjust minimum size for better visibility */
-    min-height: 100px;
+    max-width: 175px; 
+    max-height: 175px;
+    min-width: 120px; /* Adjust minimum size for better visibility */
+    min-height: 120px;
     font-size: 1.25em; /* Slightly larger text for larger circles */
 }
 
@@ -400,4 +405,5 @@ section {
         --text-font-size: 14px; /* Smaller font size for mobile */
     }
 }
+
 
