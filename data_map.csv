@@ -1,0 +1,63 @@
+Region,county,culturally_competent,lack_of_information,community_fear,support_groups,adequately_trained,refuse_service
+Capital District,Albany County,0.48,0.66,0.47,0.59,0.62,0.23
+Western New York,Allegany County,0.22,0.41,0.41,0.46,0.46,0.15
+New York City,Bronx County,0.27,0.46,0.31,0.39,0.46,0.12
+Southern Tier,Broome County,0.55,0.71,0.55,0.69,0.71,0.25
+Southern Tier,Cattaraugus County,0.22,0.41,0.41,0.46,0.46,0.15
+Finger Lakes,Cayuga County,0.22,0.46,0.39,0.55,0.48,0.19
+Southern Tier,Chautauqua County,0.22,0.41,0.41,0.46,0.46,0.15
+Southern Tier,Chemung County,0.55,0.71,0.55,0.69,0.71,0.25
+Southern Tier,Chenango County,0.55,0.71,0.55,0.69,0.71,0.25
+North Country,Clinton County,0.43,0.63,0.55,0.66,0.47,0.16
+Capital District,Columbia County,0.48,0.66,0.47,0.59,0.62,0.23
+Finger Lakes,Cortland County,0.22,0.46,0.39,0.55,0.48,0.19
+Southern Tier,Delaware County,0.55,0.71,0.55,0.69,0.71,0.25
+Mid-Hudson,Dutchess County,0.41,0.57,0.44,0.55,0.54,0.19
+Western New York,Erie County,0.22,0.41,0.41,0.46,0.46,0.15
+North Country,Essex County,0.43,0.63,0.55,0.66,0.47,0.16
+North Country,Franklin County,0.43,0.63,0.55,0.66,0.47,0.16
+Central New York & Mohawk Valley,Fulton County,0.35,0.57,0.48,0.54,0.53,0.18
+Western New York,Genesee County,0.22,0.41,0.41,0.46,0.46,0.15
+Capital District,Greene County,0.48,0.66,0.47,0.59,0.62,0.23
+North Country,Hamilton County,0.43,0.63,0.55,0.66,0.47,0.16
+Central New York & Mohawk Valley,Herkimer County,0.35,0.57,0.48,0.54,0.53,0.18
+North Country,Jefferson County,0.43,0.63,0.55,0.66,0.47,0.16
+New York City,Kings County,0.27,0.46,0.31,0.39,0.46,0.12
+North Country,Lewis County,0.43,0.63,0.55,0.66,0.47,0.16
+Finger Lakes,Livingston County,0.22,0.46,0.39,0.55,0.48,0.19
+Central New York & Mohawk Valley,Madison County,0.35,0.57,0.48,0.54,0.53,0.18
+Finger Lakes,Monroe County,0.22,0.46,0.39,0.55,0.48,0.19
+Central New York & Mohawk Valley,Montgomery County,0.35,0.57,0.48,0.54,0.53,0.18
+Long Island,Nassau County,0.49,0.74,0.58,0.57,0.6,0.19
+New York City,New York County,0.27,0.46,0.31,0.39,0.46,0.12
+Western New York,Niagara County,0.22,0.41,0.41,0.46,0.46,0.15
+Central New York & Mohawk Valley,Oneida County,0.35,0.57,0.48,0.54,0.53,0.18
+Finger Lakes,Onondaga County,0.22,0.46,0.39,0.55,0.48,0.19
+Finger Lakes,Ontario County,0.22,0.46,0.39,0.55,0.48,0.19
+Mid-Hudson,Orange County,0.41,0.57,0.44,0.55,0.54,0.19
+Western New York,Orleans County,0.22,0.41,0.41,0.46,0.46,0.15
+Finger Lakes,Oswego County,0.22,0.46,0.39,0.55,0.48,0.19
+Central New York & Mohawk Valley,Otsego County,0.35,0.57,0.48,0.54,0.53,0.18
+Mid-Hudson,Putnam County,0.41,0.57,0.44,0.55,0.54,0.19
+New York City,Queens County,0.27,0.46,0.31,0.39,0.46,0.12
+Capital District,Rensselaer County,0.48,0.66,0.47,0.59,0.62,0.23
+New York City,Richmond County,0.27,0.46,0.31,0.39,0.46,0.12
+Mid-Hudson ,Rockland County,0.41,0.57,0.44,0.55,0.54,0.19
+Capital District,Saratoga County,0.48,0.66,0.47,0.59,0.62,0.23
+Capital District,Schenectady County,0.48,0.66,0.47,0.59,0.62,0.23
+Capital District,Schoharie County,0.48,0.66,0.47,0.59,0.62,0.23
+Southern Tier,Schuyler County,0.55,0.71,0.55,0.69,0.71,0.25
+Finger Lakes,Seneca County,0.22,0.46,0.39,0.55,0.48,0.19
+North Country,St. Lawrence County,0.43,0.63,0.55,0.66,0.47,0.16
+Southern Tier,Steuben County,0.55,0.71,0.55,0.69,0.71,0.25
+Long Island,Suffolk County,0.49,0.74,0.58,0.57,0.6,0.19
+Mid-Hudson,Sullivan County,0.41,0.57,0.44,0.55,0.54,0.19
+Southern Tier,Tioga County,0.55,0.71,0.55,0.69,0.71,0.25
+Southern Tier,Tompkins County,0.55,0.71,0.55,0.69,0.71,0.25
+Mid-Hudson,Ulster County,0.41,0.57,0.44,0.55,0.54,0.19
+Capital District,Warren County,0.48,0.66,0.47,0.59,0.62,0.23
+Capital District,Washington County,0.48,0.66,0.47,0.59,0.62,0.23
+Finger Lakes,Wayne County,0.22,0.46,0.39,0.55,0.48,0.19
+Mid-Hudson,Westchester County,0.41,0.57,0.44,0.55,0.54,0.19
+Western New York,Wyoming County,0.22,0.41,0.41,0.46,0.46,0.15
+Finger Lakes,Yates County,0.22,0.46,0.39,0.55,0.48,0.19
