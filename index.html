@@ -1,0 +1,329 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>New York State LGBTQ+ Health and Human Services Needs Assessment</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels"></script> <!-- Chart.js Datalabels Plugin -->
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
+    <script src="https://d3js.org/d3.v7.min.js"></script>
+    <link rel="stylesheet" href="style.css"> <!-- If you have a separate CSS file -->
+
+
+    <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+    <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+
+
+</head>
+<body>    
+    <nav>
+        <ul>
+            <li><a href="#section1">Introduction</a></li>
+            <li><a href="#section2">Generational shifts</a></li>
+            <li><a href="#section3">Disparities (race, ethnicity, immigration)</a></li>
+            <li><a href="#section4">Covid-19</a></li>
+            <li><a href="#section5">Mental Health</a></li>
+            <li><a href="#section6">Barriers to service</a></li>
+        </ul>
+    </nav>
+
+    <section id="section1"> 
+
+    <div class="container">
+        <div class="column" id="column1">
+            <h1>Introduction</h1>
+            <div class="image-container">
+                <!-- <img src="logo.png"> -->
+                <img src="cover.png">
+
+            </div> 
+            <p><i><b>The New York State LGBTQ+ Health and Human Services Network Needs Assessment</b></i> is one of the largest LGBTQ Health Surveys in the United States. With the aim to give voice to the needs and barriers to services for this underserved community, the extensive report provides insights into the current state and needs of the LGBTQ community, exploring disparities by race, ethnicity, age, gender, disabilities, religion, region of NYS, education, income, and more. 
+             
+              
+               
+                        The Network surveyed more than 2,300 respondents throughout New York State using a mixed-methods online survey tool.
+                        <br><br>Conducted between September and November 2021 near the height of the pandemic, the survey also provides a unique capture of the impact of COVID-19 on the LGBTQ community and how it deepened and exacerbated existing inequalities. The following interactive visualizations explore key findings from this report, highlighting intersectional disparities within the LGBTQ community in need and access to key services, such as mental health.
+                      <br><br>
+               
+                     To see the full report, <a href="https://nyslgbtq.org/wp-content/uploads/2023/03/TRX-Report-010823-FINAL-REV-2.pdf">click here</a>. </p>
+        
+                     <div class="image-container-2">
+                        <img src="logo.png">
+                        <!-- <img src="cover.png"> -->
+        
+                    </div> 
+                    </div>
+
+    </div></section>
+
+    <section id="section2"> 
+    <div class="container">
+        <div class="column" id="column1">
+            <h1>Generational shifts</h1>
+
+<p><b>A generational shift is underway.</b> The 2021 Survey shows a community that has shifted substantially in terms of gender expression and identity since the last survey in 2015. The community is growing more diverse in gender identity and sexual orientation, such that binary gender identities and lesbian and gay orientations are trending toward minority status in the larger LGBTQ+ community. The shift is most pronounced in the breakdown of gender and orientation by three major age groups (13-34, 35-49, 50+). LGBTQ community members who are over 35 years of age identify primarily (72%) as either men or women (cis and trans), while those under 35 identify growingly as genderqueer, genderfluid, other genders, or non-binary (45%). Those 35+ report a higher need for care for chronic conditions and seem to need more information and education on mental health, while those under 35 report a higher need for mental health care (57.7%).
+<br><br>These differences in orientation and gender expression point to substantially different lived experience in different age groups. To address the needs of the LGBTQ+ community today means creating appropriate resources and responses for youth, those in middle adulthood, and community members who are ageing.
+
+
+                <br><br><i>The radar chart to the right shows gender identity and sexuality, by age group.</i>
+            </p>
+             </div>
+        <div class="column" id="column2">
+            <canvas id="triangleChart"></canvas>
+        </div>
+    </div>
+    </section>
+
+    <section id="section3"> 
+    <div class="container">
+        <div class="column" id="column1">
+            <h1>Disparity in access to services</h1>
+            <h2>Race and ethnicity</h2>
+           
+                  <p> Disparities in needs, access, and outcomes in the LGBTQ+ community mirror the patterns of racial and ethnic health disparities at-large in American society. In the majority of needs and issues examined in the survey, non-White respondents report higher levels of needs and lower levels of receiving services than their White counterparts.
+                    <br><br>In some areas the disparities are glaring — especially in terms of food security, obtaining public assistance, and receiving services sought in most service areas including chronic conditions, major health events, mental health, environmental health, and reproductive health. In 20 out of 23 different services non- White respondents reported a lower level of receiving services than White respondents.
+                    
+   <br><br>
+                    The bar chart below shows the percentage of respondents who sought support for <select id="categorySelect">
+                        <option value="mentalHealth">mental health</option>
+                        <option value="chronicConditions">chronic conditions</option>
+                        <option value="majorHealthEvents">major health events</option>
+                        <option value="reproductiveHealth">reproductive health</option>
+                        <option value="jobRelatedIssues">job-related issues</option>
+                        <option value="environmentalHealth">environmental health</option>
+                        <option value="abuse">relationship or familial abuse</option>
+                        <option value="substanceAbuse">substance abuse</option>
+                    
+                    </select>
+                     but were unable to access services:
+                <canvas id="accessToCareChart"></canvas>
+
+            </div>
+
+
+
+        <div class="column" id="column2">
+
+            <h2>Immigration and asylum status</h2>
+            <p>Immigration and asylum experiences affect every aspect of quality of life. HIV prevalence among respondents born outside the U.S. is 4 to 5 times the survey mean (15%-18%) compared to 3-5% for those born in the US. Those born outside the US were also twice as likely to report abuse in relationships or the family, twice as likely to have reported environmental health concerns, and more likely to have experienced major health events (e.g., medical emergencies, surgeries, or major acute illness) but two-to-three times more likely to have not received services for major health events.
+            </p>
+            <canvas id="hivPrevalence"></canvas>
+
+            </div>
+
+               
+    
+    
+    
+    </div>
+
+    </section>
+
+
+    <section id="section4"> 
+
+
+        <div class="container">
+            <div class="column" id="column1">
+
+                <h1>The impact of Covid-19 on access to services</h1>
+                <br>
+
+                <b>The Covid-19 pandemic exacerbated existing inequalities even further.</b> Most respondents rated obtaining mental health, in-home health, specialty services, substance use services, and dental care more difficult to obtain during the pandemic. 52% of non-White respondents noting difficulty accessing transition care during the COVID-19 pandemic as compared with 43% of White respondents. Overall, non-White respondents reported higher levels of difficulties in obtaining services than White respondents in most service areas.</p>
+                
+                  <br>
+                  <div id="myChartLegend" class="chart-legend">
+                    <ul>
+                      <li><span class="legend-color" style="background-color: rgba(242, 105, 95, 0.7);"></span>Transitioning care</li>
+                      <li><span class="legend-color" style="background-color: rgba(255, 165, 0, 0.7);"></span>Prescriptions</li>
+                      <li><span class="legend-color" style="background-color: rgba(258, 206, 67, 0.7);"></span>Specialty care</li>
+                      <li><span class="legend-color" style="background-color: rgba(126, 188, 100, 0.7);"></span>Primary care</li>
+                    </ul><br>
+                    <ul>
+                
+                        <li><span class="legend-color" style="background-color: rgba(12, 75, 126, 0.7);"></span>In-home health care</li>
+                        <li><span class="legend-color" style="background-color: rgba(35, 153, 181, 0.7);"></span>Emergency or urgent care</li>
+                        <li><span class="legend-color" style="background-color: rgba(238, 130, 238, 0.7);"></span>Mental health services</li>
+                      </ul><br>
+                  </div>
+                <canvas id="rainbowChart"></canvas>
+               
+
+        </div>
+
+        <div class="column" id="column2">
+            <h3>Covid-19 Infection Rate, by race and ethnicity</h3>
+<p>Approximately 10% of respondents had tested positive for COVID-19 at the time of the survey. As in the population as a whole, the effects of the pandemic were more strongly felt by non-White respondents, with respondents who identified as Black, another race or ethnicity, or Latinx/Hispanic having the highest rates.</p>
+            <canvas id="covidInfection"></canvas>
+          
+                      </div>
+
+    </div>
+    </section>
+
+    <section id="section5"> 
+
+    <div class="container">
+        <div class="column" id="column1">
+
+            <h1>Mental health</h1>
+
+<p>
+    <b>Mental health is the both the biggest support need and the greatest opportunity</b> for improving the well-being and quality of life of the LGBTQ community in New York State. The survey shows that 78% of respondents struggle with mental health issues, yet 30% are unable to access necessary services.
+    
+    </p>
+            <br><br>
+        Nine of every ten respondents (89%) reported some substance use (including alcohol and tobacco), with half (50%) reporting using only one or two substances. Another fifth (18%) reported using three substances, and another fifth (21%) reported using four or more substances.
+            Respondents reported feeling the following at least <i>‘sometimes, half the time or most of the time':</i>        
+            
+            <ul class="grid" style="list-style-type: none; padding-left: 0;"> <!-- Added class 'grid' for styling -->
+            
+                <li class="item">
+                    <span class="circle large" style="background-color: #F2695F;">
+                        <span>81%</span>
+                    </span>
+                    <span class="text">Anxious</span>
+                </li>
+            
+                <li class="item">
+                    <span class="circle medium" style="background-color: #EECE43;">
+                        <span>73%</span>
+                    </span>
+                    <span class="text">Down, depressed, or hopeless</span>
+                </li>
+            
+                <li class="item">
+                    <span class="circle small" style="background-color: #7EBC64;">
+                        <span>70%</span>
+                    </span>
+                    <span class="text">Little interest in doing things</span>
+                </li>
+            
+                <li class="item">
+                    <span class="circle smallest" style="background-color: #0C4B7F;">
+                        <span>33%</span>
+                    </span>
+                    <span class="text">Scared for my life</span>
+                </li>
+            
+            </ul>
+            
+            <br><br>The mental health crisis is highly associated with experiences of discrimination and other factors associated with the psycho-social context of self-care and seeking services. The other factors include: high levels of medical mistrust, lower self-reported health, low self-reported quality of life, and a lack of social inclusion and support reported by up to half or more of the respondents. Addressing the psycho-social context of self-care requires action in multiple areas, such as addressing the shortage of mental health professionals, addressing the lack of clear and supported pathways to bring minority candidates into the profession, or supporting certified and trained peer positions that address issues of discrimination, fear, and mistrust in the community.
+       
+
+
+
+        </p>
+
+
+    </div>
+
+    <div class="column" id="column2">
+        <h3>Social inclusion and support, by New York State region</h3>
+        To improve mental health outcomes, it is important to address social inclusion and specific community supports for individuals. This can mean social programming or community centers, but also through the affirmation of the LGBTQ+ community in health fairs, schools, libraries, parks, and other public places. Click on the drop-down menu below to see the distribution of survey respondents by NYS region who answered 'Somewhat' or 'Major' in response to each question on social isolation and support. 
+<br><br>
+        <iframe id="igraph" scrolling="no" style="border:none;" seamless="seamless" src="map_social_inclusion.html" height="60%" width="100%"></iframe>
+
+                  </div>
+
+</div></section>
+
+
+
+
+<section id="section6"> 
+
+
+<div class="container">
+   
+    <div class="column" id="column1">
+        <h1>Barriers to service</h1>
+      <p>Even though services are needed by the LGBTQ community, 62.6% of respondents did not seek services - with over half of those not seeking services being 35 and younger. Respondents were asked about barriers to access services more generally. The survey asked, “How much of a problem is each of the following for seeking and obtaining the health care services or opportunities you need?” The survey provided a list of factors that could make seeking care difficult. Respondents used a 4-point scale: 1 = ”Not at all;” 2 = “Very slight problem;” 3 = “Somewhat of a problem;” and 4 = “Major Problem.” The following is the percentage respondents who cited that these categories were ‘somewhat’ or ‘major’ barriers to services.</p>   
+
+      <h3>Top barriers to service, by New York State region</h3>
+
+      <iframe id="igraph" scrolling="no" style="border:none;" seamless="seamless" src="map_barriers.html" height="60%" width="100%"></iframe>
+
+
+        </div>
+
+        
+        <div class="column" id="column2">
+            <h3>Top overall barriers to care and services</h3>
+
+            <br><br>
+               <ul class="grid" style="list-style-type: none; padding-left: 0;"> <!-- Added class 'grid' for styling -->
+       
+                   <li class="item">
+                       <span class="circle largest" style="background-color: #0C4B7F;">
+                           <span>54%</span>
+                       </span>
+                       <span class="text">Lack of public information about LGBTQ+ competence medical or service providers in my area </span>
+                   </li>
+               
+                   <li class="item">
+                       <span class="circle largest" style="background-color: #2399B5;">
+                           <span>53%</span>
+                       </span>
+                       <span class="text">Not enough health professionals who are adequately trained and competent to deliver health care to LGBTQ people</span>
+                   </li>
+               
+                   <li class="item">
+                       <span class="circle largest" style="background-color: #EECE43;">
+                           <span>51%</span>
+                       </span>
+                       <span class="text">Not enough support groups for LGBTQ+ people</span>
+                   </li>
+               
+                   <li class="item">
+                       <span class="circle medium" style="background-color: #7EBC64;">
+                           <span>42%</span>
+                       </span>
+                       <span class="text">Community fear or dislike of LGBTQ+ people</span>
+                   </li>
+       
+                   <li class="item">
+                       <span class="circle medium" style="background-color:  #F2695F;">
+                           <span>39%</span>
+                       </span>
+                       <span class="text">My personal financial resources/can't afford to pay costs of care or services</span>
+                   </li>
+       
+                   <li class="item">
+                       <span class="circle small" style="background-color: #0C4B7F;">
+                           <span>36%</span>
+                       </span>
+                       <span class="text">Long distances to LGBTQ+ culturally competent medical facilities</span>
+                   </li>
+       
+                   <li class="item">
+                       <span class="circle small" style="background-color: #2399B5;">
+                           <span>34%</span>
+                       </span>
+                       <span class="text">Long distances to other (non-medical) LGBT sensitive service providers</span>
+                   </li>
+       
+                   <li class="item">
+                       <span class="circle smallest" style="background-color: #EECE43;">
+                           <span>18%</span>
+                       </span>
+                       <span class="text">Doctors and other health care workers who refuse to provide services to LGBTQ people</span>
+                   </li>
+               
+               </ul>
+    
+                      </div>
+    
+   
+    
+
+
+
+</div> </section>
+
+
+    <script src="script.js"></script>
+
+</body>
+</html>
