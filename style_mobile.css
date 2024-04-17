@@ -44,6 +44,9 @@ body, h1, h2, p {
     min-width: 0;        /* Fixes issues with flexbox stretching */
 }
 
+
+
+
 #column1 {
     padding-right: 5%;
 }
@@ -53,6 +56,26 @@ body, h1, h2, p {
     padding-right: 5%;
 
 }
+
+
+
+/* Media query for screens with a max width of 768px (tablets and mobile phones) */
+@media (max-width: 768px) {
+    .container {
+        flex-direction: column;
+    }
+
+    .column, #column1, #column2 {
+        width: 100%; /* Each column takes full width of the screen on small devices */
+        padding-right: 0%; /* Removes right padding on mobile for cleaner look */
+    }
+
+    #column1, #column2 {
+        padding-top: 0; /* Resets top padding for a clean stack */
+    }
+}
+
+
 
 a {
     font-size: 1em;                   /* Sets the font size */
@@ -366,20 +389,6 @@ section {
 
 /* MOBILE DESIGN */
 
-@media (max-width: 768px) {
-    .container, .grid {
-        flex-direction: column;
-    }
-    .column, .item {
-        flex: 1 1 100%;
-        margin-right: 0;
-    }
-    .image-container, .image-container-2 {
-        float: none;
-        margin: 10px auto;
-        width: 90%; /* Responsive width */
-    }
-}
 
 
 :root {
@@ -389,21 +398,6 @@ section {
 @media (max-width: 768px) {
     :root {
         --text-font-size: 14px; /* Smaller font size for mobile */
-    }
-}
-
-.container, .grid {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-between; /* This helps in alignment */
-}
-
-@media (max-width: 768px) {
-    .container {
-        flex-direction: column;
-    }
-    .column {
-        flex: 1 1 100%;
     }
 }
 
