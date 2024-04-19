@@ -8,8 +8,472 @@
     <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels"></script> <!-- Chart.js Datalabels Plugin -->
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
     <script src="https://d3js.org/d3.v7.min.js"></script>
-    <link rel="stylesheet" href="style.css"> <!-- If you have a separate CSS file -->
+    <!-- <link rel="stylesheet" href="style_mobile.css"> If you have a separate CSS file -->
 
+    <style>
+
+
+
+body {
+    font-family: 'Montserrat', sans-serif;
+    margin: 1% auto;
+    padding: 1 1 3%;
+    /* margin-top: 3%; */
+    /* margin-left: 3%; */
+    /* margin-right: 3%;
+    margin-bottom: 3%;  */
+    background-color: #fafafa;
+    color: #2399b5;
+
+}
+
+
+h1 {
+    font-weight: 700; /* Bold */
+    font-size: 1.75em;
+    color: #f2695f;
+    margin-bottom: 0;
+    margin-top: 5%;
+
+}
+
+h2 {
+    font-weight: 500; /* Bold */
+    font-size: 1.5em;
+    color: #f2695f;
+    margin-bottom: 0;
+    margin-top: 0%;
+
+
+}
+
+
+
+
+.container {
+    
+    display: flex;      /* Enables flexbox layout mode */
+    flex-wrap: wrap;    /* Allows items to wrap onto the next line as needed */
+    width: 100vw;
+    height: 100vh;
+    margin-left: 3%;
+    padding-top: 5%;
+}
+
+
+.column {
+    flex: 1 1 50%;       /* Flex-grow, Flex-shrink, Flex-basis */
+    padding: 0;
+    box-sizing: border-box;
+    min-width: 0;        /* Fixes issues with flexbox stretching */
+    margin-bottom: 5%;
+}
+
+
+canvas {
+    display: block; /* prevents bottom margin/padding issues */
+    width: 100%; /* or fixed size, ensures it fits within its container */
+    height: auto; /* or fixed size, based on your design needs */
+}
+
+
+#column1 {
+    padding-right: 5%;
+}
+
+#column2 {
+    padding-top: 1%; 
+    padding-right: 5%;
+
+}
+
+
+
+/* Media query for screens with a max width of 768px (tablets and mobile phones) */
+@media (max-width: 768px) {
+    .container {
+        flex-direction: column;
+        padding-top: 0;
+        padding-left: 0;
+        width: auto;
+        height: auto;
+    }
+
+
+    h1 {
+        font-size: 1.5rem; /* Larger headers for mobile */
+    }
+
+    .column, #column1, #column2 {
+        flex: 1 0 100%; /* Flex-grow, Flex-shrink, Flex-basis */
+        width: 100%; /* Ensures each column takes full width */
+        padding-right: 0; /* Adjust padding as needed */
+        padding-left: 0; /* Adjust padding for consistency */
+        padding-top: 0; /* Adjust top padding if needed */
+        margin-bottom: 5%; /* Maintain bottom margin for spacing */
+    }
+
+
+    section {
+        margin-bottom: 30px;
+    }
+
+    :root {
+        --text-font-size: 14px; /* Smaller font size for mobile */
+    }
+
+}
+
+
+
+a {
+    font-size: 1em;                   /* Sets the font size */
+    font-weight: bold;                 /* Makes the font bold */
+    color: #f2695f;                       /* Sets the font color */
+    text-decoration: none;             /* No underline */
+}
+
+a:hover {
+    color: #2399b5;                   /* Changes color on hover */
+}
+
+
+#covidInfection
+{
+    /* max-height: 500px;
+    display: block;
+    margin-top: 6%; */
+    max-width: 70%;
+    margin-left: 15%;
+    max-height: 70%;
+    margin-bottom: 15%;
+}
+
+#triangleChart {
+    max-width: auto;
+    max-height: 80%; 
+    display: block;
+    /* max-height: 500px;   /* Example fixed height */
+    /* display: block; */
+    /* width: auto;         Maintains aspect ratio */
+    /* height: auto;       */
+}
+
+
+#hivPrevalence {
+   
+    display: block;
+    max-width: auto;
+    max-height: auto; 
+    margin-left: 10%;
+    margin-right: 10%;
+    margin-top: 10%;
+}
+
+#accessToCareChart {
+   
+    display: block;
+    max-width: auto;
+    max-height: auto; 
+    margin-left: 15%;
+}
+
+
+
+.image-container {
+    float: right;
+    max-width: 30%;
+    max-height: auto;
+    
+    margin: 0 0px 0px 0;    
+    margin-left: 5%;      
+    width: 30%;  /* or 100% if you want it to be responsive */
+            height: auto; /* specify a height or make it responsive as needed */
+            border: none; /* just to show container boundaries, optional */
+        }
+
+  
+        .image-container-2 {
+            float: center;
+            max-width: 50%;
+            max-height: auto;
+            
+            margin: 0 0px 0px 0;    
+            margin-left: 25%;      
+            width: auto;  /* or 100% if you want it to be responsive */
+                    height: 100%; /* specify a height or make it responsive as needed */
+                    border: none; /* just to show container boundaries, optional */
+                }
+        
+                .image-container img {
+                    max-width: 60%;  /* makes the image fill the container's width */
+                    max-height: auto; /* makes the image fill the container's height */
+                    border: solid 1px black; 
+                }
+        
+                .image-container-2 img {
+                    max-width: 100%;  /* makes the image fill the container's width */
+                    max-height: 100%; /* makes the image fill the container's height */
+                }
+        
+
+
+/* RAINBOW CHART LEGEND */
+#rainbow-chart-container {
+    position: relative;
+    display: flex;
+    height: 40vh;
+    width: 100vw;
+    text-align: center; /* Center the legend container inside this div */
+  }
+  
+  .chart-legend {
+    display: block; /* Align the legend block in the center of its container */
+    text-align: center; /* Center the legend text */
+    list-style-type: none; /* Remove default list styling */
+    padding: 0;
+}
+
+.chart-legend ul {
+    padding: 0;
+    margin: 0 auto; /* Centering the UL inside .chart-legend */
+    display: flex; /* Display legend items in a row */
+    justify-content: center; /* Center legend items horizontally */
+    gap: 10px; /* Adjust gap between items */
+    list-style: none;
+}
+
+.chart-legend li {
+    font-size: .5em; /* Adjust based on your design */
+    display: flex; /* Align color box and text horizontally */
+    align-items: center; /* Center items vertically */
+    white-space: nowrap; /* Keep text in a single line */
+}
+
+.legend-color {
+    width: 20px; /* Adjust size of color box */
+    height: 20px; /* Adjust size of color box */
+    display: inline-block; /* Allow it to sit next to text */
+    margin-right: 5px; /* Space between color box and text */
+}
+/* Style for the circles */
+
+
+.item {
+    display: flex;        /* Flexbox for horizontal alignment */
+    align-items: center;  /* Vertically center the content */
+    margin-bottom: 10px;  /* Space between items */
+}
+
+
+
+.grid {
+    display: flex;         /* Enables flexbox */
+    flex-wrap: wrap;       /* Allows items to wrap to the next line */
+    justify-content: space-around; /* Distributes space around items */
+    max-width: 960px;      /* Maximum width of the grid */
+    margin: 0 auto;        /* Centers the grid horizontally */
+}
+
+.item {
+    display: flex;         /* Flexbox for horizontal alignment */
+    align-items: center;   /* Vertically center the content */
+    width: 45%;            /* Each item takes up 45% of the grid width */
+    margin-bottom: 2vh;   /* Space between rows */
+}
+
+.circle {
+    display: flex;
+    align-items: center;   /* Center content vertically */
+    justify-content: center; /* Center content horizontally */
+    text-align: center;
+    color: white;          /* Text color inside the circle */
+    font-size: 1vw;        /* Adjust font size based on the viewport width */
+    border-radius: 50%;    /* Circular shape */
+    box-sizing: border-box;
+
+    margin-right: 1vw;    /* Space between the circle and the text */
+}
+
+
+.largest {
+    width: 6vw; 
+    height: 6vw; 
+    max-width: 175px; 
+    max-height: 175px;
+    min-width: 120px; /* Adjust minimum size for better visibility */
+    min-height: 120px;
+    font-size: 1.25em; /* Slightly larger text for larger circles */
+}
+
+
+.large {
+    width: 5vw; 
+    height: 5vw; 
+    max-width: 150px; 
+    max-height: 150px;
+    min-width: 100px; /* Adjust minimum size for better visibility */
+    min-height: 100px;
+    font-size: 1.25em; /* Slightly larger text for larger circles */
+}
+
+.medium {
+    width: 4.5vw; 
+    height: 4.5vw;
+    max-width: 135px; 
+    max-height: 135px;
+    min-width: 90px;
+    min-height: 90px;
+    font-size: 1.15em; /* Adjust font size proportionally */
+}
+
+.small {
+    width: 4vw; 
+    height: 4vw;
+    max-width: 120px; 
+    max-height: 120px;
+    min-width: 80px;
+    min-height: 80px;
+    font-size: 1em; /* Standard font size */
+}
+
+.smallest {
+    width: 3.5vw; 
+    height: 3.5vw;
+    max-width: 120px; 
+    max-height: 120px;
+    min-width: 80px;
+    min-height: 80px;
+    font-size: 1em; /* Standard font size */
+}
+
+
+
+.text {
+    flex-grow: 1;          /* Takes up the rest of the space in the flex container */
+    font-size: 1.5em; /* Responsive font size */
+}
+
+
+
+
+
+
+
+
+
+    /* Style for the text inside the circles */
+    .circle span {
+        position: absolute;
+        font-size: 1em;
+        color: white;
+        z-index: 1;
+        align-items: center;
+    }
+
+      /* Remove default bullet points */
+      ul {
+        list-style-type: none;
+        padding: 0;
+        margin: 0;
+    }
+
+
+
+section {
+    margin-bottom: 2%;
+    margin-top: 2%;
+}
+
+
+
+:root {
+    --text-font-size: 16px; /* Adjust base text size */
+}
+
+
+/* NAVIGATION */
+
+
+#navbar {
+    position: fixed;
+    right: 0;
+    top: 0;
+    width: 250px;
+    height: 100%;
+    background: #EECE43;
+    color: white;
+    transition: transform 0.3s;
+    transform: translateX(250px);
+    z-index: 1000;
+    font-family: "Montserrat", sans-serif;
+  }
+  
+  #navbar a.active {
+  background-color: #F2695F; /* Highlight color */
+  color: #F2695F;
+  }
+  
+  #navbar.nav-open {
+    transform: translateX(0);
+  }
+  
+  #navbar nav ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+  
+  #navbar nav ul li a {
+    display: block;
+    padding: 1.5%;
+    color: white;
+    text-decoration: none;
+    transition: background 0.3s;
+  }
+  
+  #navbar nav ul li a:hover {
+    background: #2399B5;
+  }
+  
+  #toggleNav {
+    background: transparent;
+    color: #2399B5;
+    border: none;
+    font-size: 2.5em;
+    position: absolute;
+    top: 10px;
+    margin-left: -70px;
+    width: 50px;        /* Set the width to your desired square's side length */
+    height: 50px;       /* Set the height to the same as the width to make it a square */
+    text-align: center; /* Horizontally center the text inside the button */
+
+    /* Vertically center the text. The value should be approximately the button's height */
+    line-height: 1px;
+  }
+
+  /* Progress bar */
+
+
+  #progressBarContainer {
+    position: fixed;
+    width: 100%;
+    height: 10px; /* Adjust height as needed */
+    background-color: #EECE43; /* Yellow background */
+    top: 0;
+    left: 0;
+    z-index: 1000;
+}
+
+#progressBar {
+    height: 100%;
+    background-color: #F2695F; /* Pink color for progress */
+    width: 0%; /* Initial state with no progress */
+}
+
+
+
+    </style>
 
     <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
     <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
@@ -17,43 +481,69 @@
 
 </head>
 <body>    
-    <nav>
-        <ul>
+
+    <div id="progressBarContainer">
+        <div id="progressBar"></div>
+    </div>
+    <div id="navbar" class="nav-closed">
+        <button id="toggleNav">☰</button>
+        <nav>
+          <ul>
             <li><a href="#section1">Introduction</a></li>
             <li><a href="#section2">Generational shifts</a></li>
-            <li><a href="#section3">Disparities (race, ethnicity, immigration)</a></li>
+            <li><a href="#section3">Disparities</a></li>
+            <li><a href="#section4">Covid-19</a></li>
+            <li><a href="#section5">Mental Health</a></li>
+            <li><a href="#section6">Barriers to service</a></li>
+
+          </ul>
+        </nav>
+      </div>
+
+
+    <!-- <nav>
+        <div class="hamburger-menu">
+            <div class="bar"></div>
+            <div class="bar"></div>
+            <div class="bar"></div>
+        </div>
+        <ul id="menu" class="nav-links">
+            <li><a href="#section1">Introduction</a></li>
+            <li><a href="#section2">Generational shifts</a></li>
+            <li><a href="#section3">Disparities</a></li>
             <li><a href="#section4">Covid-19</a></li>
             <li><a href="#section5">Mental Health</a></li>
             <li><a href="#section6">Barriers to service</a></li>
         </ul>
-    </nav>
+    </nav> -->
+    
 
     <section id="section1"> 
 
     <div class="container">
         <div class="column" id="column1">
             <h1>Introduction</h1>
-            <div class="image-container">
-                <!-- <img src="logo.png"> -->
-                <img src="cover.png">
-
-            </div> 
-            <p><i><b>The New York State LGBTQ+ Health and Human Services Network Needs Assessment</b></i> is one of the largest LGBTQ Health Surveys in the United States. With the aim to give voice to the needs and barriers to services for this underserved community, the extensive report provides insights into the current state and needs of the LGBTQ community, exploring disparities by race, ethnicity, age, gender, disabilities, religion, region of NYS, education, income, and more. 
-             
-              
-               
-                        The Network surveyed more than 2,300 respondents throughout New York State using a mixed-methods online survey tool.
-                        <br><br>Conducted between September and November 2021 near the height of the pandemic, the survey also provides a unique capture of the impact of COVID-19 on the LGBTQ community and how it deepened and exacerbated existing inequalities. The following interactive visualizations explore key findings from this report, highlighting intersectional disparities within the LGBTQ community in need and access to key services, such as mental health.
-                      <br><br>
+           
+            <p><i><b>The New York State LGBTQ+ Health and Human Services Network Needs Assessment</b></i> is among the most comprehensive LGBTQ health surveys in the U.S. It aims to highlight the needs and service barriers faced by this underserved community, offering detailed insights into disparities influenced by race, ethnicity, age, gender, disabilities, religion, region, education, income, and more. Conducted online from September to November 2021 during the pandemic peak, the survey involved over 2,300 respondents and captures the profound impact of COVID-19 on LGBTQ individuals, exacerbating pre-existing inequalities.<br><br>This digital overview of the report highlights key findings, including intersectional disparities and access to essential services like mental health.
                
                      To see the full report, <a href="https://nyslgbtq.org/wp-content/uploads/2023/03/TRX-Report-010823-FINAL-REV-2.pdf">click here</a>. </p>
         
+   <br>
                      <div class="image-container-2">
+
                         <img src="logo.png">
-                        <!-- <img src="cover.png"> -->
-        
-                    </div> 
+                        </div>
+                
                     </div>
+
+    <div class="column" id="column2">
+        <div class="image-container-2">
+
+        <img src="cover.png">
+        </div>
+   
+
+        </div>
 
     </div></section>
 
@@ -70,6 +560,7 @@
             </p>
              </div>
         <div class="column" id="column2">
+        <h3>Gender identity and sexual orientation by age group</h3>
             <canvas id="triangleChart"></canvas>
         </div>
     </div>
@@ -79,7 +570,7 @@
     <div class="container">
         <div class="column" id="column1">
             <h1>Disparity in access to services</h1>
-            <h2>Race and ethnicity</h2>
+            <h3>Race and ethnicity</h3>
            
                   <p> Disparities in needs, access, and outcomes in the LGBTQ+ community mirror the patterns of racial and ethnic health disparities at-large in American society. In the majority of needs and issues examined in the survey, non-White respondents report higher levels of needs and lower levels of receiving services than their White counterparts.
                     <br><br>In some areas the disparities are glaring — especially in terms of food security, obtaining public assistance, and receiving services sought in most service areas including chronic conditions, major health events, mental health, environmental health, and reproductive health. In 20 out of 23 different services non- White respondents reported a lower level of receiving services than White respondents.
@@ -105,7 +596,7 @@
 
         <div class="column" id="column2">
 
-            <h2>Immigration and asylum status</h2>
+            <h3>Immigration and asylum status</h3>
             <p>Immigration and asylum experiences affect every aspect of quality of life. HIV prevalence among respondents born outside the U.S. is 4 to 5 times the survey mean (15%-18%) compared to 3-5% for those born in the US. Those born outside the US were also twice as likely to report abuse in relationships or the family, twice as likely to have reported environmental health concerns, and more likely to have experienced major health events (e.g., medical emergencies, surgeries, or major acute illness) but two-to-three times more likely to have not received services for major health events.
             </p>
             <canvas id="hivPrevalence"></canvas>
@@ -130,9 +621,10 @@
                 <h1>The impact of Covid-19 on access to services</h1>
                 <br>
 
-                <b>The Covid-19 pandemic exacerbated existing inequalities even further.</b> Most respondents rated obtaining mental health, in-home health, specialty services, substance use services, and dental care more difficult to obtain during the pandemic. 52% of non-White respondents noting difficulty accessing transition care during the COVID-19 pandemic as compared with 43% of White respondents. Overall, non-White respondents reported higher levels of difficulties in obtaining services than White respondents in most service areas.</p>
+                <u>The Covid-19 pandemic exacerbated existing inequalities even further.</u> Most respondents rated obtaining mental health, in-home health, specialty services, substance use services, and dental care more difficult to obtain during the pandemic. 52% of non-White respondents noting difficulty accessing transition care during the COVID-19 pandemic as compared with 43% of White respondents. Overall, non-White respondents reported higher levels of difficulties in obtaining services than White respondents in most service areas.
+                <br><br><b>Hover over the chart to see the breakdown of those who reported increased difficulty in obtaining services during Covid-19, by race and service type:</b></p>
                 
-                  <br>
+                  
                   <div id="myChartLegend" class="chart-legend">
                     <ul>
                       <li><span class="legend-color" style="background-color: rgba(242, 105, 95, 0.7);"></span>Transitioning care</li>
@@ -173,9 +665,8 @@
     <b>Mental health is the both the biggest support need and the greatest opportunity</b> for improving the well-being and quality of life of the LGBTQ community in New York State. The survey shows that 78% of respondents struggle with mental health issues, yet 30% are unable to access necessary services.
     
     </p>
-            <br><br>
         Nine of every ten respondents (89%) reported some substance use (including alcohol and tobacco), with half (50%) reporting using only one or two substances. Another fifth (18%) reported using three substances, and another fifth (21%) reported using four or more substances.
-            Respondents reported feeling the following at least <i>‘sometimes, half the time or most of the time':</i>        
+            Respondents reported feeling the following at least <i>‘sometimes, half the time or most of the time':</i>  <br><br>      
             
             <ul class="grid" style="list-style-type: none; padding-left: 0;"> <!-- Added class 'grid' for styling -->
             
@@ -315,10 +806,6 @@
     
                       </div>
     
-   
-    
-
-
 
 </div> </section>
 
