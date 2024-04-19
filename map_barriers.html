@@ -7,7 +7,7 @@
     <style>
         #map svg {
             width: 80vw;   /* Use 80% of the viewport width */
-            height: 80vh;  /* Use 80% of the viewport height */
+            height: 85vh;  /* Use 80% of the viewport height */
             max-width: 100%;
             max-height: 100%;
             font-family: Arial;
@@ -30,6 +30,7 @@
             top: 10px;
             left: 10px;
             z-index: 1000;
+            width: 50vw;
         }
     </style>
 </head>
@@ -43,7 +44,7 @@
     <option value="refuse_service">Doctors and other health care workers who refuse to provide services to LGBTQ+ people</option>
 </select>
 <br>
-
+<br>
 <div id="tooltip" style="position: absolute; visibility: hidden; padding: 10px; background: rgba(255,255,255,0.8); border: 1px solid #ddd; border-radius: 3px; pointer-events: none;"></div>
 <br>
 
@@ -154,52 +155,56 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 
     function drawLegend(svg, width) {
-        var legendX = width * 0.1, legendY = 10; // Adjusted to top-left corner
-        var legendWidth = width * 0.2, legendHeight = 20, legendMargin = 10; // Adjusted size
+    var legendX = width * 0.1;
+    var legendY = 30; // Increase y-position to make space for the title
+    var legendWidth = width * 0.2;
+    var legendHeight = 20;
+    var legendMargin = 10;
 
-        var gradients = svg.append("defs")
-            .append("linearGradient")
-            .attr("id", "gradient")
-            .attr("x1", "0%")
-            .attr("x2", "100%")
-            .attr("y1", "0%")
-            .attr("y2", "0%");
+    // Add title above the color bar gradient
+    svg.append("text")
+        .attr("x", legendX)
+        .attr("y", legendY - 21) // Adjusted for better visibility
+        .style("text-anchor", "start")
+        .style("font-size", "12px")
+        .text("Quantile");
 
-        gradients.append("stop")
-            .attr("offset", "0%")
-            .attr("stop-color", "#7EBC64"); // Green (Q1)
-        gradients.append("stop")
-            .attr("offset", "33%")
-            .attr("stop-color", "#2399B5"); // Blue (Q2)
-        gradients.append("stop")
-            .attr("offset", "67%")
-            .attr("stop-color", "#EECE43"); // Yellow (Q3)
-        gradients.append("stop")
-            .attr("offset", "100%")
-            .attr("stop-color", "#F2695F"); // Red (Q4)
+    var gradients = svg.append("defs")
+        .append("linearGradient")
+        .attr("id", "gradient")
+        .attr("x1", "0%")
+        .attr("x2", "100%")
+        .attr("y1", "0%")
+        .attr("y2", "0%");
 
-        svg.append("rect")
-            .attr("class", "legend")
-            .attr("x", legendX)
-            .attr("y", legendY)
-            .attr("width", legendWidth)
-            .attr("height", legendHeight)
-            .style("fill", "url(#gradient)");
+    gradients.append("stop").attr("offset", "0%").attr("stop-color", "#7EBC64"); // Green (Q1)
+    gradients.append("stop").attr("offset", "33%").attr("stop-color", "#2399B5"); // Blue (Q2)
+    gradients.append("stop").attr("offset", "67%").attr("stop-color", "#EECE43"); // Yellow (Q3)
+    gradients.append("stop").attr("offset", "100%").attr("stop-color", "#F2695F"); // Red (Q4)
 
-        var xLegendScale = d3.scaleLinear()
-            .domain([1, 4])
-            .range([0, legendWidth]);
+    svg.append("rect")
+        .attr("class", "legend")
+        .attr("x", legendX)
+        .attr("y", legendY)
+        .attr("width", legendWidth)
+        .attr("height", legendHeight)
+        .style("fill", "url(#gradient)");
 
-        var legendAxis = d3.axisBottom(xLegendScale)
-            .tickSize(5)
-            .tickValues([1, 2, 3, 4])
-            .tickFormat(function(d) { return 'Q' + d; });
+    var xLegendScale = d3.scaleLinear()
+        .domain([1, 4])
+        .range([0, legendWidth]);
 
-        svg.append("g")
-            .attr("class", "legend-axis")
-            .attr("transform", `translate(${legendX}, ${legendY + legendHeight + legendMargin})`)
-            .call(legendAxis);
-    }
+    var legendAxis = d3.axisBottom(xLegendScale)
+        .tickSize(5)
+        .tickValues([1, 2, 3, 4])
+        .tickFormat(function(d) { return 'Q' + d; });
+
+    svg.append("g")
+        .attr("class", "legend-axis")
+        .attr("transform", `translate(${legendX}, ${legendY + legendHeight + legendMargin})`)
+        .call(legendAxis);
+}
+
 
     function createCustomColorScale(columnName) {
         var values = Object.values(dataMap).map(d => d[columnName]).filter(Boolean);
@@ -227,215 +232,3 @@ document.addEventListener('DOMContentLoaded', function() {
 
 
 
-
-
-<!-- <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>New York Counties Choropleth Map</title>
-    <script src="https://d3js.org/d3.v7.min.js"></script>
-    <style>
- 
-
-         #map svg {
-        width: 80vw;   /* Use 80% of the viewport width */
-        height: 80vh;  /* Use 80% of the viewport height */
-        max-width: 100%;
-        max-height: 100%;
-        font-family: Arial;
-    }
-
-#dataColumnSelect {
-    position: absolute;
-    top: 1%;
-    left: 1%; /* Adjust this value according to your design */
-    z-index: 1000;
-}
-
-
-#tooltip{
-    font-family: Arial;
-    font-size: 1em;
-}
-
-select {
-            position: absolute;
-            top: 10px;
-            left: 10px;
-            z-index: 1000;
-        }
-
-
-    </style>
-</head>
-<body>
-    <select id="dataColumnSelect">
-        <option value="community_fear">Community fear or dislike of LGBTQ+ people</option>
-        <option value="lack_of_information">Lack of public information about LGBTQ+ competent medical or service providers in my area</option>
-        <option value="culturally_competent">Long distances to LGBTQ+ culturally competent medical facilities</option>
-        <option value="support_groups">Not enough support groups (clinical or peer) for LGBTQ+ people</option>
-        <option value="adequately_trained">Not enough health professionals who are adequately trained and competent to deliver health care to LGBTQ+ people</option>
-        <option value="refuse_service">Doctors and other health care workers who refuse to provide services to LGBTQ+ people</option>
-    </select>
-    
-
-    <div id="tooltip" style="position: absolute; visibility: hidden; padding: 10px; background: rgba(255,255,255,0.8); border: 1px solid #ddd; border-radius: 3px; pointer-events: none;"></div>
-<br>
-
-    <div id="map"></div>
-
- 
-<script>
-
-document.addEventListener('DOMContentLoaded', function() {
-    var selectedColumn = "culturally_competent"; // Default column to display
-    var dataMap = {};
-    var geoData;
-
-    // Load GeoJSON and CSV data
-    d3.json("new-york-counties.geojson").then(function(geoJSONData) {
-        geoData = geoJSONData;
-        return d3.csv("data_map.csv");
-    }).then(function(csvData) {
-        csvData.forEach(function(d) {
-            var countyName = d.county;
-            dataMap[countyName] = {
-                culturally_competent: +d.culturally_competent,
-                lack_of_information: +d.lack_of_information,
-                community_fear: +d.community_fear,
-                support_groups: +d.support_groups,
-                adequately_trained: +d.adequately_trained,
-                refuse_service: +d.refuse_service
-            };
-        });
-        drawMap(selectedColumn);
-    });
-
-    function drawMap(columnName) {
-        var width = Math.max(document.documentElement.clientWidth, window.innerWidth || 0) * 0.8;
-        var height = Math.max(document.documentElement.clientHeight, window.innerHeight || 0) * 0.8;
-
-        var svg = d3.select("#map").append("svg")
-            .attr("width", width)
-            .attr("height", height);
-
-        var projection = d3.geoMercator().fitSize([width, height], geoData);
-        var path = d3.geoPath().projection(projection);
-
-        var colorScale = createCustomColorScale(columnName);
-
-        svg.selectAll("path")
-           .data(geoData.features)
-           .enter()
-           .append("path")
-           .attr("d", path)
-           .attr("stroke", "white")
-           .attr("stroke-width", 1)
-           .style("fill", d => {
-               var countyName = d.properties.name;
-               var value = dataMap[countyName] && dataMap[countyName][columnName];
-               return value != null ? colorScale(value) : "#ccc";
-           })
-           .on("mouseover", function(event, d) {
-               d3.select("#tooltip")
-                 .style("visibility", "visible")
-                 .text(`${d.properties.name}: ${formatValue(dataMap[d.properties.name][columnName])}`);
-           })
-           .on("mousemove", function(event, d) {
-               d3.select("#tooltip")
-                 .style("top", (event.pageY - 10) + "px")
-                 .style("left", (event.pageX + 10) + "px");
-           })
-           .on("mouseout", function() {
-               d3.select("#tooltip").style("visibility", "hidden");
-           });
-
-        drawLegend(svg, width, height);
-    }
-
-    function drawLegend(svg, width, height) {
-    var legendWidth = 200, legendHeight = 20, legendMargin = 10;
-    var legendX = 10, legendY = 10; // Adjusted to top-left corner
-
-    var gradients = svg.append("defs")
-        .append("linearGradient")
-        .attr("id", "gradient")
-        .attr("x1", "0%")
-        .attr("x2", "100%")
-        .attr("y1", "0%")
-        .attr("y2", "0%");
-    
-    // Define the color stops for the gradient
-    gradients.append("stop")
-        .attr("offset", "0%")
-        .attr("stop-color", "#7EBC64"); // Green (Q1)
-    gradients.append("stop")
-        .attr("offset", "33%")
-        .attr("stop-color", "#2399B5"); // Blue (Q2)
-    gradients.append("stop")
-        .attr("offset", "67%")
-        .attr("stop-color", "#EECE43"); // Yellow (Q3)
-    gradients.append("stop")
-        .attr("offset", "100%")
-        .attr("stop-color", "#F2695F"); // Red (Q4)
-
-    // Draw the color gradient rectangle
-    svg.append("rect")
-        .attr("x", legendX)
-        .attr("y", legendY)
-        .attr("width", legendWidth)
-        .attr("height", legendHeight)
-        .style("fill", "url(#gradient)");
-
-    // Set up the scale for the legend axis
-    var xLegendScale = d3.scaleLinear()
-        .domain([1, 4])
-        .range([legendX, legendX + legendWidth]);
-
-    var legendAxis = d3.axisBottom(xLegendScale)
-        .tickSize(5)
-        .tickValues([1, 2, 3, 4])
-        .tickFormat(function(d) { return 'Q' + d; });
-
-    // Add the legend axis to the SVG
-    svg.append("g")
-        .attr("class", "legend-axis")
-        .attr("transform", `translate(0, ${legendY + legendHeight + legendMargin})`)
-        .call(legendAxis);
-}
-
-
-
-
-    function createCustomColorScale(columnName) {
-        var values = Object.values(dataMap).map(d => d[columnName]).filter(Boolean);
-        var q1 = d3.quantile(values.sort(d3.ascending), 0.25);
-        var q2 = d3.quantile(values, 0.50);
-        var q3 = d3.quantile(values, 0.75);
-        console.log("Quantiles for", columnName, ": ", [q1, q2, q3]);
-
-        return d3.scaleThreshold()
-            .domain([q1, q2, q3])
-            .range(["#7EBC64", "#2399B5", "#EECE43", "#F2695F"]);
-    }
-
-    function formatValue(value) {
-        return value ? d3.format(".1%")(value) : "N/A";
-    }
-
-    d3.select("#dataColumnSelect").on("change", function() {
-        selectedColumn = d3.select(this).property("value");
-        d3.select("#map").selectAll("svg").remove();
-        drawMap(selectedColumn);
-    });
-});
-
-
-
-
-</script>
-
-  
-</body>
-</html> -->
