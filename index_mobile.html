@@ -28,9 +28,25 @@ body {
 }
 
 
-body, h1, h2, p {
-    font-size: 1rem; /* Base size for body text */
+h1 {
+    font-weight: 700; /* Bold */
+    font-size: 1.75em;
+    color: #f2695f;
+    margin-bottom: 0;
+    margin-top: 5%;
+
 }
+
+h2 {
+    font-weight: 500; /* Bold */
+    font-size: 1.5em;
+    color: #f2695f;
+    margin-bottom: 0;
+    margin-top: 0%;
+
+
+}
+
 
 
 
@@ -96,6 +112,11 @@ body, h1, h2, p {
     section {
         margin-bottom: 30px;
     }
+
+    :root {
+        --text-font-size: 14px; /* Smaller font size for mobile */
+    }
+
 }
 
 
@@ -359,7 +380,7 @@ a:hover {
 
 nav {
     position: fixed;
-    font-size: 1.25em;
+    font-size: 1em;
     padding-top: 1%;
     padding-left: 1%;
     top: 0;
@@ -371,10 +392,6 @@ nav {
     border-bottom: 1px solid #0C4B7F;
 }
 
-/* Add padding to the top of the body to ensure the content is not hidden behind the fixed navbar */
-body {
-    padding-top: 10px; /* Adjust this value based on the height of your navigation bar */
-}
 
 
 nav ul {
@@ -410,18 +427,10 @@ section {
     margin-top: 2%;
 }
 
-/* MOBILE DESIGN */
-
 
 
 :root {
     --text-font-size: 16px; /* Adjust base text size */
-}
-
-@media (max-width: 768px) {
-    :root {
-        --text-font-size: 14px; /* Smaller font size for mobile */
-    }
 }
 
 
@@ -468,7 +477,10 @@ section {
                     </div>
 
     <div class="column" id="column2">
+        <div class="image-container-2">
+
         <img src="cover.png">
+        </div>
    
 
         </div>
@@ -497,7 +509,7 @@ section {
     <div class="container">
         <div class="column" id="column1">
             <h1>Disparity in access to services</h1>
-            <h2>Race and ethnicity</h2>
+            <h3>Race and ethnicity</h3>
            
                   <p> Disparities in needs, access, and outcomes in the LGBTQ+ community mirror the patterns of racial and ethnic health disparities at-large in American society. In the majority of needs and issues examined in the survey, non-White respondents report higher levels of needs and lower levels of receiving services than their White counterparts.
                     <br><br>In some areas the disparities are glaring — especially in terms of food security, obtaining public assistance, and receiving services sought in most service areas including chronic conditions, major health events, mental health, environmental health, and reproductive health. In 20 out of 23 different services non- White respondents reported a lower level of receiving services than White respondents.
@@ -523,7 +535,7 @@ section {
 
         <div class="column" id="column2">
 
-            <h2>Immigration and asylum status</h2>
+            <h3>Immigration and asylum status</h3>
             <p>Immigration and asylum experiences affect every aspect of quality of life. HIV prevalence among respondents born outside the U.S. is 4 to 5 times the survey mean (15%-18%) compared to 3-5% for those born in the US. Those born outside the US were also twice as likely to report abuse in relationships or the family, twice as likely to have reported environmental health concerns, and more likely to have experienced major health events (e.g., medical emergencies, surgeries, or major acute illness) but two-to-three times more likely to have not received services for major health events.
             </p>
             <canvas id="hivPrevalence"></canvas>
