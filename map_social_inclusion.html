@@ -76,7 +76,7 @@ document.addEventListener('DOMContentLoaded', function() {
             .attr("transform", `translate(${legendX}, ${legendY + legendHeight + legendMargin})`)
             .call(d3.axisBottom(xLegendScale)
                 .tickSize(5)
-                .tickValues([50, 59, 69, 79, 89, 100])
+                .tickValues([50, 75, 100])
                 .tickFormat(d => d + "%"));
     }
 
@@ -168,29 +168,37 @@ document.addEventListener('DOMContentLoaded', function() {
                 "#0C4B7F"   // 90+
         ];
 
-        colors.forEach((color, index) => {
-            svg.append("rect")
-                .attr("x", legendX + index * sectionWidth)
-                .attr("y", legendY)
-                .attr("width", sectionWidth)
-                .attr("height", legendHeight)
-                .style("fill", color);
-        });
+ // Calculate section width dynamically based on the number of color categories
+ var sectionWidth = legendWidth / colors.length;
 
-        var xLegendScale = d3.scaleLinear()
-            .domain([50, 100])
-            .range([0, legendWidth]);
+// Append color blocks to the legend
+colors.forEach((color, index) => {
+    svg.append("rect")
+        .attr("x", legendX + index * sectionWidth)
+        .attr("y", legendY)
+        .attr("width", sectionWidth)
+        .attr("height", legendHeight)
+        .style("fill", color);
+});
 
-        var legendAxis = d3.axisBottom(xLegendScale)
-            .tickSize(5)
-            .tickValues([50, 54, 59, 64, 69, 74, 79, 84, 89, 100])
-            .tickFormat(d => `${d}%`);
+// Define the legend's scale
+var xLegendScale = d3.scaleLinear()
+    .domain([50, 100])
+    .range([0, legendWidth]);
 
-        svg.append("g")
-            .attr("class", "legend-axis")
-            .attr("transform", `translate(${legendX}, ${legendY + legendHeight + legendMargin})`)
-            .call(legendAxis);
-    }
+// Define the axis for the legend
+var legendAxis = d3.axisBottom(xLegendScale)
+    .tickSize(5) // Size of the ticks
+    .tickValues([50, 75, 100]) // Only show ticks at 50%, 75%, and 100%
+    .tickFormat(d => `${d}%`); // Format ticks as percentages
+
+// Append the axis to the legend
+svg.append("g")
+    .attr("class", "legend-axis")
+    .attr("transform", `translate(${legendX}, ${legendY + legendHeight + legendMargin})`)
+    .call(legendAxis);
+}
+
 
     function createCustomColorScale() {
         return d3.scaleThreshold()
