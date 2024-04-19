@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>New York State LGBTQ+ Health and Human Services Needs Assessment</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+    <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+    <script src="https://d3js.org/d3.v7.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels"></script>
+    <style>
+body {
+    font-family: 'Montserrat', sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #fafafa;
+    color: #2399b5;
+    font-size: 16px; /* Adjust base text size */
+}
+
+nav {
+    position: fixed;
+    width: 100%;
+    background-color: rgba(255, 255, 255, 0.95);
+    padding: 10px 0;
+    z-index: 1000;
+    display: flex;
+    justify-content: space-around;
+}
+
+nav ul {
+    display: none; /* Hide nav links in mobile view by default */
+    padding-left: 0;
+}
+
+nav ul li {
+    list-style: none;
+}
+
+.hamburger-menu {
+    display: block; /* Show hamburger menu in mobile view */
+    cursor: pointer;
+}
+
+.container {
+    display: block;
+    padding: 20px;
+}
+
+.column {
+    width: 100%;
+    padding: 10px 0;
+}
+
+.image-container img,
+.image-container-2 img {
+    width: 100%;
+    height: auto;
+    border: none;
+}
+
+@media (min-width: 768px) {
+    nav ul {
+        display: flex; /* Flex display to align links horizontally */
+    }
+
+    .hamburger-menu {
+        display: none; /* Hide hamburger menu in desktop view */
+    }
+
+    .container {
+        display: flex;
+        justify-content: space-between;
+    }
+
+    .column {
+        flex: 1;
+        margin: 0 10px;
+    }
+
+    .image-container img,
+    .image-container-2 img {
+        max-width: 60%;
+    }
+}
+    </style>
+</head>
+<body>
+    <nav>
+        <div class="hamburger-menu">☰</div>
+        <ul id="menu" class="hidden">
+            <li><a href="#section1">Introduction</a></li>
+            <li><a href="#section2">Generational shifts</a></li>
+            <li><a href="#section3">Disparities</a></li>
+            <li><a href="#section4">Covid-19</a></li>
+            <li><a href="#section5">Mental Health</a></li>
+            <li><a href="#section6">Barriers to service</a></li>
+        </ul>
+    </nav>
+
+    <section id="section1" class="container"> 
+        <div class="column">
+            <h1>Introduction</h1>
+            <p>The New York State LGBTQ+ Health and Human Services Network Needs Assessment is among the most comprehensive LGBTQ health surveys in the U.S...</p>
+            <a href="https://nyslgbtq.org/wp-content/uploads/2023/03/TRX-Report-010823-FINAL-REV-2.pdf">Full report</a>
+            <div class="image-container">
+                <img src="logo.png" alt="Organization Logo">
+            </div>
+        </div>
+    </section>
+
+    <section id="section2" class="container"> 
+        <div class="column">
+            <h1>Generational shifts</h1>
+            <p>Description of generational shifts...</p>
+        </div>
+        <div class="column">
+            <canvas id="triangleChart"></canvas>
+        </div>
+    </section>
+
+    <section id="section3" class="container"> 
+        <div class="column">
+            <h1>Disparities in Access to Services</h1>
+            <p>Race and ethnicity play significant roles in access to services...</p>
+            <canvas id="accessToCareChart"></canvas>
+        </div>
+    </section>
+
+    <section id="section4" class="container"> 
+        <div class="column">
+            <h1>The Impact of Covid-19 on Access to Services</h1>
+            <p>Discussion on Covid-19 impacts...</p>
+            <canvas id="covidInfection"></canvas>
+        </div>
+    </section>
+
+    <section id="section5" class="container"> 
+        <div class="column">
+            <h1>Mental Health</h1>
+            <p>Detailed discussion on mental health issues...</p>
+        </div>
+    </section>
+
+    <section id="section6" class="container"> 
+        <div class="column">
+            <h1>Barriers to Service</h1>
+            <p>Detailed discussion on barriers to service...</p>
+        </div>
+    </section>
+
+
+    <script src="script.js"></script>
+</body>
+</html>
