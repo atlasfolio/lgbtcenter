@@ -3,155 +3,129 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>New York State LGBTQ+ Health and Human Services Needs Assessment</title>
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
-    <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
-    <script src="https://d3js.org/d3.v7.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels"></script>
-    <style>
-body {
-    font-family: 'Montserrat', sans-serif;
+    <title>Responsive Mobile Website</title>
+<style>
+
+/* Basic Reset */
+* {
     margin: 0;
     padding: 0;
-    background-color: #fafafa;
-    color: #2399b5;
-    font-size: 16px; /* Adjust base text size */
+    box-sizing: border-box;
 }
 
-nav {
-    position: fixed;
-    width: 100%;
-    background-color: rgba(255, 255, 255, 0.95);
-    padding: 10px 0;
-    z-index: 1000;
-    display: flex;
-    justify-content: space-around;
+body, html {
+    font-family: Arial, sans-serif;
+    line-height: 1.6;
+    color: #333;
+    background: #f4f4f4;
+    overflow-x: hidden;
+}
+
+header {
+    background: #0044cc;
+    color: #fff;
+    padding: 10px 20px;
+    text-align: center;
 }
 
 nav ul {
-    display: none; /* Hide nav links in mobile view by default */
-    padding-left: 0;
+    list-style-type: none;
 }
 
 nav ul li {
-    list-style: none;
+    display: inline;
+    margin-right: 10px;
 }
 
-.hamburger-menu {
-    display: block; /* Show hamburger menu in mobile view */
-    cursor: pointer;
+nav ul li a {
+    color: white;
+    text-decoration: none;
+    font-size: 16px;
 }
 
 .container {
-    display: block;
+    display: flex;
+    flex-direction: column; /* Stacks sections vertically by default */
+    column-count: 2;
+}
+
+section {
     padding: 20px;
+    margin: 10px 5px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    background: white;
 }
 
-.column {
-    width: 100%;
-    padding: 10px 0;
-}
-
-.image-container img,
-.image-container-2 img {
-    width: 100%;
+section img {
+    max-width: 100%;
     height: auto;
-    border: none;
+    display: block;
+    margin: 10px auto;
 }
 
-@media (min-width: 768px) {
-    nav ul {
-        display: flex; /* Flex display to align links horizontally */
-    }
 
-    .hamburger-menu {
-        display: none; /* Hide hamburger menu in desktop view */
-    }
 
-    .container {
-        display: flex;
-        justify-content: space-between;
-    }
 
-    .column {
-        flex: 1;
-        margin: 0 10px;
-    }
 
-    .image-container img,
-    .image-container-2 img {
-        max-width: 60%;
-    }
-}
-    </style>
+
+</style>
 </head>
 <body>
-    <nav>
-        <div class="hamburger-menu">☰</div>
-        <ul id="menu" class="hidden">
-            <li><a href="#section1">Introduction</a></li>
-            <li><a href="#section2">Generational shifts</a></li>
-            <li><a href="#section3">Disparities</a></li>
-            <li><a href="#section4">Covid-19</a></li>
-            <li><a href="#section5">Mental Health</a></li>
-            <li><a href="#section6">Barriers to service</a></li>
-        </ul>
-    </nav>
+    <header>
+        <nav>
+            <ul id="navbar">
+                <li><a href="#home">Home</a></li>
+                <li><a href="#about">About</a></li>
+                <li><a href="#services">Services</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
+    <div class="container">
+        <section id="home">
+            <h1>Welcome to Our Website</h1>
+            <p>This is the homepage section. Discover our latest offerings and news here.</p>
+            <img src="https://via.placeholder.com/400x300" alt="Home Image">
+        </section>
 
-    <section id="section1" class="container"> 
-        <div class="column">
-            <h1>Introduction</h1>
-            <p>The New York State LGBTQ+ Health and Human Services Network Needs Assessment is among the most comprehensive LGBTQ health surveys in the U.S...</p>
-            <a href="https://nyslgbtq.org/wp-content/uploads/2023/03/TRX-Report-010823-FINAL-REV-2.pdf">Full report</a>
-            <div class="image-container">
-                <img src="logo.png" alt="Organization Logo">
-            </div>
-        </div>
-    </section>
+        <section id="about">
+            <h1>About Us</h1>
+            <p>We are a leading firm with years of experience in our industry. Learn more about our journey and team in this section.</p>
+            <img src="https://via.placeholder.com/400x300" alt="About Us Image">
+        </section>
 
-    <section id="section2" class="container"> 
-        <div class="column">
-            <h1>Generational shifts</h1>
-            <p>Description of generational shifts...</p>
-        </div>
-        <div class="column">
-            <canvas id="triangleChart"></canvas>
-        </div>
-    </section>
+        <section id="services">
+            <h1>Our Services</h1>
+            <p>We offer a wide range of services designed to meet your needs. Find detailed descriptions of our services below.</p>
+            <img src="https://via.placeholder.com/400x300" alt="Services Image">
+        </section>
 
-    <section id="section3" class="container"> 
-        <div class="column">
-            <h1>Disparities in Access to Services</h1>
-            <p>Race and ethnicity play significant roles in access to services...</p>
-            <canvas id="accessToCareChart"></canvas>
-        </div>
-    </section>
-
-    <section id="section4" class="container"> 
-        <div class="column">
-            <h1>The Impact of Covid-19 on Access to Services</h1>
-            <p>Discussion on Covid-19 impacts...</p>
-            <canvas id="covidInfection"></canvas>
-        </div>
-    </section>
-
-    <section id="section5" class="container"> 
-        <div class="column">
-            <h1>Mental Health</h1>
-            <p>Detailed discussion on mental health issues...</p>
-        </div>
-    </section>
-
-    <section id="section6" class="container"> 
-        <div class="column">
-            <h1>Barriers to Service</h1>
-            <p>Detailed discussion on barriers to service...</p>
-        </div>
-    </section>
+        <section id="contact">
+            <h1>Contact Us</h1>
+            <p>For inquiries, please reach out via the following contact methods. We look forward to hearing from you!</p>
+            <img src="https://via.placeholder.com/400x300" alt="Contact Image">
+        </section>
+    </div>
 
 
-    <script src="script.js"></script>
+<script>
+    window.addEventListener('DOMContentLoaded', (event) => {
+        const navbarLinks = document.querySelectorAll('nav ul li a');
+    
+        for (const link of navbarLinks) {
+            link.addEventListener('click', function(e) {
+                e.preventDefault();
+                const targetId = e.target.getAttribute('href');
+                const targetSection = document.querySelector(targetId);
+    
+                targetSection.scrollIntoView({ 
+                    behavior: 'smooth' 
+                });
+            });
+        }
+    });
+    </script>
+
 </body>
 </html>
