@@ -1,9 +1,15 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Responsive Mobile Website</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels"></script> <!-- Chart.js Datalabels Plugin -->
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
+    <script src="https://d3js.org/d3.v7.min.js"></script>
+    <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
     <style>
         /* Basic Reset */
 * {
@@ -105,6 +111,26 @@ footer {
     }
 }
 
+
+
+
+#hivPrevalence {
+   
+    display: block;
+    max-width: auto;
+    max-height: auto; 
+    margin-left: 5%;
+    margin-right: 5%;
+}
+
+#accessToCareChart {
+   
+    display: block;
+    max-width: auto;
+    max-height: auto; 
+    margin-left: 15%;
+}
+
     </style>>
 </head>
 <body>
@@ -126,7 +152,7 @@ footer {
                 <p>This is the homepage section. Discover our latest offerings and news here.</p>
             </div>
             <div class="image">
-                <img src="https://via.placeholder.com/400x300" alt="Home Image">
+                <img src="logo.png" alt="Home Image">
             </div>
         </section>
 
@@ -136,7 +162,7 @@ footer {
                 <p>We are a leading firm with years of experience in our industry. Learn more about our journey and team in this section.</p>
             </div>
             <div class="image">
-                <img src="https://via.placeholder.com/400x300" alt="About Us Image">
+                <img src="cover.png" alt="About Us Image">
             </div>
         </section>
 
@@ -146,7 +172,8 @@ footer {
                 <p>We offer a wide range of services designed to meet your needs. Find detailed descriptions of our services below.</p>
             </div>
             <div class="image">
-                <img src="https://via.placeholder.com/400x300" alt="Services Image">
+some text here and a data viz    <canvas id="accessToCareChart"></canvas>
+
             </div>
         </section>
 
@@ -156,10 +183,14 @@ footer {
                 <p>For inquiries, please reach out via the following contact methods. We look forward to hearing from you!</p>
             </div>
             <div class="image">
-                <img src="https://via.placeholder.com/400x300" alt="Contact Image">
+                <iframe id="igraph" scrolling="no" style="border:none;" seamless="seamless" src="map_barriers.html" height="60%" width="100%"></iframe>
+
             </div>
         </section>
     </div>
+
+    <script src="script.js"></script>
+
 
     <footer>
         <p>© 2024 Company Name</p>
