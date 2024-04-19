@@ -11,7 +11,6 @@
     <script src="https://d3js.org/d3.v7.min.js"></script>
     <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
     <style>
-        /* Basic Reset */
 * {
     margin: 0;
     padding: 0;
@@ -19,15 +18,15 @@
 }
 
 body, html {
-    font-family: Arial, sans-serif;
+    font-family: "Montserrat", sans-serif;
     line-height: 1.6;
-    color: #333;
-    background: #f4f4f4;
+    background-color: #fafafa;
+    color: #2399b5;
     overflow-x: hidden;
 }
 
 header {
-    background: #0044cc;
+    background: #EECE43;
     color: #fff;
     padding: 10px 20px;
     text-align: center;
@@ -51,33 +50,67 @@ nav ul li a {
 .container {
     display: flex;
     flex-direction: column;
+    align-items: center;
 }
+
+/* section {
+    display: flex;
+    flex-direction: column;
+    padding: 1%;
+    margin: 0;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    background: white;
+} */
+
 
 section {
     display: flex;
     flex-direction: column;
     padding: 20px;
-    margin: 10px 5px;
+    margin: 10px 0; /* Vertical margin for breathing space */
     border: 1px solid #ccc;
     border-radius: 5px;
-    background: white;
+    max-width: 800px; /* Limiting max width of sections */
+    width: 100%; /* Ensures it takes full width on smaller screens */
 }
 
-.content, .image {
+
+.content, {
+    flex: 1;
+}
+
+.visualization {
     flex: 1;
 }
 
 section img {
+    max-width: 60%;
+    height: auto;
+    display: block;
+    margin-left: 20%;
+    margin-top: 10px;
+}
+
+section canvas{
     max-width: 100%;
     height: auto;
     display: block;
     margin-top: 10px;
 }
 
+section iframe {
+    max-width: 100%;
+    height: auto;
+    display: block;
+    margin-top: 10px;
+}
+
+
 footer {
     text-align: center;
     padding: 10px 0;
-    background: #0044cc;
+    background: #EECE43;
     color: white;
     position: fixed;
     bottom: 0;
@@ -95,7 +128,7 @@ footer {
     section {
         flex-direction: row; /* Image to the right of the text */
         align-items: center; /* Center the items vertically */
-        width: 45%; /* Manage the width of each section */
+        width: 80%; /* Manage the width of each section */
     }
 
     .content {
@@ -103,6 +136,10 @@ footer {
     }
 
     .image {
+        width: 40%; /* Image takes less space */
+    }
+
+    .visualization {
         width: 40%; /* Image takes less space */
     }
 
@@ -137,7 +174,7 @@ footer {
     <header>
         <nav>
             <ul id="navbar">
-                <li><a href="#home">Home</a></li>
+                <li><a href="#introduction">Introduction</a></li>
                 <li><a href="#about">About</a></li>
                 <li><a href="#services">Services</a></li>
                 <li><a href="#contact">Contact</a></li>
@@ -146,29 +183,40 @@ footer {
     </header>
 
     <div class="container">
-        <section id="home">
+        <section id="introduction">
             <div class="content">
-                <h1>Welcome to Our Website</h1>
-                <p>This is the homepage section. Discover our latest offerings and news here.</p>
-            </div>
-            <div class="image">
+                <h1>Introduction</h1>
+               
+            <p><i><b>The New York State LGBTQ+ Health and Human Services Network Needs Assessment</b></i> is among the most comprehensive LGBTQ health surveys in the U.S. It aims to highlight the needs and service barriers faced by this underserved community, offering detailed insights into disparities influenced by race, ethnicity, age, gender, disabilities, religion, region, education, income, and more. Conducted online from September to November 2021 during the pandemic peak, the survey involved over 2,300 respondents and captures the profound impact of COVID-19 on LGBTQ individuals, exacerbating pre-existing inequalities.<br><br>This digital overview of the report highlights key findings, including intersectional disparities and access to essential services like mental health.
+               
+                To see the full report, <a href="https://nyslgbtq.org/wp-content/uploads/2023/03/TRX-Report-010823-FINAL-REV-2.pdf">click here</a>. </p>
                 <img src="logo.png" alt="Home Image">
-            </div>
-        </section>
 
-        <section id="about">
-            <div class="content">
-                <h1>About Us</h1>
-                <p>We are a leading firm with years of experience in our industry. Learn more about our journey and team in this section.</p>
             </div>
             <div class="image">
                 <img src="cover.png" alt="About Us Image">
             </div>
         </section>
 
+        <section id="about">
+            <div class="content">
+                <h1>Generational Shifts</h1>
+                <p><b>A generational shift is underway.</b> The 2021 Survey shows a community that has shifted substantially in terms of gender expression and identity since the last survey in 2015. The community is growing more diverse in gender identity and sexual orientation, such that binary gender identities and lesbian and gay orientations are trending toward minority status in the larger LGBTQ+ community. The shift is most pronounced in the breakdown of gender and orientation by three major age groups (13-34, 35-49, 50+). LGBTQ community members who are over 35 years of age identify primarily (72%) as either men or women (cis and trans), while those under 35 identify growingly as genderqueer, genderfluid, other genders, or non-binary (45%). Those 35+ report a higher need for care for chronic conditions and seem to need more information and education on mental health, while those under 35 report a higher need for mental health care (57.7%).
+                    <br><br>These differences in orientation and gender expression point to substantially different lived experience in different age groups. To address the needs of the LGBTQ+ community today means creating appropriate resources and responses for youth, those in middle adulthood, and community members who are ageing.
+                    
+                    
+                                    <br><br><i>The radar chart to the right shows gender identity and sexuality, by age group.</i>
+                                </p>            </div>
+            <div class="visualization">
+                <canvas id="triangleChart"></canvas>
+
+                
+            </div>
+        </section>
+
         <section id="services">
             <div class="content">
-                <h1>Our Services</h1>
+                <h1</h1>
                 <p>We offer a wide range of services designed to meet your needs. Find detailed descriptions of our services below.</p>
             </div>
             <div class="image">
@@ -190,7 +238,6 @@ some text here and a data viz    <canvas id="accessToCareChart"></canvas>
     </div>
 
     <script src="script.js"></script>
-
 
     <footer>
         <p>© 2024 Company Name</p>
