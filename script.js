@@ -1,27 +1,59 @@
 document.addEventListener('DOMContentLoaded', function () {
-    const sections = document.querySelectorAll("section");
-    const navLinks = document.querySelectorAll("nav ul li a");
+    const toggleNavButton = document.getElementById('toggleNav');
+    const navbar = document.getElementById('navbar');
+    const navLinks = navbar.querySelectorAll('a');
 
-    window.addEventListener("scroll", () => {
-        let current = "";
-        sections.forEach(section => {
-            const sectionTop = section.offsetTop;
-            const sectionHeight = section.clientHeight;
-            if (pageYOffset >= (sectionTop - sectionHeight / 3)) {
-                current = section.getAttribute("id");
-            }
-        });
+    // Function to toggle navigation open/close
+    toggleNavButton.addEventListener('click', function() {
+        if (navbar.classList.contains('nav-closed')) {
+            navbar.classList.remove('nav-closed');
+            navbar.classList.add('nav-open');
+        } else {
+            navbar.classList.remove('nav-open');
+            navbar.classList.add('nav-closed');
+        }
+    });
 
-        navLinks.forEach(link => {
-            link.classList.remove("active");
-            if (link.getAttribute("href") === "#" + current) {
-                link.classList.add("active");
+    // Function to handle navigation link clicks
+    navLinks.forEach(link => {
+        link.addEventListener('click', function(event) {
+            event.preventDefault(); // Prevent default anchor click behavior
+            const targetSection = document.querySelector(this.getAttribute('href'));
+
+            if (targetSection) {
+                // Scroll to the section smoothly
+                window.scrollTo({
+                    top: targetSection.offsetTop,
+                    behavior: 'smooth'
+                });
+
+                // Close the navigation after clicking
+                navbar.classList.remove('nav-open');
+                navbar.classList.add('nav-closed');
             }
         });
     });
 });
 
-//
+function updateProgress() {
+    var sections = document.querySelectorAll("section");
+    var pageHeight = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+    var scrollPosition = window.scrollY || document.documentElement.scrollTop;
+    var total = sections.length;
+    var currentSection = Math.min(
+        total,
+        Math.max(1, Math.floor((scrollPosition / pageHeight) * total))
+    );
+
+    var progressPercentage = (currentSection / total) * 100;
+    document.getElementById("progressBar").style.width = progressPercentage + "%";
+}
+
+window.addEventListener('scroll', updateProgress);
+window.addEventListener('resize', updateProgress);
+
+
+
 
 // Introduction 
 
@@ -167,6 +199,18 @@ const triangleChart = new Chart(triangleChartCtx, {
 
 });
 
+function resizeCanvas() {
+    var canvas = document.getElementById('triangleChart');
+    if (!canvas) return;
+    // Set the dimensions explicitly, avoiding continuous growth or zero dimensions
+    canvas.width = document.getElementById('column2').offsetWidth;
+    canvas.height = Math.min(window.innerHeight * 0.75, 400);  // Limiting height to avoid it becoming too large
+    // Re-instantiate the chart or update its size here if necessary
+}
+
+// Ensure resize logic is called on appropriate events
+window.addEventListener('resize', resizeCanvas);
+window.addEventListener('DOMContentLoaded', resizeCanvas);
 
 
 
@@ -513,12 +557,12 @@ document.addEventListener("DOMContentLoaded", function() {
             label: 'Covid-19 Infection Rates',
             data: [2, 8, 9, 13, 17, 18],
             backgroundColor: [
-                'rgba(35, 153, 181, .5)',
-                'rgba(35, 153, 181, 1)',  
-                'rgba(35, 153, 181, 1)',
-                'rgba(35, 153, 181, 1)',
-                'rgba(35, 153, 181, 1)',
-                'rgba(35, 153, 181, 1)'
+                'rgba(242, 105, 95, .5)',
+                'rgba(242, 105, 95, .5)',
+                'rgba(242, 105, 95, .5)',
+                'rgba(242, 105, 95, .5)',
+                'rgba(242, 105, 95, .5)',
+                'rgba(242, 105, 95, .5)',
 
             ],
             borderColor: [
