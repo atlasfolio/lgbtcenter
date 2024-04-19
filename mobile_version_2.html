@@ -4,9 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Responsive Mobile Website</title>
-<style>
-
-/* Basic Reset */
+    <style>
+        /* Basic Reset */
 * {
     margin: 0;
     padding: 0;
@@ -45,11 +44,12 @@ nav ul li a {
 
 .container {
     display: flex;
-    flex-direction: column; /* Stacks sections vertically by default */
-    column-count: 2;
+    flex-direction: column;
 }
 
 section {
+    display: flex;
+    flex-direction: column;
     padding: 20px;
     margin: 10px 5px;
     border: 1px solid #ccc;
@@ -57,19 +57,55 @@ section {
     background: white;
 }
 
+.content, .image {
+    flex: 1;
+}
+
 section img {
     max-width: 100%;
     height: auto;
     display: block;
-    margin: 10px auto;
+    margin-top: 10px;
 }
 
+footer {
+    text-align: center;
+    padding: 10px 0;
+    background: #0044cc;
+    color: white;
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+}
 
+/* Responsive Layout */
+@media (min-width: 600px) {
+    .container {
+        flex-direction: row;
+        flex-wrap: wrap;
+        justify-content: space-around;
+    }
 
+    section {
+        flex-direction: row; /* Image to the right of the text */
+        align-items: center; /* Center the items vertically */
+        width: 45%; /* Manage the width of each section */
+    }
 
+    .content {
+        width: 60%; /* Text takes more space */
+    }
 
+    .image {
+        width: 40%; /* Image takes less space */
+    }
 
-</style>
+    footer {
+        position: static;
+    }
+}
+
+    </style>>
 </head>
 <body>
     <header>
@@ -82,50 +118,51 @@ section img {
             </ul>
         </nav>
     </header>
+
     <div class="container">
         <section id="home">
-            <h1>Welcome to Our Website</h1>
-            <p>This is the homepage section. Discover our latest offerings and news here.</p>
-            <img src="https://via.placeholder.com/400x300" alt="Home Image">
+            <div class="content">
+                <h1>Welcome to Our Website</h1>
+                <p>This is the homepage section. Discover our latest offerings and news here.</p>
+            </div>
+            <div class="image">
+                <img src="https://via.placeholder.com/400x300" alt="Home Image">
+            </div>
         </section>
 
         <section id="about">
-            <h1>About Us</h1>
-            <p>We are a leading firm with years of experience in our industry. Learn more about our journey and team in this section.</p>
-            <img src="https://via.placeholder.com/400x300" alt="About Us Image">
+            <div class="content">
+                <h1>About Us</h1>
+                <p>We are a leading firm with years of experience in our industry. Learn more about our journey and team in this section.</p>
+            </div>
+            <div class="image">
+                <img src="https://via.placeholder.com/400x300" alt="About Us Image">
+            </div>
         </section>
 
         <section id="services">
-            <h1>Our Services</h1>
-            <p>We offer a wide range of services designed to meet your needs. Find detailed descriptions of our services below.</p>
-            <img src="https://via.placeholder.com/400x300" alt="Services Image">
+            <div class="content">
+                <h1>Our Services</h1>
+                <p>We offer a wide range of services designed to meet your needs. Find detailed descriptions of our services below.</p>
+            </div>
+            <div class="image">
+                <img src="https://via.placeholder.com/400x300" alt="Services Image">
+            </div>
         </section>
 
         <section id="contact">
-            <h1>Contact Us</h1>
-            <p>For inquiries, please reach out via the following contact methods. We look forward to hearing from you!</p>
-            <img src="https://via.placeholder.com/400x300" alt="Contact Image">
+            <div class="content">
+                <h1>Contact Us</h1>
+                <p>For inquiries, please reach out via the following contact methods. We look forward to hearing from you!</p>
+            </div>
+            <div class="image">
+                <img src="https://via.placeholder.com/400x300" alt="Contact Image">
+            </div>
         </section>
     </div>
 
-
-<script>
-    window.addEventListener('DOMContentLoaded', (event) => {
-        const navbarLinks = document.querySelectorAll('nav ul li a');
-    
-        for (const link of navbarLinks) {
-            link.addEventListener('click', function(e) {
-                e.preventDefault();
-                const targetId = e.target.getAttribute('href');
-                const targetSection = document.querySelector(targetId);
-    
-                targetSection.scrollIntoView({ 
-                    behavior: 'smooth' 
-                });
-            });
-        }
-    });
-    </script>
-
+    <footer>
+        <p>© 2024 Company Name</p>
+    </footer>
 </body>
 </html>
