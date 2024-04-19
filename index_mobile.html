@@ -70,6 +70,11 @@ h2 {
 }
 
 
+canvas {
+    display: block; /* prevents bottom margin/padding issues */
+    width: 100%; /* or fixed size, ensures it fits within its container */
+    height: auto; /* or fixed size, based on your design needs */
+}
 
 
 #column1 {
@@ -138,13 +143,16 @@ a:hover {
     /* max-height: 500px;
     display: block;
     margin-top: 6%; */
-    max-width: auto;
-    height: auto;
+    max-width: 70%;
+    margin-left: 15%;
+    max-height: 70%;
+    margin-bottom: 15%;
 }
 
 #triangleChart {
-    max-width: 100%;
-    height: auto; 
+    max-width: auto;
+    max-height: 80%; 
+    display: block;
     /* max-height: 500px;   /* Example fixed height */
     /* display: block; */
     /* width: auto;         Maintains aspect ratio */
@@ -157,8 +165,9 @@ a:hover {
     display: block;
     max-width: auto;
     max-height: auto; 
-    margin-left: 5%;
-    margin-right: 5%;
+    margin-left: 10%;
+    margin-right: 10%;
+    margin-top: 10%;
 }
 
 #accessToCareChart {
@@ -186,11 +195,11 @@ a:hover {
   
         .image-container-2 {
             float: center;
-            max-width: 30%;
+            max-width: 50%;
             max-height: auto;
             
             margin: 0 0px 0px 0;    
-            margin-left: 20%;      
+            margin-left: 25%;      
             width: auto;  /* or 100% if you want it to be responsive */
                     height: 100%; /* specify a height or make it responsive as needed */
                     border: none; /* just to show container boundaries, optional */
@@ -282,12 +291,7 @@ a:hover {
     font-size: 1vw;        /* Adjust font size based on the viewport width */
     border-radius: 50%;    /* Circular shape */
     box-sizing: border-box;
-    /* width: 40vw;
-    height: 40vw;
-    max-width: 150px;      /* Cap the size */
-    /* max-height: 150px;
-    min-width: 80px;       /* Minimum size */
-    /* min-height: 80px; */ 
+
     margin-right: 1vw;    /* Space between the circle and the text */
 }
 
@@ -347,7 +351,7 @@ a:hover {
 
 .text {
     flex-grow: 1;          /* Takes up the rest of the space in the flex container */
-    font-size: calc(1vw); /* Responsive font size */
+    font-size: 1.5em; /* Responsive font size */
 }
 
 
@@ -376,52 +380,6 @@ a:hover {
 
 
 
-/* NAVIGATION  */
-
-nav {
-    position: fixed;
-    font-size: 1em;
-    padding-top: 1%;
-    padding-left: 1%;
-    top: 0;
-    padding-bottom: 1%;
-    width: 100%;
-    background-color: white; /* Ensures the nav bar background is not transparent */
-    z-index: 1000; /* Ensures the nav bar stays on top of other content */
-    background-color: rgba(258,206,67,1.0);
-    border-bottom: 1px solid #0C4B7F;
-}
-
-
-
-nav ul {
-    display: flex; 
-    margin: 0;  /* Resets the margin to remove unwanted space */
-    padding: 0; /* Resets the padding to remove unwanted space */
-    background-color: transparent;
-}
-
-nav ul li {
-    display: inline;
-    margin-right: 1em;
-}
-
-nav ul li a {
-    text-decoration: none;
-    color: #2399b5;
-    font-weight: Bold; 
-}
-
-nav ul li a.active {
-    color: white; /* Change the color for the active state */
-    background: #2399b5;
-}
-
-nav ul li a:hover {
-    color: #f2695f; /* Change text color on hover */
-}
-
-
 section {
     margin-bottom: 2%;
     margin-top: 2%;
@@ -434,6 +392,87 @@ section {
 }
 
 
+/* NAVIGATION */
+
+
+#navbar {
+    position: fixed;
+    right: 0;
+    top: 0;
+    width: 250px;
+    height: 100%;
+    background: #EECE43;
+    color: white;
+    transition: transform 0.3s;
+    transform: translateX(250px);
+    z-index: 1000;
+    font-family: "Montserrat", sans-serif;
+  }
+  
+  #navbar a.active {
+  background-color: #F2695F; /* Highlight color */
+  color: #F2695F;
+  }
+  
+  #navbar.nav-open {
+    transform: translateX(0);
+  }
+  
+  #navbar nav ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+  
+  #navbar nav ul li a {
+    display: block;
+    padding: 1.5%;
+    color: white;
+    text-decoration: none;
+    transition: background 0.3s;
+  }
+  
+  #navbar nav ul li a:hover {
+    background: #2399B5;
+  }
+  
+  #toggleNav {
+    background: transparent;
+    color: #2399B5;
+    border: none;
+    font-size: 2.5em;
+    position: absolute;
+    top: 10px;
+    margin-left: -70px;
+    width: 50px;        /* Set the width to your desired square's side length */
+    height: 50px;       /* Set the height to the same as the width to make it a square */
+    text-align: center; /* Horizontally center the text inside the button */
+
+    /* Vertically center the text. The value should be approximately the button's height */
+    line-height: 1px;
+  }
+
+  /* Progress bar */
+
+
+  #progressBarContainer {
+    position: fixed;
+    width: 100%;
+    height: 10px; /* Adjust height as needed */
+    background-color: #EECE43; /* Yellow background */
+    top: 0;
+    left: 0;
+    z-index: 1000;
+}
+
+#progressBar {
+    height: 100%;
+    background-color: #F2695F; /* Pink color for progress */
+    width: 0%; /* Initial state with no progress */
+}
+
+
+
     </style>
 
     <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
@@ -442,20 +481,41 @@ section {
 
 </head>
 <body>    
-    <nav>
-            <span></span>
-            <span></span>
-            <span></span>
-            <ul id="menu">
-                <li><a href="#section1">Introduction</a></li>
-                <li><a href="#section2">Generational shifts</a></li>
-                <li><a href="#section3">Disparities</a></li>
-                <li><a href="#section4">Covid-19</a></li>
-                <li><a href="#section5">Mental Health</a></li>
-                <li><a href="#section6">Barriers to service</a></li>
-            </ul>
+
+    <div id="progressBarContainer">
+        <div id="progressBar"></div>
+    </div>
+    <div id="navbar" class="nav-closed">
+        <button id="toggleNav">☰</button>
+        <nav>
+          <ul>
+            <li><a href="#section1">Introduction</a></li>
+            <li><a href="#section2">Generational shifts</a></li>
+            <li><a href="#section3">Disparities</a></li>
+            <li><a href="#section4">Covid-19</a></li>
+            <li><a href="#section5">Mental Health</a></li>
+            <li><a href="#section6">Barriers to service</a></li>
+
+          </ul>
+        </nav>
+      </div>
+
+
+    <!-- <nav>
+        <div class="hamburger-menu">
+            <div class="bar"></div>
+            <div class="bar"></div>
+            <div class="bar"></div>
         </div>
-    </nav>
+        <ul id="menu" class="nav-links">
+            <li><a href="#section1">Introduction</a></li>
+            <li><a href="#section2">Generational shifts</a></li>
+            <li><a href="#section3">Disparities</a></li>
+            <li><a href="#section4">Covid-19</a></li>
+            <li><a href="#section5">Mental Health</a></li>
+            <li><a href="#section6">Barriers to service</a></li>
+        </ul>
+    </nav> -->
     
 
     <section id="section1"> 
@@ -500,6 +560,7 @@ section {
             </p>
              </div>
         <div class="column" id="column2">
+        <h3>Gender identity and sexual orientation by age group</h3>
             <canvas id="triangleChart"></canvas>
         </div>
     </div>
@@ -560,9 +621,10 @@ section {
                 <h1>The impact of Covid-19 on access to services</h1>
                 <br>
 
-                <b>The Covid-19 pandemic exacerbated existing inequalities even further.</b> Most respondents rated obtaining mental health, in-home health, specialty services, substance use services, and dental care more difficult to obtain during the pandemic. 52% of non-White respondents noting difficulty accessing transition care during the COVID-19 pandemic as compared with 43% of White respondents. Overall, non-White respondents reported higher levels of difficulties in obtaining services than White respondents in most service areas.</p>
+                <u>The Covid-19 pandemic exacerbated existing inequalities even further.</u> Most respondents rated obtaining mental health, in-home health, specialty services, substance use services, and dental care more difficult to obtain during the pandemic. 52% of non-White respondents noting difficulty accessing transition care during the COVID-19 pandemic as compared with 43% of White respondents. Overall, non-White respondents reported higher levels of difficulties in obtaining services than White respondents in most service areas.
+                <br><br><b>Hover over the chart to see the breakdown of those who reported increased difficulty in obtaining services during Covid-19, by race and service type:</b></p>
                 
-                  <br>
+                  
                   <div id="myChartLegend" class="chart-legend">
                     <ul>
                       <li><span class="legend-color" style="background-color: rgba(242, 105, 95, 0.7);"></span>Transitioning care</li>
