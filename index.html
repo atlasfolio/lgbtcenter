@@ -150,13 +150,14 @@ a:hover {
 }
 
 #triangleChart {
-    max-width: auto;
-    min-height: 100px;
-    max-height: 100%; 
     display: block;
+    max-width: auto;
+    max-height: auto; 
+    margin-left: 10%;
+    margin-right: 10%;
+    margin-top: 10%;
 
 }
-
 
 
 #hivPrevalence {
@@ -560,8 +561,8 @@ section {
              </div>
         <div class="column" id="column2">
         <h3>Gender identity and sexual orientation by age group</h3>
-            <canvas id="triangleChart"></canvas>
-        </div>
+        <iframe id="igraph" scrolling="no" style="border:none;" seamless="seamless" src="triangleChart.html" height="60%" width="100%"></iframe>
+    </div>
     </div>
     </section>
 
