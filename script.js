@@ -71,20 +71,28 @@ document.addEventListener('DOMContentLoaded', function () {
 
 function updateProgress() {
     var sections = document.querySelectorAll("section");
-    var pageHeight = document.documentElement.scrollHeight - document.documentElement.clientHeight;
-    var scrollPosition = window.scrollY || document.documentElement.scrollTop;
+    var scrollPosition = window.scrollY || window.pageYOffset;
     var total = sections.length;
-    var currentSection = Math.min(
-        total,
-        Math.max(1, Math.floor((scrollPosition / pageHeight) * total))
-    );
+    var currentSectionIndex = 0;
 
-    var progressPercentage = (currentSection / total) * 100;
+    // Check which section the current scroll position is passing
+    sections.forEach((section, index) => {
+        if (scrollPosition >= section.offsetTop) {
+            currentSectionIndex = index + 1;
+        }
+    });
+
+    var progressPercentage = (currentSectionIndex / total) * 100;
     document.getElementById("progressBar").style.width = progressPercentage + "%";
+    console.log('Current Section Index:', currentSectionIndex, 'Progress:', progressPercentage + '%');
 }
+
+
 
 window.addEventListener('scroll', updateProgress);
 window.addEventListener('resize', updateProgress);
+document.addEventListener('DOMContentLoaded', updateProgress);
+window.addEventListener('load', updateProgress);  // Use if content size changes post DOMContentLoaded
 
 
 
