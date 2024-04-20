@@ -1,3 +1,37 @@
+// window.addEventListener("load", function() {
+//     var iframe = document.getElementById('igraph');
+//     var iframeWin = iframe.contentWindow || iframe.contentDocument.parentWindow;
+//     if (iframeWin.document.body) {
+//       iframe.height = iframeWin.document.documentElement.scrollHeight || iframeWin.document.body.scrollHeight;
+//     }
+//   });
+
+window.addEventListener('load', function() {
+    const iframe = document.getElementById('igraph');
+    if (iframe.contentWindow) {
+        // Function to set size
+        const resizeIframe = () => {
+            try {
+                const body = iframe.contentWindow.document.body;
+                const html = iframe.contentWindow.document.documentElement;
+                const height = Math.max(body.scrollHeight, body.offsetHeight, html.clientHeight, html.scrollHeight, html.offsetHeight);
+                iframe.style.height = height + 'px';
+            } catch (error) {
+                console.error('Error resizing iframe:', error);
+            }
+        };
+
+        // Set initial size
+        resizeIframe();
+
+        // Optional: Resize on window resize or orientation change
+        window.addEventListener('resize', resizeIframe);
+        window.addEventListener('orientationchange', resizeIframe);
+    }
+});
+
+
+
 document.addEventListener('DOMContentLoaded', function () {
     const toggleNavButton = document.getElementById('toggleNav');
     const navbar = document.getElementById('navbar');
@@ -504,7 +538,12 @@ document.addEventListener("DOMContentLoaded", function() {
         { category: 'Have HIV', values: [{location: 'NYC', value: 5}, {location: 'New York State', value: 3}, {location: 'US', value: 4}, {location: 'US Territory or Possession', value: 18}, {location: 'Outside US', value: 15}] }
     ];
 
-    const myColors = ['#7EBC64', '#EECE43', '#2399B5']; // Custom colors: Pink, Blue, Purple
+    // Calculate totals for each location
+    const locationTotals = originalData[0].values.map((v, index) => 
+        originalData.reduce((acc, category) => acc + category.values[index].value, 0)
+    );
+
+    const myColors = ['#7EBC64', '#EECE43', '#2399B5']; // Custom colors: Green, Yellow, Blue
 
     const datasets = originalData.map((category, index) => ({
         label: category.category,
@@ -520,6 +559,8 @@ document.addEventListener("DOMContentLoaded", function() {
             datasets: datasets
         },
         options: {
+            responsive: true,
+            maintainAspectRatio: true,
             scales: {
                 x: {
                     stacked: true
@@ -532,6 +573,19 @@ document.addEventListener("DOMContentLoaded", function() {
                 legend: {
                     position: 'top',
                 },
+                tooltip: {
+                    enabled: true,
+                    mode: 'index',
+                    intersect: false,
+                    callbacks: {
+                        label: function(tooltipItem) {
+                            let value = tooltipItem.raw;
+                            let total = locationTotals[tooltipItem.dataIndex];
+                            let percentage = ((value / total) * 100).toFixed(0);
+                            return `${tooltipItem.dataset.label}: ${percentage}%`;
+                        }
+                    }
+                },
                 title: {
                     display: true,
                     text: 'HIV Risk/Prevalence by Location'
@@ -540,6 +594,7 @@ document.addEventListener("DOMContentLoaded", function() {
         }
     });
 });
+
 
 // Covid-19 infection rates
 
