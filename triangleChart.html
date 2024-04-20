@@ -10,6 +10,12 @@
     <script src="https://d3js.org/d3.v7.min.js"></script>
     <style>
       
+#triangleChart {
+    display: block;
+    max-width: 100%;
+    max-height: 100%; 
+
+}
     </style>
 </head>
 <body>
@@ -116,8 +122,21 @@ const triangleChart = new Chart(triangleChartCtx, {
         },
         plugins: {
             legend: {
-                position: 'right',
-            },
+        position: 'bottom', // Ensures the legend is at the bottom
+        labels: {
+            boxWidth: 2, // Width of the color box accompanying the legend text
+            boxHeight: 2,
+            padding: 5,  // Space between each legend item
+            font: {
+                size: 12,  // Set the font size to 14px
+                family: 'Arial', // Optional: Specify the font family
+                style: 'normal', // Optional: Specify the font style
+                weight: 'normal' // Optional: Specify the font weight
+            }
+        },
+        align: 'center', // Aligns the legend items to the start (left if position is top or bottom)
+        maxHeight: 50, // Adjust based on your specific needs
+    },
             tooltip: {
                 callbacks: {
                     label: function(context) {
@@ -131,20 +150,7 @@ const triangleChart = new Chart(triangleChartCtx, {
                     }
                 }
             },
-            // title: { // Add this block for the chart title
-            //     display: true,
-            //     text: 'Gender identity and sexual orientation, by age group.', 
-            //     padding: {
-            //         top: 10,
-            //         bottom: 10
-            //     },
-            //     font: {
-            //         size: 14,
-            //         family: 'Arial',
-            //         weight: 'bold'
-            //     },
-            //     color: '#2399B5'
-            // }
+
         
             
             
