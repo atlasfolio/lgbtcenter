@@ -2,12 +2,12 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>New York Counties Choropleth Map</title>
+    <title>New York Counties Choropleth Map - Social Inclusion</title>
     <script src="https://d3js.org/d3.v7.min.js"></script>
     <style>
         #map svg {
-            width: 80vw;   /* Use 80% of the viewport width */
-            height: 80vh;  /* Use 80% of the viewport height */
+            width: 80vw;  
+            height: 80vh; 
             max-width: 100%;
             max-height: 100%;
             font-family: Arial;
@@ -16,7 +16,7 @@
         #dataColumnSelect {
             position: absolute;
             top: 1%;
-            left: 1%; /* Adjust this value according to your design */
+            left: 1%; 
             z-index: 1000;
         }
 
@@ -42,9 +42,9 @@
 </head>
 <body>
 <select id="dataColumnSelect">
+    <option value="lack_companionship">Over the past year, how often do you feel that you lack companionship?</option>
     <option value="feeling_isolated">Over the past year, how often do you feel isolated from others?</option>
     <option value="feeling_left_out">Over the past year, how often do you feel left out?</option>
-    <option value="lack_companionship">Over the past year, how often do you feel that you lack companionship?</option>
     <option value="social_support">Over the past year, how often do you feel supported by others?</option>
 </select>
 <br>
@@ -56,7 +56,7 @@
 
 <script>
 document.addEventListener('DOMContentLoaded', function() {
-    var selectedColumn = "feeling_isolated";
+    var selectedColumn = "lack_companionship";
     var dataMap = {};
     var geoData;
 
@@ -69,14 +69,14 @@ document.addEventListener('DOMContentLoaded', function() {
             .attr("y", legendY);
 
         var xLegendScale = d3.scaleLinear()
-            .domain([50, 100])
+            .domain([52, 85])
             .range([0, legendWidth]);
 
         svg.select(".legend-axis")
             .attr("transform", `translate(${legendX}, ${legendY + legendHeight + legendMargin})`)
             .call(d3.axisBottom(xLegendScale)
                 .tickSize(5)
-                .tickValues([50, 75, 100])
+                .tickValues([52, 68, 85])
                 .tickFormat(d => d + "%"));
     }
 
@@ -157,15 +157,7 @@ document.addEventListener('DOMContentLoaded', function() {
         var sectionWidth = legendWidth / 9;  // There are 9 color sections
 
         var colors = [
-        "#2399B5",  // 50-54
-                "#208FAE",  // 55-59
-                "#1D86A8",  // 60-64
-                "#1A7CA1",  // 65-69
-                "#18729A",  // 70-74
-                "#156893",  // 75-79
-                "#125F8D",  // 80-84
-                "#0F5586",  // 85-89
-                "#0C4B7F"   // 90+
+        "#0C4B7F", "#2D4F7A", "#4E5476", "#6F5871", "#8F5C6D", "#B06068", "#D16564", "#F2695F", "#F2695F", "#F1775B", "#F18657", "#F09453", "#F0A34F", "#EFB14B", "#EFC047", "#EECE43", "#EECE43", "#DECB48", "#CEC94C", "#BEC651", "#AEC456", "#9EC15B", "#8EBF5F", "#7EBC64", "#7EBC64", "#74B86D", "#6AB476", "#60B07F", "#56AC88", "#4BA991", "#41A59A", "#37A1A3", "#2D9DAC", "#2399B5"
         ];
 
  // Calculate section width dynamically based on the number of color categories
@@ -183,13 +175,13 @@ colors.forEach((color, index) => {
 
 // Define the legend's scale
 var xLegendScale = d3.scaleLinear()
-    .domain([50, 100])
+    .domain([52, 85])
     .range([0, legendWidth]);
 
 // Define the axis for the legend
 var legendAxis = d3.axisBottom(xLegendScale)
     .tickSize(5) // Size of the ticks
-    .tickValues([50, 75, 100]) // Only show ticks at 50%, 75%, and 100%
+    .tickValues([52, 60, 85]) // Only show ticks at 50%, 75%, and 100%
     .tickFormat(d => `${d}%`); // Format ticks as percentages
 
 // Append the axis to the legend
@@ -202,17 +194,9 @@ svg.append("g")
 
     function createCustomColorScale() {
         return d3.scaleThreshold()
-            .domain([54, 59, 64, 69, 74, 79, 84, 89])  // Define breaks in the scale
+            .domain([52, 53, 54, 55, 56, 57, 58, 59, 60, 61, 62, 63, 64, 65, 66, 67, 68, 69, 70, 71, 72, 73, 74, 75, 76, 77, 78, 79, 80, 81, 82, 83, 84, 85])  // Define breaks in the scale
             .range([
-                "#2399B5",  // 50-54
-                "#208FAE",  // 55-59
-                "#1D86A8",  // 60-64
-                "#1A7CA1",  // 65-69
-                "#18729A",  // 70-74
-                "#156893",  // 75-79
-                "#125F8D",  // 80-84
-                "#0F5586",  // 85-89
-                "#0C4B7F"   // 90+
+            "#0C4B7F", "#2D4F7A", "#4E5476", "#6F5871", "#8F5C6D", "#B06068", "#D16564", "#F2695F", "#F2695F", "#F1775B", "#F18657", "#F09453", "#F0A34F", "#EFB14B", "#EFC047", "#EECE43", "#EECE43", "#DECB48", "#CEC94C", "#BEC651", "#AEC456", "#9EC15B", "#8EBF5F", "#7EBC64", "#7EBC64", "#74B86D", "#6AB476", "#60B07F", "#56AC88", "#4BA991", "#41A59A", "#37A1A3", "#2D9DAC", "#2399B5"
             ]);
     }
 
