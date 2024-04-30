@@ -42,9 +42,10 @@
 </head>
 <body>
 <select id="dataColumnSelect">
-    <option value="lack_companionship">Over the past year, how often do you feel that you lack companionship?</option>
     <option value="feeling_isolated">Over the past year, how often do you feel isolated from others?</option>
     <option value="feeling_left_out">Over the past year, how often do you feel left out?</option>
+    <option value="lack_companionship">Over the past year, how often do you feel that you lack companionship?</option>
+
 </select>
 <br>
 
@@ -55,7 +56,7 @@
 
 <script>
 document.addEventListener('DOMContentLoaded', function() {
-    var selectedColumn = "lack_companionship";
+    var selectedColumn = "feeling_isolated";
     var dataMap = {};
     var geoData;
 
