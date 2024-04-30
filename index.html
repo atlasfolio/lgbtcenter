@@ -8,7 +8,7 @@
     <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels"></script> <!-- Chart.js Datalabels Plugin -->
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
     <script src="https://d3js.org/d3.v7.min.js"></script>
-
+    <!-- <link rel="stylesheet" href="style_mobile.css"> If you have a separate CSS file -->
 
     <style>
 
@@ -637,28 +637,29 @@ section {
                
                 <i>For more information, consult <a href="https://nyslgbtq.org/wp-content/uploads/2023/03/TRX-Report-010823-FINAL-REV-2.pdf#page=115" target="_blank">section VII</a> of the full report.</i>
                 
-                <br><br>Click on the chart below to see the breakdown of White vs. non-White respondents who reported increased difficulty in obtaining services during Covid-19.</p>
-                <div style="border: 1px solid #7EBC64; border-radius: 1.5em; padding-top: 1em; padding-left: 0; padding-right: 0">
 
-                  
+                <br><br>
+                
+                <div style="border: 1px solid #7EBC64; border-radius: 1.5em; padding-top: 1em; padding-left: 1em; padding-right: 1em;">
+                    Click on the chart below to see the breakdown of White vs. non-White respondents reporting increased difficulty in obtaining services during Covid-19.</p>
+</div>
+                  <br>
                   <div id="myChartLegend" class="chart-legend">
                     <ul>
-                      <li><span class="legend-color" style="background-color: rgba(242, 105, 95, 0.7);"></span>Transitioning care</li>
-                      <li><span class="legend-color" style="background-color: rgba(255, 165, 0, 0.7);"></span>Prescriptions</li>
-                      <li><span class="legend-color" style="background-color: rgba(258, 206, 67, 0.7);"></span>Specialty care</li>
-                      <li><span class="legend-color" style="background-color: rgba(126, 188, 100, 0.7);"></span>Primary care</li>
-                    </ul><br>
+                      <li><span class="legend-color" style="background-color: rgba(242, 105, 95, 0.7); margin-bottom: 1em;"></span>Transitioning care</li>
+                      <li><span class="legend-color" style="background-color: rgba(255, 165, 0, 0.7); margin-bottom: 1em;"></span>Prescriptions</li>
+                      <li><span class="legend-color" style="background-color: rgba(258, 206, 67, 0.7); margin-bottom: 1em;"></span>Specialty care</li>
+                      <li><span class="legend-color" style="background-color: rgba(126, 188, 100, 0.7); margin-bottom: 1em;"></span>Primary care</li>
+                    </ul>
                     <ul>
                 
-                        <li><span class="legend-color" style="background-color: rgba(12, 75, 126, 0.7);"></span>In-home health care</li>
-                        <li><span class="legend-color" style="background-color: rgba(35, 153, 181, 0.7);"></span>Emergency or urgent care</li>
-                        <li><span class="legend-color" style="background-color: rgba(238, 130, 238, 0.7);"></span>Mental health services</li>
+                        <li><span class="legend-color" style="background-color: rgba(12, 75, 126, 0.7); margin-top: 1em; margin-bottom: 1em"></span>In-home health care</li>
+                        <li><span class="legend-color" style="background-color: rgba(35, 153, 181, 0.7); margin-top: 1em; margin-bottom: 1em"></span>Emergency or urgent care</li>
+                        <li><span class="legend-color" style="background-color: rgba(238, 130, 238, 0.7); margin-top: 1em; margin-bottom: 1em"></span>Mental health services</li>
                       </ul><br>
                   </div>
-                  </div><br>
+                  
                 <canvas id="rainbowChart"></canvas>
-
-
                
 
         </div>
@@ -742,14 +743,10 @@ section {
    
     <div class="column" id="column1">
         <h1>Barriers to service</h1>
-        <p>While there is a significant demand for services within the LGBTQ community, a large portion (62.6%) of respondents did not seek out the care or services they need. Among these, individuals under 35 represented over half of those who refrained from seeking support. 
-            Among those who did seek non-behavioral services but were unsuccessful, 29% said they could not find the required services locally in their area. 47% of respondents who looked for but did not obtain mental health services cited the absence of such services locally as the primary obstacle.
-            <b>Telehealth services</b> can provide a cheaper and simpler alternative to improve accessibility.</p>
 
         <h4>Top barriers to care or service, by NYS region</h4>
-        <iframe id="igraph" scrolling="no" style="border:none;" seamless="seamless" src="map_barriers.html" height="100%" width="100%" overflow="display"></iframe>
+        <iframe id="igraph" scrolling="no" style="border:none;" seamless="seamless" src="map_barriers.html" height="100%" width="100%" overflow="display" style="margin-bottom: 0"></iframe>
                
-
         </div>
 
         
@@ -766,59 +763,59 @@ section {
             
 
             <br><br>
-               <ul class="grid" style="list-style-type: none; padding-left: 0;"> <!-- Added class 'grid' for styling -->
+               <ul class="grid" style="list-style-type: none; padding-left: 0;"> 
        
                    <li class="item">
-                       <span class="circle largest" style="background-color: #0C4B7F;">
+                       <span class="circle largest" style="background-color: #0C4B7F; margin-left: 1em; margin-right: 1em">
                            <span>54%</span>
                        </span>
                        <span class="text">Lack of public information about LGBTQ+ competence medical or service providers in my area </span>
                    </li>
     
                    <li class="item">
-                       <span class="circle largest" style="background-color: #2399B5;">
+                       <span class="circle largest" style="background-color: #2399B5;  margin-left: 1em; margin-right: 1em">
                            <span>53%</span>
                        </span>
                        <span class="text">Not enough health professionals who are adequately trained and competent to deliver health care to LGBTQ people</span>
                    </li>
                
                    <li class="item">
-                       <span class="circle largest" style="background-color: #EECE43;">
+                       <span class="circle largest" style="background-color: #EECE43;  margin-left: 1em; margin-right: 1em">
                            <span>51%</span>
                        </span>
                        <span class="text">Not enough support groups for LGBTQ+ people</span>
                    </li>
                
                    <li class="item">
-                       <span class="circle medium" style="background-color: #7EBC64;">
+                       <span class="circle medium" style="background-color: #7EBC64;  margin-left: 1em; margin-right: 1em">
                            <span>42%</span>
                        </span>
                        <span class="text">Community fear or dislike of LGBTQ+ people</span>
                    </li>
        
                    <li class="item">
-                       <span class="circle medium" style="background-color:  #F2695F;">
+                       <span class="circle medium" style="background-color:  #F2695F;  margin-left: 1em; margin-right: 1em">
                            <span>39%</span>
                        </span>
                        <span class="text">My personal financial resources/can't afford to pay costs of care or services</span>
                    </li>
        
                    <li class="item">
-                       <span class="circle small" style="background-color: #0C4B7F;">
+                       <span class="circle small" style="background-color: #0C4B7F;  margin-left: 1em; margin-right: 1em">
                            <span>36%</span>
                        </span>
                        <span class="text">Long distances to LGBTQ+ culturally competent medical facilities</span>
                    </li>
        
                    <li class="item">
-                       <span class="circle small" style="background-color: #2399B5;">
+                       <span class="circle small" style="background-color: #2399B5;  margin-left: 1em; margin-right: 1em">
                            <span>34%</span>
                        </span>
                        <span class="text">Long distances to other (non-medical) LGBT sensitive service providers</span>
                    </li>
        
                    <li class="item">
-                       <span class="circle smallest" style="background-color: #EECE43;">
+                       <span class="circle smallest" style="background-color: #EECE43;  margin-left: 1em; margin-right: 1em">
                            <span>18%</span>
                        </span>
                        <span class="text">Doctors and other health care workers who refuse to provide services to LGBTQ people</span>
@@ -852,26 +849,23 @@ Building off the findings of the survey, <b>key points for policy action are:</b
 
 </ul>
 <br><br>
+
 <h2>2) Guarantee the expansion of Telehealth Services and close the gap for Medicaid reimbursement for telemedicine</h2>
 <p>Incentivize service providers to increase service availability by compensating behavioral and nonbehavioral telehealth services at competitive rates for organizations.</p>
-
 
             </div>
 
          <div class="column" id="column2">
-<br><br>
+<br>
             <h2>3) Expand In-Person and Remote Service Capacity, improve LGBTQ sensitivity training among current providers</h2>
             <p>Fund and support the training, technical assistance, and support to public and private service providers to increase the state's capacity to serve its LGBTQ constituents. We recognize the importance and work to educate the public about the importance of extended LGBTQ cultural competency training and improved LGBT-affirming policies, regulations, and service standards.
          Support pathways to bring minority candidates into the profession, or supporting certified and trained peer positions that address issues of discrimination, fear, and mistrust in the community.
-
-
             </p>
-            <br>
+            <br><br>
             
             <h2>4) Increase targeted awareness about mental health issues and available services targeted to underserved communities</h2>
             <p>Invest in developing targeted programming to reach historically marginalized groups within our communities: BIPOC communities, younger and aging clients, people with disabilities, immigrants, and TGNC clients.</p>
             
-
 <br>
        
        <h3>For more information:</h3>
