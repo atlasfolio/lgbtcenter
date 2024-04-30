@@ -128,6 +128,8 @@ canvas {
     }
 
     .item {
+        flex-direction: column; 
+        align-items: flex-start;
         padding: 10px;  /* Adjust this value as needed */
         box-sizing: border-box; /* Ensures padding is included in the width calculation */
     }
@@ -137,7 +139,8 @@ canvas {
     }
     .text {
         font-size: 14px;  /* Smaller font size for mobile devices */
-        margin-right: 1em;
+        margin-left: 1em;
+        margin-right: 1em; 
     }
 
 
@@ -375,6 +378,7 @@ a:hover {
 .text {
     /* flex-grow: 1;        */
     font-size: .9em; /* Responsive font size */
+    margin-left: 0;
 }
 
 
@@ -573,10 +577,12 @@ section {
             <h1>Generational shifts</h1>
 
          
+            <div style="column-count: 2">
 
 <p><b>A generational shift is underway.</b> The 2021 Survey shows a community that has shifted substantially in terms of gender expression and identity since the last survey in 2015. The community is growing more diverse in gender identity and sexual orientation, such that binary gender identities and lesbian and gay orientations are trending toward minority status in the larger LGBTQ+ community. 
     The shift is most pronounced in the breakdown of gender and orientation by three major age groups <i>(13-34, 35-49, 50+).</i> 
-
+</div>
+<br>
 
     <div style="border: 1px solid #F2695F; border-radius: 1.5em; padding: 1.5em;">
         <ul style="list-style-type: square; padding-left: 1.5em;">
@@ -584,6 +590,7 @@ section {
             </li><br>
             <li>These differences in orientation and gender expression point to substantially different lived experience in different age groups. To address the needs of the LGBTQ+ community today means creating appropriate resources and responses for youth, those in middle adulthood, and community members who are ageing.
             </li>
+            
 
 
     </ul>
