@@ -123,7 +123,12 @@ canvas {
         --text-font-size: 14px; /* Smaller font size for mobile */
     }
 
+    #igraph {
+        height: 500px; /* Adjust based on your needs */
+    }
 }
+
+
 
 
 
@@ -342,8 +347,8 @@ a:hover {
 
 
 .text {
-    flex-grow: 1;          /* Takes up the rest of the space in the flex container */
-    font-size: 1em; /* Responsive font size */
+    /* flex-grow: 1;        */
+    font-size: .9em; /* Responsive font size */
 }
 
 
@@ -744,9 +749,15 @@ section {
     <div class="column" id="column1">
         <h1>Barriers to service</h1>
 
+        <p>While there is a significant demand for services within the LGBTQ community, a large portion (62.6%) of respondents did not seek out the care or services they need. Among these, individuals under 35 represented over half of those who refrained from seeking support. 
+            Among those who did seek non-behavioral services but were unsuccessful, 29% said they could not find the required services locally in their area. 47% of respondents who looked for but did not obtain mental health services cited the absence of such services locally as the primary obstacle.
+            <b>Telehealth services</b> can provide a cheaper and simpler alternative to improve accessibility.</p>
+
+
         <h4>Top barriers to care or service, by NYS region</h4>
-        <iframe id="igraph" scrolling="no" style="border:none;" seamless="seamless" src="map_barriers.html" height="100%" width="100%" overflow="display" style="margin-bottom: 0"></iframe>
-               
+        <iframe id="igraph" scrolling="no" style="border:none; margin-bottom: 0; width: 100%; height: 100%; overflow: hidden;" seamless="seamless" src="map_barriers.html"></iframe>
+
+
         </div>
 
         
@@ -763,59 +774,59 @@ section {
             
 
             <br><br>
-               <ul class="grid" style="list-style-type: none; padding-left: 0;"> 
+               <ul class="grid" style="list-style-type: none;"> 
        
                    <li class="item">
-                       <span class="circle largest" style="background-color: #0C4B7F; margin-left: 1em; margin-right: 1em">
+                       <span class="circle largest" style="background-color: #0C4B7F; margin-right: 1em">
                            <span>54%</span>
                        </span>
                        <span class="text">Lack of public information about LGBTQ+ competence medical or service providers in my area </span>
                    </li>
     
                    <li class="item">
-                       <span class="circle largest" style="background-color: #2399B5;  margin-left: 1em; margin-right: 1em">
+                       <span class="circle largest" style="background-color: #2399B5; margin-right: 1em">
                            <span>53%</span>
                        </span>
                        <span class="text">Not enough health professionals who are adequately trained and competent to deliver health care to LGBTQ people</span>
                    </li>
                
                    <li class="item">
-                       <span class="circle largest" style="background-color: #EECE43;  margin-left: 1em; margin-right: 1em">
+                       <span class="circle largest" style="background-color: #EECE43; margin-right: 1em">
                            <span>51%</span>
                        </span>
                        <span class="text">Not enough support groups for LGBTQ+ people</span>
                    </li>
                
                    <li class="item">
-                       <span class="circle medium" style="background-color: #7EBC64;  margin-left: 1em; margin-right: 1em">
+                       <span class="circle medium" style="background-color: #7EBC64; margin-right: 1em">
                            <span>42%</span>
                        </span>
                        <span class="text">Community fear or dislike of LGBTQ+ people</span>
                    </li>
        
                    <li class="item">
-                       <span class="circle medium" style="background-color:  #F2695F;  margin-left: 1em; margin-right: 1em">
+                       <span class="circle medium" style="background-color:  #F2695F;  margin-left: 1em;">
                            <span>39%</span>
                        </span>
                        <span class="text">My personal financial resources/can't afford to pay costs of care or services</span>
                    </li>
        
                    <li class="item">
-                       <span class="circle small" style="background-color: #0C4B7F;  margin-left: 1em; margin-right: 1em">
+                       <span class="circle small" style="background-color: #0C4B7F;  margin-left: 1em;">
                            <span>36%</span>
                        </span>
                        <span class="text">Long distances to LGBTQ+ culturally competent medical facilities</span>
                    </li>
        
                    <li class="item">
-                       <span class="circle small" style="background-color: #2399B5;  margin-left: 1em; margin-right: 1em">
+                       <span class="circle small" style="background-color: #2399B5;  margin-left: 1em; ">
                            <span>34%</span>
                        </span>
                        <span class="text">Long distances to other (non-medical) LGBT sensitive service providers</span>
                    </li>
        
                    <li class="item">
-                       <span class="circle smallest" style="background-color: #EECE43;  margin-left: 1em; margin-right: 1em">
+                       <span class="circle smallest" style="background-color: #EECE43;  margin-left: 1em;">
                            <span>18%</span>
                        </span>
                        <span class="text">Doctors and other health care workers who refuse to provide services to LGBTQ people</span>
