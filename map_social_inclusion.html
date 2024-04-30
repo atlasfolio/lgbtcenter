@@ -45,7 +45,6 @@
     <option value="lack_companionship">Over the past year, how often do you feel that you lack companionship?</option>
     <option value="feeling_isolated">Over the past year, how often do you feel isolated from others?</option>
     <option value="feeling_left_out">Over the past year, how often do you feel left out?</option>
-    <option value="social_support">Over the past year, how often do you feel supported by others?</option>
 </select>
 <br>
 
@@ -69,14 +68,14 @@ document.addEventListener('DOMContentLoaded', function() {
             .attr("y", legendY);
 
         var xLegendScale = d3.scaleLinear()
-            .domain([52, 85])
+            .domain([52, 68])
             .range([0, legendWidth]);
 
         svg.select(".legend-axis")
             .attr("transform", `translate(${legendX}, ${legendY + legendHeight + legendMargin})`)
             .call(d3.axisBottom(xLegendScale)
                 .tickSize(5)
-                .tickValues([52, 68, 85])
+                .tickValues([52, 60, 68])
                 .tickFormat(d => d + "%"));
     }
 
@@ -157,8 +156,8 @@ document.addEventListener('DOMContentLoaded', function() {
         var sectionWidth = legendWidth / 9;  // There are 9 color sections
 
         var colors = [
-        "#0C4B7F", "#2D4F7A", "#4E5476", "#6F5871", "#8F5C6D", "#B06068", "#D16564", "#F2695F", "#F2695F", "#F1775B", "#F18657", "#F09453", "#F0A34F", "#EFB14B", "#EFC047", "#EECE43", "#EECE43", "#DECB48", "#CEC94C", "#BEC651", "#AEC456", "#9EC15B", "#8EBF5F", "#7EBC64", "#7EBC64", "#74B86D", "#6AB476", "#60B07F", "#56AC88", "#4BA991", "#41A59A", "#37A1A3", "#2D9DAC", "#2399B5"
-        ];
+        "#7EBC64", "#8CBE60", "#9AC15C", "#A8C358", "#B6C553", "#C4C74F", "#D2CA4B", "#E0CC47", "#EECE43", "#EFC147", "#EFB44A", "#F0A84E", "#F09B51", "#F18E55", "#F18258", "#F2755C", "#F2695F"
+    ];
 
  // Calculate section width dynamically based on the number of color categories
  var sectionWidth = legendWidth / colors.length;
@@ -175,13 +174,13 @@ colors.forEach((color, index) => {
 
 // Define the legend's scale
 var xLegendScale = d3.scaleLinear()
-    .domain([52, 85])
+    .domain([52, 68])
     .range([0, legendWidth]);
 
 // Define the axis for the legend
 var legendAxis = d3.axisBottom(xLegendScale)
     .tickSize(5) // Size of the ticks
-    .tickValues([52, 60, 85]) // Only show ticks at 50%, 75%, and 100%
+    .tickValues([52, 60, 68]) // Only show ticks at 50%, 75%, and 100%
     .tickFormat(d => `${d}%`); // Format ticks as percentages
 
 // Append the axis to the legend
@@ -194,10 +193,11 @@ svg.append("g")
 
     function createCustomColorScale() {
         return d3.scaleThreshold()
-            .domain([52, 53, 54, 55, 56, 57, 58, 59, 60, 61, 62, 63, 64, 65, 66, 67, 68, 69, 70, 71, 72, 73, 74, 75, 76, 77, 78, 79, 80, 81, 82, 83, 84, 85])  // Define breaks in the scale
+            .domain([52, 53, 54, 55, 56, 57, 58, 59, 60, 61, 62, 63, 64, 65, 66, 67, 68])  // Define breaks in the scale
             .range([
-            "#0C4B7F", "#2D4F7A", "#4E5476", "#6F5871", "#8F5C6D", "#B06068", "#D16564", "#F2695F", "#F2695F", "#F1775B", "#F18657", "#F09453", "#F0A34F", "#EFB14B", "#EFC047", "#EECE43", "#EECE43", "#DECB48", "#CEC94C", "#BEC651", "#AEC456", "#9EC15B", "#8EBF5F", "#7EBC64", "#7EBC64", "#74B86D", "#6AB476", "#60B07F", "#56AC88", "#4BA991", "#41A59A", "#37A1A3", "#2D9DAC", "#2399B5"
-            ]);
+            "#7EBC64", "#8CBE60", "#9AC15C", "#A8C358", "#B6C553", "#C4C74F", "#D2CA4B", "#E0CC47", "#EECE43", "#EFC147", "#EFB44A", "#F0A84E", "#F09B51", "#F18E55", "#F18258", "#F2755C", "#F2695F"
+
+                ]);
     }
 
     function formatValue(value) {
