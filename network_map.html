@@ -9,6 +9,7 @@
 <script src="https://d3js.org/d3.v5.min.js"></script>
 
 <style>
+
   body { 
     margin: 0; 
     padding: 0; 
@@ -32,12 +33,10 @@
     background: rgba(255, 255, 255, 0.75);
     position: absolute;
     font-size: 0.75em;
-    top: 0px;
-    left: 0px;
+    top: 10px; /* Moved down slightly for better visibility */
+    right: 10px; /* Moved to the right corner */
     z-index: 1;
     border: 1px solid grey;
-    overflow-y: auto;
-    max-height: 100vh;
   }
   
   .legend-title {
@@ -87,10 +86,10 @@
   
   @media (max-width: 600px) {
     #legend {
-      width: 70vw;
+      width: 40vw;
       max-width: none;
       font-size: 0.9em;
-      max-height: 40vh;
+      max-height: 30vh;
     }
     
     .legend-labels {
@@ -99,16 +98,16 @@
     }
     
     .legend-bar {
-      width: 70vw;
+      width: 100%;
     }
   }
   
   @media (max-width: 400px) {
     #legend {
-      width: 80vw;
+      width: 50vw;
       max-width: none;
       font-size: 1em;
-      max-height: 40vh;
+      max-height: 30vh;
     }
     
     .legend-labels {
@@ -117,9 +116,12 @@
     }
     
     .legend-bar {
-      width: 80vw;
+      width: 100%;
     }
   }
+
+
+  
 </style>
 </head>
 <body>
