@@ -69,31 +69,37 @@
     color: #0078A8; /* Optional: Change the link color */
   }
 
-  /* Media queries for responsive design */
   @media (max-width: 600px) {
     #legend {
-      width: 80vw;
-      font-size: 1em;
+      width: 70vw;
+      max-width: none;
+      font-size: 0.9em;
     }
+    
     .legend-labels {
       width: 100%;
-      font-size: 1em;
+      font-size: 0.9em;
     }
+    
     .legend-bar {
-      width: 80vw;
+      width: 70vw;
     }
   }
+  
   @media (max-width: 400px) {
     #legend {
-      width: 90vw;
-      font-size: 1.2em;
+      width: 80vw;
+      max-width: none;
+      font-size: 1em;
     }
+    
     .legend-labels {
       width: 100%;
-      font-size: 1.2em;
+      font-size: 1em;
     }
+    
     .legend-bar {
-      width: 90vw;
+      width: 80vw;
     }
   }
 </style>
