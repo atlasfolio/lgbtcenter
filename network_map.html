@@ -9,71 +9,88 @@
 <script src="https://d3js.org/d3.v5.min.js"></script>
 
 <style>
-  body { margin: 0; 
+  body { 
+    margin: 0; 
     padding: 0; 
     display: flex; 
-  font-family: Arial;}
-  #map { position: absolute; top: 0; bottom: 0; left: 0; right: 0; border: 1px solid black;}
+    font-family: Arial;
+  }
+  
+  #map { 
+    position: absolute; 
+    top: 0; 
+    bottom: 0; 
+    left: 0; 
+    right: 0; 
+    border: 1px solid black;
+  }
 
   #legend {
     width: 20vw;
+    max-width: 300px;
     padding: 1%;
-    background: rgba(255, 255, 255, 0.75)    ;
+    background: rgba(255, 255, 255, 0.75);
     position: absolute;
-    font-size: .75em;
+    font-size: 0.75em;
     top: 0px;
     left: 0px;
     z-index: 1;
     border: 1px solid grey;
+    overflow-y: auto;
+    max-height: 100vh;
   }
+  
   .legend-title {
     font-weight: bold;
     margin-bottom: 1%;
   }
+  
   .legend-scale {
     display: flex;
     align-items: center;
   }
+  
   .legend-labels {
     display: flex; 
     justify-content: space-between;
-    width: 20vw;
+    width: 100%;
     margin-top: 1%;
-    font-size: .75em;
+    font-size: 0.75em;
   }
+  
   .legend-bar {
     height: 20px;
-    width: 100vw;
+    width: 100%;
     background: linear-gradient(to right, #2399B5, #7EBC64, #EECE43, #F2695F);
   }
-  /* General style for all pop-ups */
+  
   .mapboxgl-popup-content {
     border-radius: 1%;
   }
-  /* Specific style for program layer pop-ups */
+  
   .program-popup {
     background: rgba(255, 255, 255, 0.9);
-    z-index: 10; /* Base z-index */
+    z-index: 10;
   }
-  /* Specific style for choropleth layer pop-ups */
+  
   .choropleth-popup {
     background: rgba(0, 0, 0, 0.7);
     color: white;
   }
-
-    /* Remove the blue outline and border around contact links */
-    .mapboxgl-popup-content a {
+  
+  .mapboxgl-popup-content a {
     outline: none;
     border: none;
     text-decoration: none;
-    color: #0078A8; /* Optional: Change the link color */
+    color: #0078A8;
   }
-
+  
   @media (max-width: 600px) {
     #legend {
       width: 70vw;
       max-width: none;
       font-size: 0.9em;
+      max-height: 40vh;
     }
     
     .legend-labels {
@@ -91,6 +108,7 @@
       width: 80vw;
       max-width: none;
       font-size: 1em;
+      max-height: 40vh;
     }
     
     .legend-labels {
