@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bubble Chart</title>
+    <script src="https://d3js.org/d3.v6.min.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
+
+    <style>
+        body {
+            font-size: 1em;
+            font-family: 'Montserrat', sans-serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin: 0;
+            padding: 0;
+            overflow-x: hidden;
+        }
+        .bubble {
+            stroke: none;
+            stroke-width: none;
+        }
+        .tooltip {
+            position: absolute;
+            text-align: center;
+            width: auto;
+            height: auto;
+            padding: .5em;
+            font: 12px sans-serif;
+            background: white;
+            border: 0px;
+            color: black;
+            border-radius: 8px;
+            pointer-events: none;
+        }
+        .title {
+            text-align: center;
+            font-size: 24px;
+            margin-top: 20px;
+        }
+        .legend {
+            font-size: .75em;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            margin-top: 0px;
+        }
+        .legend-item {
+            display: flex;
+            align-items: center;
+            margin: 2px 5px;
+        }
+        .legend-item svg {
+            margin-right: .25em;
+        }
+        .legend-item span {
+            margin-left: 0;
+            white-space: nowrap; /* Prevent text from wrapping to the next line */
+        }
+        .legend rect {
+            stroke-width: 2;
+            width: 1em;
+            height: 1em;
+        }
+        .legend text {
+            font-size: .5em;
+        }
+        #checkbox-container {
+            text-align: center;
+            margin-bottom: 0px;
+            font-style: 'Montserrat', sans-serif;
+            color: #f2695f;
+            font-weight: bold;
+            font-size: 1em;
+        }
+        .bubble-text {
+            text-anchor: middle;
+            dominant-baseline: middle;
+            font-size: 1em;
+            fill: black;
+        }
+        #chart-container {
+            display: flex;
+            justify-content: center;
+            align-items: center; /* Center vertically */
+            flex-direction: column;
+            width: 100%;
+            max-width: 1200px;
+            gap: 0px; /* Reduced spacing between chart and legend */
+
+        }
+        #chart {
+            width: 100%;
+            height: 60vh;
+        }
+        svg {
+            width: 100%;
+            height: 100%;
+        }
+        @media (max-width: 768px) {
+            .legend {
+                flex-direction: column;
+                align-items: center;
+            }
+            .legend-item {
+                margin: 5px 0;
+            }
+        }
+        @media (max-width: 480px) {
+            .title {
+                font-size: 2em;
+            }
+            .legend-item {
+                margin: 0px 0;
+                font-size: .6em;
+            }
+            .legend-item svg {
+                width: 0.8em;
+                height: 0.8em;
+            }
+            .legend rect {
+                width: 0.8em;
+                height: 0.8em;
+            }
+            .legend text {
+                font-size: .6em;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div id="checkbox-container">
+        <label><input type="checkbox" id="non-behavioral" checked> Non-Behavioral Health Services</label>
+        <label><input type="checkbox" id="mental" checked> Mental Health Services</label>
+    </div>
+    <div id="chart-container">
+        <div id="chart"></div>
+    </div>
+    <div id="legend" class="legend"></div>
+
+    <script>
+        const nonBehavioralData = [
+            { reason: "I could not afford services", percentage: 52, color: "#0C4B7F" },
+            { reason: "I had problems with insurance", percentage: 42, color: "#2399B5" },
+            { reason: "Couldn't find services in my area", percentage: 49, color: "#EECE43" },
+            { reason: "I had no time to get to services", percentage: 33, color: "#7EBC64" },
+            { reason: "No transport to get to services", percentage: 23, color: "#F2695F" }
+        ];
+
+        const mentalHealthData = [
+            { reason: "I could not afford services", percentage: 49, color: "#0C4B7F" },
+            { reason: "I had problems with insurance", percentage: 43, color: "#2399B5" },
+            { reason: "Couldn't find services in my area", percentage: 59, color: "#EECE43" },
+            { reason: "I had no time to get to services", percentage: 23, color: "#7EBC64" },
+            { reason: "Lack of LGBTQ affirming services", percentage: 50, color: "grey" }
+        ];
+
+        const allData = {
+            "non-behavioral": nonBehavioralData,
+            "mental": mentalHealthData
+        };
+
+        const svg = d3.select("#chart")
+            .append("svg")
+            .attr("preserveAspectRatio", "xMinYMin meet")
+            .attr("viewBox", "0 0 800 500")
+            .classed("svg-content-responsive", true);
+
+        const tooltip = d3.select("body")
+            .append("div")
+            .attr("class", "tooltip")
+            .style("opacity", 0);
+
+        const pack = d3.pack()
+            .padding(10);
+
+        function updateChart(selectedData) {
+            const containerWidth = document.getElementById("chart").clientWidth;
+            const containerHeight = document.getElementById("chart").clientHeight;
+
+            svg.attr("viewBox", `0 0 ${containerWidth} ${containerHeight}`);
+            pack.size([containerWidth, containerHeight]);
+
+            const combinedData = [];
+            selectedData.forEach(key => {
+                combinedData.push(...allData[key]);
+            });
+
+            const root = d3.hierarchy({ children: combinedData })
+                .sum(d => d.percentage);
+
+            const nodes = pack(root).leaves();
+
+            const node = svg.selectAll("g.node")
+                .data(nodes, d => d.data.reason);
+
+            // Exit old nodes
+            node.exit().remove();
+
+            // Enter new nodes
+            const nodeEnter = node.enter().append("g")
+                .attr("class", "node")
+                .attr("transform", d => `translate(${d.x},${d.y})`);
+
+            nodeEnter.append("circle")
+                .attr("class", "bubble")
+                .attr("r", d => d.r)
+                .attr("fill", d => d.data.color)
+                .on("mouseover", (event, d) => {
+                    tooltip.transition()
+                        .duration(200)
+                        .style("opacity", .9);
+                    tooltip.html(`${d.data.reason}: ${d.data.percentage}%`)
+                        .style("left", (event.pageX + 5) + "px")
+                        .style("top", (event.pageY - 28) + "px");
+                })
+                .on("mouseout", () => {
+                    tooltip.transition()
+                        .duration(500)
+                        .style("opacity", 0);
+                });
+
+            nodeEnter.append("text")
+                .attr("class", "bubble-text")
+                .attr("dy", ".3em")
+                .text(d => d.data.percentage + "%");
+
+            // Merge new and existing nodes
+            const nodeMerge = nodeEnter.merge(node);
+
+            nodeMerge.transition()
+                .duration(750)
+                .attr("transform", d => `translate(${d.x},${d.y})`);
+
+            nodeMerge.select("circle")
+                .attr("r", d => d.r)
+                .attr("fill", d => d.data.color);
+
+            nodeMerge.select(".bubble-text")
+                .text(d => d.data.percentage + "%");
+
+            // Update legend
+            const legend = d3.select("#legend").html("");
+
+            const combinedLegendData = [
+                ...nonBehavioralData,
+                ...mentalHealthData
+            ].reduce((acc, cur) => {
+                if (!acc.find(item => item.reason === cur.reason)) {
+                    acc.push(cur);
+                }
+                return acc;
+            }, []);
+
+            combinedLegendData.forEach((d, i) => {
+                const legendItem = legend.append("div")
+                    .attr("class", "legend-item");
+
+                legendItem.append("svg")
+                    .attr("width", "1em")
+                    .attr("height", "1em")
+                    .append("rect")
+                    .attr("width", "1em")
+                    .attr("height", "1em")
+                    .attr("fill", d.color);
+
+                legendItem.append("span")
+                    .text(d.reason);
+            });
+
+            // Align legend items into two columns
+            const legendItems = d3.selectAll(".legend-item").nodes();
+            const midIndex = Math.ceil(legendItems.length / 2);
+            const column1 = legendItems.slice(0, midIndex);
+            const column2 = legendItems.slice(midIndex);
+
+            const column1Div = legend.append("div").attr("class", "legend-column");
+            const column2Div = legend.append("div").attr("class", "legend-column");
+
+            column1.forEach(item => column1Div.append(() => item));
+            column2.forEach(item => column2Div.append(() => item));
+
+            legend.selectAll(".legend-column").style("display", "flex").style("flex-direction", "column").style("align-items", "center");
+
+            // Debugging output
+            console.log("Legend Data:", combinedLegendData);
+        }
+
+        // Initial chart display
+        window.addEventListener('load', () => {
+            updateChart(["non-behavioral", "mental"]);
+        });
+
+        // Update chart on checkbox selection change
+        d3.selectAll("#checkbox-container input").on("change", function() {
+            const selectedData = [];
+            d3.selectAll("#checkbox-container input").each(function() {
+                const cb = d3.select(this);
+                if (cb.property("checked")) {
+                    selectedData.push(cb.attr("id"));
+                }
+            });
+            updateChart(selectedData);
+        });
+
+        // Update chart on window resize
+        window.addEventListener("resize", () => {
+            const selectedData = [];
+            d3.selectAll("#checkbox-container input").each(function() {
+                const cb = d3.select(this);
+                if (cb.property("checked")) {
+                    selectedData.push(cb.attr("id"));
+                }
+            });
+            updateChart(selectedData);
+        });
+    </script>
+</body>
+</html>
