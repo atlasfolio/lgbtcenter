@@ -2,36 +2,57 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>New York Counties Choropleth Map</title>
+    <title>Barriers map</title>
     <script src="https://d3js.org/d3.v7.min.js"></script>
     <style>
-        #map svg {
-            width: 80vw;   /* Use 80% of the viewport width */
-            height: 85vh;  /* Use 80% of the viewport height */
-            max-width: 100%;
-            max-height: 100%;
-            font-family: Arial;
-        }
+      #map svg {
+        width: 80vw;   /* Use 80% of the viewport width */
+        height: 85vh;  /* Use 80% of the viewport height */
+        max-width: 100%;
+        max-height: 100%;
+        font-family: Arial;
+    }
 
-        #dataColumnSelect {
-            position: absolute;
-            top: 1%;
-            left: 1%; /* Adjust this value according to your design */
-            z-index: 1000;
-        }
+    #dataColumnSelect {
+        position: absolute;
+        top: 1%;
+        left: 1%; 
+        z-index: 1000;
+    }
 
-        #tooltip{
-            font-family: Arial;
-            font-size: 1em;
-        }
+    #tooltip {
+        font-family: Arial;
+        font-size: 1em;
+        position: absolute;
+        visibility: hidden;
+        padding: .5em;
+        background: rgba(255,255,255,0.8);
+        border: 1px solid #ddd;
+        border-radius: 3px;
+        pointer-events: none;
+    }
 
+    select {
+        position: absolute;
+        top: 10px;
+        left: 10px;
+        z-index: 1000;
+        width: 65vw; /* Adjusted base width for most devices */
+        max-width: 100%; /* Ensures it doesn't exceed container width */
+    }
+
+    /* Media queries for smaller screens */
+    @media (max-width: 600px) {
         select {
-            position: absolute;
-            top: 10px;
-            left: 10px;
-            z-index: 1000;
-            width: 65vw;
+            width: 90vw; /* Increase width for smaller screens to ensure full text is visible */
         }
+    }
+
+    @media (max-width: 400px) {
+        select {
+            width: 95vw; /* Further increase width for very small screens */
+        }
+    }
     </style>
 </head>
 <body>
@@ -104,7 +125,8 @@ document.addEventListener('DOMContentLoaded', function() {
                 community_fear: +d.community_fear,
                 support_groups: +d.support_groups,
                 adequately_trained: +d.adequately_trained,
-                refuse_service: +d.refuse_service
+                refuse_service: +d.refuse_service,
+                region: d.region // Adding the region data
             };
         });
         var width = Math.max(document.documentElement.clientWidth, window.innerWidth || 0) * 0.8;
@@ -131,7 +153,7 @@ document.addEventListener('DOMContentLoaded', function() {
            .append("path")
            .attr("d", path)
            .attr("stroke", "white")
-           .attr("stroke-width", 1)
+           .attr("stroke-width", 0.5)
            .style("fill", d => {
                var countyName = d.properties.name;
                var value = dataMap[countyName] && dataMap[countyName][columnName];
@@ -140,7 +162,7 @@ document.addEventListener('DOMContentLoaded', function() {
            .on("mouseover", function(event, d) {
                d3.select("#tooltip")
                  .style("visibility", "visible")
-                 .text(`${d.properties.name}: ${formatValue(dataMap[d.properties.name][columnName])}`);
+                 .text(`${dataMap[d.properties.name].region}: ${formatValue(dataMap[d.properties.name][columnName])}`); // Showing region data
            })
            .on("mousemove", function(event, d) {
                d3.select("#tooltip")
@@ -155,56 +177,55 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 
     function drawLegend(svg, width) {
-    var legendX = width * 0.1;
-    var legendY = 30; // Increase y-position to make space for the title
-    var legendWidth = width * 0.2;
-    var legendHeight = 20;
-    var legendMargin = 10;
+        var legendX = width * 0.1;
+        var legendY = 30; // Increase y-position to make space for the title
+        var legendWidth = width * 0.2;
+        var legendHeight = 20;
+        var legendMargin = 10;
 
-    // Add title above the color bar gradient
-    svg.append("text")
-        .attr("x", legendX)
-        .attr("y", legendY - 21) // Adjusted for better visibility
-        .style("text-anchor", "start")
-        .style("font-size", "12px")
-        .text("Quantile");
+        // Add title above the color bar gradient
+        svg.append("text")
+            .attr("x", legendX)
+            .attr("y", legendY - 21) // Adjusted for better visibility
+            .style("text-anchor", "start")
+            .style("font-size", "12px")
+            .text("Quantile");
 
-    var gradients = svg.append("defs")
-        .append("linearGradient")
-        .attr("id", "gradient")
-        .attr("x1", "0%")
-        .attr("x2", "100%")
-        .attr("y1", "0%")
-        .attr("y2", "0%");
+        var gradients = svg.append("defs")
+            .append("linearGradient")
+            .attr("id", "gradient")
+            .attr("x1", "0%")
+            .attr("x2", "100%")
+            .attr("y1", "0%")
+            .attr("y2", "0%");
 
-    gradients.append("stop").attr("offset", "0%").attr("stop-color", "#7EBC64"); // Green (Q1)
-    gradients.append("stop").attr("offset", "33%").attr("stop-color", "#2399B5"); // Blue (Q2)
-    gradients.append("stop").attr("offset", "67%").attr("stop-color", "#EECE43"); // Yellow (Q3)
-    gradients.append("stop").attr("offset", "100%").attr("stop-color", "#F2695F"); // Red (Q4)
+        gradients.append("stop").attr("offset", "0%").attr("stop-color", "#7EBC64"); // Green (Q1)
+        gradients.append("stop").attr("offset", "33%").attr("stop-color", "#2399B5"); // Blue (Q2)
+        gradients.append("stop").attr("offset", "67%").attr("stop-color", "#EECE43"); // Yellow (Q3)
+        gradients.append("stop").attr("offset", "100%").attr("stop-color", "#F2695F"); // Red (Q4)
 
-    svg.append("rect")
-        .attr("class", "legend")
-        .attr("x", legendX)
-        .attr("y", legendY)
-        .attr("width", legendWidth)
-        .attr("height", legendHeight)
-        .style("fill", "url(#gradient)");
+        svg.append("rect")
+            .attr("class", "legend")
+            .attr("x", legendX)
+            .attr("y", legendY)
+            .attr("width", legendWidth)
+            .attr("height", legendHeight)
+            .style("fill", "url(#gradient)");
 
-    var xLegendScale = d3.scaleLinear()
-        .domain([1, 4])
-        .range([0, legendWidth]);
+        var xLegendScale = d3.scaleLinear()
+            .domain([1, 4])
+            .range([0, legendWidth]);
 
-    var legendAxis = d3.axisBottom(xLegendScale)
-        .tickSize(5)
-        .tickValues([1, 2, 3, 4])
-        .tickFormat(function(d) { return 'Q' + d; });
+        var legendAxis = d3.axisBottom(xLegendScale)
+            .tickSize(5)
+            .tickValues([1, 2, 3, 4])
+            .tickFormat(function(d) { return 'Q' + d; });
 
-    svg.append("g")
-        .attr("class", "legend-axis")
-        .attr("transform", `translate(${legendX}, ${legendY + legendHeight + legendMargin})`)
-        .call(legendAxis);
-}
-
+        svg.append("g")
+            .attr("class", "legend-axis")
+            .attr("transform", `translate(${legendX}, ${legendY + legendHeight + legendMargin})`)
+            .call(legendAxis);
+    }
 
     function createCustomColorScale(columnName) {
         var values = Object.values(dataMap).map(d => d[columnName]).filter(Boolean);
@@ -229,6 +250,3 @@ document.addEventListener('DOMContentLoaded', function() {
 </script>
 </body>
 </html>
-
-
-
