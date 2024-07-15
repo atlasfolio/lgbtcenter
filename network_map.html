@@ -2,7 +2,7 @@
 <html>
 <head>
 <meta charset="utf-8" />
-<title>Mapbox Choropleth Map with Markers</title>
+<title>The Network Map</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <script src='https://api.mapbox.com/mapbox-gl-js/v2.3.1/mapbox-gl.js'></script>
 <link href='https://api.mapbox.com/mapbox-gl-js/v2.3.1/mapbox-gl.css' rel='stylesheet' />
@@ -68,6 +68,34 @@
     text-decoration: none;
     color: #0078A8; /* Optional: Change the link color */
   }
+
+  /* Media queries for responsive design */
+  @media (max-width: 600px) {
+    #legend {
+      width: 80vw;
+      font-size: 1em;
+    }
+    .legend-labels {
+      width: 100%;
+      font-size: 1em;
+    }
+    .legend-bar {
+      width: 80vw;
+    }
+  }
+  @media (max-width: 400px) {
+    #legend {
+      width: 90vw;
+      font-size: 1.2em;
+    }
+    .legend-labels {
+      width: 100%;
+      font-size: 1.2em;
+    }
+    .legend-bar {
+      width: 90vw;
+    }
+  }
 </style>
 </head>
 <body>
@@ -130,7 +158,7 @@
   d3.csv('network_programs.csv').then(function(csvData) {
     csvData.forEach(function(row) {
       var popup = new mapboxgl.Popup({ offset: 25 })
-      .setHTML('<h3>' + row.program + '</h3><p>' + row.description + '</p><p>Contact: <a href="' + row.contact + '">' + row.contact + '</a></p>')
+      .setHTML('<h3>' + row.program + '</h3><p>' + row.description + '</p><p>Contact: <a href="mailto:' + row.contact + '">' + row.contact + '</a></p>')
         .setLngLat([parseFloat(row.longitude), parseFloat(row.latitude)]);
 
       // Add custom class to the popup for styling
@@ -142,17 +170,9 @@
         .setPopup(popup)
         .addTo(map);
 
-      // Add hover event listeners
-      marker.getElement().addEventListener('mouseenter', () => {
-        hideAllProgramPopups();
-        popup.addTo(map);
-        popup._container.style.zIndex = 20; // Ensure a high z-index
-      });
-      marker.getElement().addEventListener('mouseleave', () => {
-        popup.remove();
-        popup._container.style.zIndex = 10; // Reset z-index
-      });
-      marker.getElement().addEventListener('click', () => {
+      // Add click event listener
+      marker.getElement().addEventListener('click', (e) => {
+        e.stopPropagation(); // Stop the event from propagating to the map
         hideAllProgramPopups();
         popup.addTo(map);
         popup._container.style.zIndex = 20; // Ensure a high z-index
@@ -160,6 +180,11 @@
 
       markers.push(marker);
     });
+  });
+
+  // Close popups when clicking anywhere else on the map
+  map.on('click', function () {
+    hideAllProgramPopups();
   });
 
   // Load and merge GeoJSON and CSV data
