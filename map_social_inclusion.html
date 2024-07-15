@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>New York Counties Choropleth Map - Social Inclusion</title>
+    <title>Social Inclusion Map</title>
     <script src="https://d3js.org/d3.v7.min.js"></script>
     <style>
         #map svg {
@@ -25,7 +25,7 @@
             font-size: 1em;
             position: absolute;
             visibility: hidden;
-            padding: 10px;
+            padding: .5em;
             background: rgba(255,255,255,0.8);
             border: 1px solid #ddd;
             border-radius: 3px;
@@ -42,11 +42,11 @@
 </head>
 <body>
 <select id="dataColumnSelect">
-    <option value="feeling_isolated">Over the past year, how often do you feel isolated from others?</option>
-    <option value="feeling_left_out">Over the past year, how often do you feel left out?</option>
-    <option value="lack_companionship">Over the past year, how often do you feel that you lack companionship?</option>
-
+    <option value="feeling_isolated">&rarr; Over the past year, how often do you feel isolated from others?</option>
+    <option value="feeling_left_out">&rarr; Over the past year, how often do you feel left out?</option>
+    <option value="lack_companionship">&rarr; Over the past year, how often do you feel that you lack companionship?</option>
 </select>
+
 <br>
 
 <div id="tooltip"></div>
@@ -103,6 +103,7 @@ document.addEventListener('DOMContentLoaded', function() {
         csvData.forEach(function(d) {
             var countyName = d.county;
             dataMap[countyName] = {
+                region: d.region,
                 lack_companionship: +d.lack_companionship * 100,
                 feeling_left_out: +d.feeling_left_out * 100,
                 feeling_isolated: +d.feeling_isolated * 100,
@@ -131,7 +132,7 @@ document.addEventListener('DOMContentLoaded', function() {
            .append("path")
            .attr("d", path)
            .attr("stroke", "white")
-           .attr("stroke-width", 1)
+           .attr("stroke-width", .5)
            .style("fill", d => {
                var countyName = d.properties.name;
                var value = dataMap[countyName] && dataMap[countyName][columnName];
@@ -142,7 +143,7 @@ document.addEventListener('DOMContentLoaded', function() {
                  .style("visibility", "visible")
                  .style("top", (event.pageY - 10) + "px")
                  .style("left", (event.pageX + 10) + "px")
-                 .text(`${d.properties.name}: ${formatValue(dataMap[d.properties.name][columnName])}`);
+                 .text(`${dataMap[d.properties.name].region}: ${formatValue(dataMap[d.properties.name][columnName])}`);
            })
            .on("mouseout", function() {
                d3.select("#tooltip").style("visibility", "hidden");
