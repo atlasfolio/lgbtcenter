@@ -9,6 +9,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
     <script src="https://d3js.org/d3.v7.min.js"></script>
     <!-- <link rel="stylesheet" href="style_mobile.css"> If you have a separate CSS file -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
     <style>
 
@@ -87,6 +88,23 @@ canvas {
     padding-right: 5%;
 
 }
+
+
+#columnMap1 {
+    flex: 0 0 30%;       /* Do not grow, do not shrink, set the basis to 30% */
+    padding-right: 5%;
+    
+
+}
+
+#columnMap2 {
+    flex: 0 0 70%;  
+    padding-top: 1%;
+    padding-right: 5%;
+}
+
+
+
 
 
 
@@ -501,8 +519,18 @@ section {
 }
 
 
+.network-map-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100vw;
+    height: 100vh;
+  }
 
-
+  ul {
+            list-style-type: disc; /* Ensures bullet points are shown */
+            padding-left: 2%;    /* Adds padding to ensure bullets are inside the container */
+        }
 
     </style>
 
@@ -527,6 +555,8 @@ section {
             <li><a href="#section5">Mental Health</a></li>
             <li><a href="#section6">Barriers to service</a></li>
             <li><a href="#section7">Policy opportunities</a></li>
+            <li><a href="#section8">Network Map</a></li>
+
 
 
           </ul>
@@ -550,10 +580,13 @@ section {
 
      
             
-                <br><br>This digital overview of the report highlights key findings, including intersectional disparities in care/access and the critical need for mental health support.
+                <br><br>This digital overview of the report highlights key findings, including intersectional disparities in care/access and the critical need for mental health support. <br><br>
+                <i style="font-size:1em; color: #F2695F" class="fa">&#xf245;</i> Hover over each visualization in the sections below to explore the survey data.
+
                
-                      <br><br>
-                    To see the full report, <a href="https://nyslgbtq.org/wp-content/uploads/2023/03/TRX-Report-010823-FINAL-REV-2.pdf">click here</a>.
+               
+                 
+                    <br><br>
                     </p>
         
    <br>
@@ -568,7 +601,16 @@ section {
         <div class="image-container-2">
 
         <img src="cover.png">
+        <br><br>
+
+        <ul>
+       <li> To see the full survey report, <a href="https://nyslgbtq.org/wp-content/uploads/2023/03/TRX-Report-010823-FINAL-REV-2.pdf" target="_blank">click here</a>.</li>
+        <br><li>To learn more about the Network, <a href="#section8">click here</a>.   </li>
+    </ul>
+        
         </div>
+
+        
    
 
         </div>
@@ -604,7 +646,8 @@ section {
              </div>
         <div class="column" id="column2">
             <div style="border: 1px solid #7EBC64; border-radius: 1.5em; padding: 1.5em;">
-        <h3>Gender identity and sexual orientation by age group</h3>
+        <h3>Gender identity and sexual orientation by age group  &nbsp;<i style="font-size:1em; color: #F2695F" class="fa">&#xf245;</i>
+        </h3> 
         <iframe id="igraph" scrolling="no" style="border:none;" seamless="seamless" src="triangleChart.html" height="100%" width="100%" overflow="hidden"></iframe>
         </div>
         <br><br>
@@ -622,11 +665,11 @@ section {
             
            
                   <p>Disparities in needs, access, and outcomes in the LGBTQ+ community <b>mirror the patterns of racial and ethnic health disparities</b> at-large in American society. In the majority of needs and issues examined in the survey, non-White respondents report higher levels of needs and lower levels of receiving services than their White counterparts.
-                    <br><br>In some areas the disparities are glaring — especially in terms of food security, obtaining public assistance, and receiving services sought in most service areas including chronic conditions, major health events, mental health, environmental health, and reproductive health. In 20 out of 23 different services non-White respondents reported a lower level of receiving services than White respondents.
+                    In some areas the disparities are glaring — especially in terms of food security, obtaining public assistance, and receiving services sought in most service areas including chronic conditions, major health events, mental health, environmental health, and reproductive health. In 20 out of 23 different services non-White respondents reported a lower level of receiving services than White respondents.
                     <i>For more information, consult <a href="https://nyslgbtq.org/wp-content/uploads/2023/03/TRX-Report-010823-FINAL-REV-2.pdf#page=38" target="_blank">section 2B</a> of the full report.</i>
 
    <br><br>
-                    The bar chart below shows the percentage of respondents who sought support for <select id="categorySelect">
+                    The bar chart below shows the percentage of respondents who sought support for &nbsp;<i style="font-size:1em; color: #F2695F" class="fa">&#xf245;</i>&nbsp;<select id="categorySelect">
                         <option value="mentalHealth">mental health</option>
                         <option value="chronicConditions">chronic conditions</option>
                         <option value="majorHealthEvents">major health events</option>
@@ -636,8 +679,8 @@ section {
                         <option value="abuse">relationship or familial abuse</option>
                         <option value="substanceAbuse">substance abuse</option>
                     
-                    </select>
-                     but were unable to access services:
+                    </select> 
+                     but were unable to access services:<br><br>
                 <canvas id="accessToCareChart"></canvas>
                                 
 
@@ -648,12 +691,12 @@ section {
         <div class="column" id="column2">
 
             <h3>Immigration and asylum status</h3>
-            <p><b>Immigration and asylum experiences affect every aspect of quality of life.</b> HIV prevalence among respondents born outside the U.S. is 4 to 5 times the survey mean (15%-18%) compared to 3-5% for those born in the US. Those born outside the US were also twice as likely to report abuse in relationships or the family, twice as likely to have reported environmental health concerns, and more likely to have experienced major health events <i>(e.g., medical emergencies, surgeries, or major acute illness)</i> but two-to-three times more likely to have not received services for major health events.
-
-            </p>
-            <h5><u><center>HIV Risk by Birthplace</center></u></h5>
+            <h5><u><center>HIV Risk by Birthplace</u> &nbsp;<i style="font-size:1em; color: #F2695F" class="fa">&#xf245;</i></center></h5>
             <canvas id="hivPrevalence"></canvas>
             <br><br>
+            <p><b>Immigration and asylum experiences affect every aspect of quality of life.</b> HIV prevalence among respondents born outside the U.S. is 4 to 5 times the survey mean (15%-18%) compared to 3-5% for those born in the US. Those born outside the US were also twice as likely to report abuse in relationships or the family, twice as likely to have reported environmental health concerns, and more likely to have experienced major health events <i>(e.g., medical emergencies, surgeries, or major acute illness)</i> but two-to-three times more likely to have not received services for major health events.
+
+            </p><br>
             <i><center>For more information, consult <a href="https://nyslgbtq.org/wp-content/uploads/2023/03/TRX-Report-010823-FINAL-REV-2.pdf#page=40" target="_blank">section 2C</a> of the full report.</i></center>
 
 
@@ -687,36 +730,24 @@ section {
 
                 <br><br>
                 
-                <div style="border: 1px solid #7EBC64; border-radius: 1.5em; padding-top: 1em; padding-left: 1em; padding-right: 1em;">
-                    Click on the chart below to see the breakdown of White vs. non-White respondents reporting increased difficulty in obtaining services during Covid-19.</p>
-</div>
+          <div style="border: 1px solid #7EBC64; border-radius: 1.5em; padding-top: 1em; padding-left: 1em; padding-right: 1em;">
+            &nbsp;<i style="font-size:1em; color: #F2695F" class="fa">&#xf245;</i> Hover over the chart below to see the breakdown of those who reported increased difficulty in obtaining services during Covid-19, by category and ethnicity.</p>
+                </div> 
+                <iframe id="igraph" scrolling="no" style="border:none;" seamless="seamless" src="chordDiagram.html" height="50%" width="100%" overflow="hidden"></iframe>
+
                   <br>
-                  <div id="myChartLegend" class="chart-legend">
-                    <ul>
-                      <li><span class="legend-color" style="background-color: rgba(242, 105, 95, 0.7); margin-bottom: 1em;"></span>Transitioning care</li>
-                      <li><span class="legend-color" style="background-color: rgba(255, 165, 0, 0.7); margin-bottom: 1em;"></span>Prescriptions</li>
-                      <li><span class="legend-color" style="background-color: rgba(258, 206, 67, 0.7); margin-bottom: 1em;"></span>Specialty care</li>
-                      <li><span class="legend-color" style="background-color: rgba(126, 188, 100, 0.7); margin-bottom: 1em;"></span>Primary care</li>
-                    </ul>
-                    <ul>
-                
-                        <li><span class="legend-color" style="background-color: rgba(12, 75, 126, 0.7); margin-top: 1em; margin-bottom: 1em"></span>In-home health care</li>
-                        <li><span class="legend-color" style="background-color: rgba(35, 153, 181, 0.7); margin-top: 1em; margin-bottom: 1em"></span>Emergency or urgent care</li>
-                        <li><span class="legend-color" style="background-color: rgba(238, 130, 238, 0.7); margin-top: 1em; margin-bottom: 1em"></span>Mental health services</li>
-                      </ul><br>
-                  </div>
                   
-                <canvas id="rainbowChart"></canvas>
+                  
                
 
         </div>
 
         <div class="column" id="column2">
-            <h3>Covid-19 Infection Rate, by race and ethnicity</h3>
+            <h3>Covid-19 Infection Rate, by race and ethnicity &nbsp;<i style="font-size:1em; color: #F2695F" class="fa">&#xf245;</i></h3>
 
             <div style="border: 1px solid #F2695F; border-radius: 1.5em; padding-top: 0; padding-left: 1em; padding-right: 1em">
 
-<p>Approximately 10% of respondents had tested positive for COVID-19 at the time of the survey. As in the population as a whole, the effects of the pandemic were more strongly felt by non-White respondents, with respondents who identified as Black, another race or ethnicity, or Latinx/Hispanic reporting the highest rates of Covid-19 infection.</p>
+<p>Approximately <b>10% of respondents</b> had tested positive for COVID-19 at the time of the survey. As in the population as a whole, the effects of the pandemic were more strongly felt by non-White respondents, with respondents who identified as Black, another race or ethnicity, or Latinx/Hispanic reporting <b>the highest rates</b> of Covid-19 infection.</p>
         </div>
 <canvas id="covidInfection"></canvas>
 
@@ -740,11 +771,9 @@ section {
    <b> Mental health is both the largest support need and greatest opportunity area</b> for improving the well-being and quality of life of the LGBTQ community in New York State. 77.4% of respondents reported mental health needs, yet 23.6% did not receive services. This mental health crisis is highly associated with experiences of discrimination, as well as high levels of medical mistrust, lower self-reported health, low self-reported quality of life, and a lack of social inclusion and support.
     <br><br>
    Respondents reported feeling <i>(at least ‘half the time’ or ‘most of the time’ in the prior 12 months)</i> anxious/nervous (51%), down/depressed/hopeless (36%), little interest in doing things (33%), and scared for their life (12%).
-27% of respondents reported feeling isolated, 22% reported 'lacking companionship', and 21% reported feeling left out 'often or mostly.'
-
-<br><br>There is a <b>strong overlap of mental health and substance use service needs.</b> 89% reported some substance use (including alcohol and tobacco), with half reporting using only one or two substances. 18% reported using three substances, and another 21% reported using four or more substances.
+27% of respondents reported feeling isolated, 22% reported 'lacking companionship', and 21% reported feeling left out 'often or mostly.' There is a <b>strong overlap of mental health and substance use service needs.</b> 89% reported some substance use (including alcohol and tobacco), with half reporting using only one or two substances. 18% reported using three substances, and another 21% reported using four or more substances.
    <br>
-   <h3>Psychological and traumatic stress, and the effects of racism:</h3>
+   <h3>Psychological and traumatic stress, effects of racism:</h3>
     <div style="border: 1px solid #7EBC64; border-radius: 1.5em; padding-top: 1em; padding-left: 1em; padding-right: 1em; padding-bottom: 1em;">
         <ul style="list-style-type: square; padding-left: 30px;">
             <li>Multiracial and Latinx/Latiné respondents reported the <b>highest levels of psychological distress</b> in all the categories measured in the community survey: low motivation, depression, anxiety, and being afraid for one’s life.  
@@ -775,8 +804,17 @@ section {
 
     <i>For more information, consult <a href="https://nyslgbtq.org/wp-content/uploads/2023/03/TRX-Report-010823-FINAL-REV-2.pdf#page=93" target="_blank">section 4F</a> of the full report.</i>
         </div>
-        <br>Click on the drop-down menu below to see the distribution of survey respondents by NYS region who answered 'Somewhat' or 'Major' in response to each question on social isolation and support. 
-      <br><br>
+<br>
+
+<div style="border: 1px solid #f2695f; border-radius: 1.5em; padding-top: 0.5em; padding-left: 1em; padding-right: 0.5em; padding-bottom: 0.5em;">
+
+    <i style="font-size:1em; color: #F2695F" class="fa">&#xf245;</i>
+
+    
+          <span style="margin-left: 0em; vertical-align: left; color: #2399B5; font-size: 1em;">
+            <b>Click on the drop-down menu</b> below to see the distribution of survey respondents by New York State region who answered <i>'Somewhat'</i> or <i>'Major'</i> in response to questions on social isolation and support.
+          </span>
+        </div><br>
         <iframe id="igraph" scrolling="no" style="border:none;" seamless="seamless" src="map_social_inclusion.html" height="100%" width="100%" overflow="display"></iframe>
        
 
@@ -800,7 +838,7 @@ section {
             <b>Telehealth services can provide a cheaper and simpler alternative to improve accessibility.</b></p>
 
 
-        <h4>Top barriers to care or service, by NYS region</h4>
+        <h4>Top barriers to care or service, by New York State region</h4>
         <iframe id="igraph" scrolling="no" style="border:none;" seamless="seamless" src="map_barriers.html" height="100%" width="100%" overflow="display"></iframe>
 
 
@@ -808,77 +846,17 @@ section {
 
         
         <div class="column" id="column2"><br><br>
-  <h4>Top obstacles to seeking care and services</h4>
+  <h3>Top barriers to seeking care and services</h3>
 
-            The survey looked into barriers to accessing services. Affordability and insurance issues are consistently ranked as one of the main problems to access health services. A lack of LGBTQ-affirming services is one of the leading reasons why people do not access or look for services. Increasing medical transparency and the rights of patients, providers and families are key elements to tackling this.
 
-        <br><br> The following chart displays the barriers that respondents cited as 'somewhat' or 'major' problems to obtaining care:
-    
+  <b>The main reason for not accessing services is economic.</b> Affordability and insurance issues are consistently ranked as one of the main problems to accessing health services. A lack of LGBTQ-affirming services is one of the leading reasons why people do not access or look for services. Increasing medical transparency and the rights of patients, providers and families are key elements to tackling this. With <i>"I could not find services in my area”</i>, time and transportation constraints consistently rated as major reasons for not accessing healthcare services, telehealth provides an affordable and straight-forward mechanism for improving accessibility.
+  <br><br> &nbsp;<i style="font-size:1em; color: #F2695F" class="fa">&#xf245;</i> Hover over the bubbles below to explore the top barriers to obtaining services:
+</p>
 
-    </p>
-            
+    <iframe id="igraph" scrolling="no" style="border:none;" seamless="seamless" src="bubbleChart.html" height="100%" width="100%" overflow="display"></iframe>
 
-            <br><br>
-               <ul class="grid" style="list-style-type: none;"> 
-       
-                   <li class="item">
-                       <span class="circle largest" style="background-color: #0C4B7F; margin-right: 1em;">
-                           <span>54%</span>
-                       </span>
-                       <span class="text">Lack of public information about LGBTQ+ competence medical or service providers in my area </span>
-                   </li>
-    
-                   <li class="item">
-                       <span class="circle largest" style="background-color: #2399B5; margin-right: 1em">
-                           <span>53%</span>
-                       </span>
-                       <span class="text">Not enough health professionals who are adequately trained and competent to deliver health care to LGBTQ people</span>
-                   </li>
-               
-                   <li class="item">
-                       <span class="circle largest" style="background-color: #EECE43; margin-right: 1em">
-                           <span>51%</span>
-                       </span>
-                       <span class="text">Not enough support groups for LGBTQ+ people</span>
-                   </li>
-               
-                   <li class="item">
-                       <span class="circle medium" style="background-color: #7EBC64; margin-right: 1em">
-                           <span>42%</span>
-                       </span>
-                       <span class="text">Community fear or dislike of LGBTQ+ people</span>
-                   </li>
-       
-                   <li class="item">
-                       <span class="circle medium" style="background-color:  #F2695F;  margin-left: 1em;">
-                           <span>39%</span>
-                       </span>
-                       <span class="text">My personal financial resources/can't afford to pay costs of care or services</span>
-                   </li>
-       
-                   <li class="item">
-                       <span class="circle small" style="background-color: #0C4B7F;  margin-left: 1em;">
-                           <span>36%</span>
-                       </span>
-                       <span class="text">Long distances to LGBTQ+ culturally competent medical facilities</span>
-                   </li>
-       
-                   <li class="item">
-                       <span class="circle smallest" style="background-color: #2399B5;  margin-left: 1em; ">
-                           <span>34%</span>
-                       </span>
-                       <span class="text">Long distances to other (non-medical) LGBT sensitive service providers</span>
-                   </li>
-       
-                   <li class="item">
-                       <span class="circle smallest2" style="background-color: #EECE43;  margin-left: 1em;">
-                           <span>18%</span>
-                       </span>
-                       <span class="text">Doctors and other health care workers who refuse to provide services to LGBTQ people</span>
-                   </li>
-               
-               </ul><br><br>
-               <i>For more information, consult <a href="https://nyslgbtq.org/wp-content/uploads/2023/03/TRX-Report-010823-FINAL-REV-2.pdf#page=71" target="_blank">section 3H</a> of the full report.</i>
+
+
 
     
                       </div>
@@ -899,7 +877,7 @@ Building off the findings of the survey, <b>key points for policy action are:</b
 
 <h2>1) Expand the availability and accessibility of LGBTQ-affirmative mental health services</h2>
 <p>Fund organizations and programs providing mental health services that are:
-    <ul style="list-style-type: square; padding-left: 30px;">
+    <ul style="list-style-type: square; padding-left: 1.875em;">
         <li>LGBTQ-affirming</li>
         <li>Free or low cost and affordable</li>
         <li>In multiple languages with diverse racial/ethnic backgrounds</li>
@@ -942,6 +920,39 @@ Building off the findings of the survey, <b>key points for policy action are:</b
     
         </div>
             </div>
+</section>
+
+
+<section id="section8"> 
+
+    <div class="container">
+
+    <div class="column" id="columnMap1">
+        <h1>The Network Map</h1>
+        <p>
+            <b>The Network</b> is a coalition founded in 1994 and administered by The Center. We aspire to increase the safety, freedom, quality of life, and wellbeing of every LGBTQ+ person in New York State. </li>    
+
+        <ul style="list-style-type: square; padding-left: 1.875em;">
+            <li>60+ LGBT-specific and LGBT-supportive nonprofit organizations that provide care to LGBT New Yorkers, serving <b>all of New York State’s 62 counties</b>, including upstate, downstate, rural, and urban populations.</li>
+            <li>Together, we increase our shared capacity as LGBTQ+ specific organizations and programs to serve our communities through funding and legislative advocacy, capacity enhancement, and coalition building. </li>
+    </ul>
+
+
+       <!-- <p><b>The Network</b> is a coalition founded in 1994 and administered by The Center, consisting of 62 LGBT-specific and LGBT-supportive nonprofit organizations that provide care to LGBT New Yorkers. Members of The New York State LGBT Health & Human Services Network serve all of New York State’s 62 counties—including upstate, downstate, rural, and urban populations.
+<br><br>
+        Together and United, we increase our shared capacity as LGBTQ+ specific organizations and programs to serve our communities through funding and legislative advocacy, capacity enhancement, and coalition building. As members of the New York State LGBT HHS Network, we aspire to increase the safety, freedom, quality of life, and wellbeing of every LGBTQ+ person in New York State. -->
+<br><b>The map to the right</b> shows where each Network member is located throughout the state.
+<br><br>&nbsp; <i style="font-size:1em; color: #F2695F" class="fa">&#xf245;</i> Hover over each point learn more about a particular service.
+<br><br><input type="checkbox" id="myCheckbox" name="myCheckbox" value="value"> Toggle different layers to see how barriers to seeking care and services interact with Network member locations.
+
+       </p>    </div>
+   
+    <div class="column" id="columnMap2">
+        <iframe id="igraph" scrolling="no" style="border:none; margin-right: 0%;" seamless="seamless" src="network_map.html" height="100%" width="100%" overflow="display"></iframe>
+
+        </div>
+        </div>
+
 </section>
 
     <script src="script.js"></script>
