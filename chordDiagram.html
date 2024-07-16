@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title></title>
+    <script src="https://d3js.org/d3.v6.min.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
+
+    <style>
+        body {
+            font-family: 'Montserrat', sans-serif;
+        }
+    
+        .arc path {
+            stroke: #fff;
+        }
+
+        .tooltip {
+            position: absolute;
+            text-align: center;
+            width: auto;
+            height: auto;
+            padding: 5px;
+            font: 12px sans-serif;
+            background: lightsteelblue;
+            border: 0px;
+            border-radius: 8px;
+            pointer-events: none;
+        }
+
+        .legend {
+            font: 12px sans-serif;
+        }
+
+        .legend rect {
+            stroke-width: 2;
+        }
+        .legend text {
+        fill: grey; /* Change the color of the legend text to grey */
+    }
+
+    </style>
+</head>
+<body>
+    <div id="chart"></div>
+    <script>
+        // Data preparation
+        const data = [
+            {category: "Transitioning care", white: 43, nonWhite: 53, colorWhite: "rgba(242, 105, 95, 0.5)", colorNonWhite: "rgba(242, 105, 95, 1)"},
+            {category: "Prescriptions", white: 15, nonWhite: 25, colorWhite: "rgba(255, 165, 0, 0.5)", colorNonWhite: "rgba(255, 165, 0, 1)"},
+            {category: "Specialty care", white: 46, nonWhite: 54, colorWhite: "rgba(258, 206, 67, 0.5)", colorNonWhite: "rgba(258, 206, 67, 1)"},
+            {category: "Primary care", white: 40, nonWhite: 48, colorWhite: "rgba(126, 188, 100, 0.5)", colorNonWhite: "rgba(126, 188, 100, 1)"},
+            {category: "In-home health care", white: 44, nonWhite: 50, colorWhite: "rgba(12, 75, 126, 0.5)", colorNonWhite: "rgba(12, 75, 126, 1)"},
+            {category: "Emergency or urgent care", white: 40, nonWhite: 45, colorWhite: "rgba(35, 153, 181, 0.5)", colorNonWhite: "rgba(35, 153, 181, 1)"},
+            {category: "Mental health services", white: 45, nonWhite: 49, colorWhite: "rgba(238, 130, 238, 0.5)", colorNonWhite: "rgba(238, 130, 238, 1)"}
+        ];
+
+        // Sort data by nonWhite percentage
+        data.sort((a, b) => b.nonWhite - a.nonWhite);
+
+        // Initial setup
+        const chartDiv = d3.select("#chart");
+        const svg = chartDiv.append("svg");
+
+        let width = window.innerWidth;
+        let height = window.innerHeight;
+        const innerRadius = 10;
+        let outerRadius = Math.min(width, height) / 2 - 50;
+
+        svg.attr("width", width)
+            .attr("height", height);
+
+        const gChart = svg.append("g")
+            .attr("transform", `translate(${(width * 2 / 3)},${height / 2})`);
+
+        const gLegend = svg.append("g")
+            .attr("class", "legend")
+            .attr("transform", `translate(${50},${height / 4})`);
+
+        const x = d3.scaleBand()
+            .domain(data.flatMap(d => [d.category + "-white", d.category + "-nonWhite"]))
+            .range([0, 2 * Math.PI])
+            .align(0);
+
+        const y = d3.scaleRadial()
+            .domain([0, d3.max(data, d => Math.max(d.white, d.nonWhite))])
+            .range([innerRadius, outerRadius]);
+
+        const arc = d3.arc()
+            .innerRadius(innerRadius)
+            .outerRadius(d => y(d.value))
+            .startAngle(d => x(d.category + "-" + d.group))
+            .endAngle(d => x(d.category + "-" + d.group) + x.bandwidth())
+            .padAngle(0.01)
+            .padRadius(innerRadius);
+
+        const tooltip = d3.select("body").append("div")
+            .attr("class", "tooltip")
+            .style("opacity", 0);
+
+        function drawChart() {
+            gChart.selectAll("*").remove();
+            gLegend.selectAll("*").remove();
+
+            outerRadius = Math.min(window.innerWidth, window.innerHeight) / 2 - 50;
+            y.range([innerRadius, outerRadius]);
+
+            const arcs = gChart.append("g")
+                .selectAll("g")
+                .data(data.flatMap(d => [
+                    {category: d.category, group: "white", value: d.white, color: d.colorWhite},
+                    {category: d.category, group: "nonWhite", value: d.nonWhite, color: d.colorNonWhite}
+                ]))
+                .enter().append("g")
+                .attr("class", "arc")
+                .append("path")
+                .attr("fill", d => d.color)
+                .attr("d", arc)
+                .on("mouseover", function(event, d) {
+                    const groupText = d.group === "nonWhite" ? "non-white" : "white";
+                    tooltip.transition()
+                        .duration(200)
+                        .style("opacity", .9);
+                    tooltip.html(`${d.category} (${groupText}): ${d.value}%`)
+                        .style("left", (event.pageX + 5) + "px")
+                        .style("top", (event.pageY - 28) + "px");
+                })
+                .on("mouseout", function(d) {
+                    tooltip.transition()
+                        .duration(500)
+                        .style("opacity", 0);
+                });
+
+            // Legend
+            const legendRects = gLegend.selectAll("rect")
+                .data(data)
+                .enter().append("rect")
+                .attr("x", 0)
+                .attr("y", (d, i) => i * 25)
+                .attr("width", 18)
+                .attr("height", 18)
+                .style("fill", d => d.colorNonWhite);
+
+            const legendTexts = gLegend.selectAll("text")
+                .data(data)
+                .enter().append("text")
+                .attr("x", 24)
+                .attr("y", (d, i) => i * 25 + 9)
+                .attr("dy", ".35em")
+                .text(d => d.category);
+        }
+
+        drawChart();
+
+        window.addEventListener("resize", function() {
+            width = window.innerWidth;
+            height = window.innerHeight;
+
+            svg.attr("width", width)
+                .attr("height", height);
+
+            gChart.attr("transform", `translate(${(width * 2 / 3)},${height / 2})`);
+            gLegend.attr("transform", `translate(${50},${height / 4})`);
+
+            drawChart();
+        });
+    </script>
+</body>
+</html>
