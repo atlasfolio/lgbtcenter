@@ -145,11 +145,7 @@
      <input type="checkbox" id="toggle-support_groups">Not enough support groups (clinical or peer) for LGBTQ+ people<br>
      <input type="checkbox" id="toggle-adequately_trained">Not enough health professionals who are adequately trained and competent to deliver healthcare to LGBTQ people<br>
      <input type="checkbox" id="toggle-refuse_service">Doctors and other healthcare workers who refuse to provide service<br>
-<!--    
-     <h3>Social inclusion</h3>
-  <input type="checkbox" id="toggle-lack_companionship">Lack companionship<br>
-   <input type="checkbox" id="toggle-feeling_left_out">Feeling left out<br>
-  <input type="checkbox" id="toggle-feeling_isolated">Feeling isolated<br> -->
+
 
 </div>
 <div id='map'></div>
@@ -159,7 +155,7 @@
   // Initialize the map
   var map = new mapboxgl.Map({
     container: 'map', // Container ID
-    style: 'mapbox://styles/mapbox/satellite-streets-v12', // Map style to use
+    style: 'mapbox://styles/mapbox/light-v11', // Map style to use
     center: [-75.65929113474522, 43.022150007429644], // Starting position [lng, lat]
     zoom: 5.5 // Starting zoom level
   });
@@ -277,7 +273,7 @@
               0.75, '#F2695F',
               1, '#F2695F'
             ],
-            'fill-opacity': 0.75
+            'fill-opacity': .9
           }
         }, 'waterway-label'); // Place before the waterway-label layer
 
@@ -291,7 +287,7 @@
           },
           'paint': {
             'line-color': '#ffffff',
-            'line-width': 0
+            'line-width': .5
           }
         });
 
