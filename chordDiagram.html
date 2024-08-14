@@ -28,26 +28,6 @@
             border-radius: 8px;
             pointer-events: none;
         }
-
-        .legend {
-            font: 12px sans-serif;
-        }
-
-        .legend rect {
-            stroke-width: 2;
-        }
-
-        
-    .legend text {
-    fill: black; 
-    text-shadow: 
-        -.5px -.5px 0 white,  
-        .5px -.5px 0 white,
-        -.5px .5px 0 white,
-        .5px .5px 0 white; /* Black highlight */
-}
-    
-
     </style>
 </head>
 <body>
@@ -80,11 +60,7 @@
             .attr("height", height);
 
         const gChart = svg.append("g")
-            .attr("transform", `translate(${(width * 2 / 3)},${height / 2})`);
-
-        const gLegend = svg.append("g")
-            .attr("class", "legend")
-            .attr("transform", `translate(${50},${height / 4})`);
+            .attr("transform", `translate(${width / 2},${height / 2})`);
 
         const x = d3.scaleBand()
             .domain(data.flatMap(d => [d.category + "-white", d.category + "-nonWhite"]))
@@ -109,7 +85,6 @@
 
         function drawChart() {
             gChart.selectAll("*").remove();
-            gLegend.selectAll("*").remove();
 
             outerRadius = Math.min(window.innerWidth, window.innerHeight) / 2 - 50;
             y.range([innerRadius, outerRadius]);
@@ -139,24 +114,6 @@
                         .duration(500)
                         .style("opacity", 0);
                 });
-
-            // Legend
-            const legendRects = gLegend.selectAll("rect")
-                .data(data)
-                .enter().append("rect")
-                .attr("x", 0)
-                .attr("y", (d, i) => i * 25)
-                .attr("width", 18)
-                .attr("height", 18)
-                .style("fill", d => d.colorNonWhite);
-
-            const legendTexts = gLegend.selectAll("text")
-                .data(data)
-                .enter().append("text")
-                .attr("x", 24)
-                .attr("y", (d, i) => i * 25 + 9)
-                .attr("dy", ".35em")
-                .text(d => d.category);
         }
 
         drawChart();
@@ -168,8 +125,7 @@
             svg.attr("width", width)
                 .attr("height", height);
 
-            gChart.attr("transform", `translate(${(width * 2 / 3)},${height / 2})`);
-            gLegend.attr("transform", `translate(${50},${height / 4})`);
+            gChart.attr("transform", `translate(${width / 2},${height / 2})`);
 
             drawChart();
         });
