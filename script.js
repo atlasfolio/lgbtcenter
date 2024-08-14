@@ -670,7 +670,7 @@ document.addEventListener("DOMContentLoaded", function() {
                           
 
                         },
-                        color: 'grey'
+                        color: '#666666'
                     },
                     ticks: {
                         // backdropColor: 'rgba(255, 255, 255, 0.75)',
