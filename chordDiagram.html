@@ -3,27 +3,64 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title></title>
     <script src="https://d3js.org/d3.v6.min.js"></script>
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
-
     <style>
         body {
             font-family: 'Montserrat', sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: row;
+            align-items: flex-start;
+            height: 100vh;
         }
-    
-        .arc path {
-            stroke: #fff;
+        .container {
+            display: flex;
+            flex-direction: row;
+            width: 100%;
+            height: 100%;
         }
-
+        .legend-container {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            justify-content: center;
+            width: 30%;
+            padding: 20px;
+            box-sizing: border-box;
+        }
+        .legend-item {
+            display: flex;
+            align-items: center;
+            margin: 5px 0;
+        }
+        .legend-item span {
+            font-family: Arial, sans-serif;
+            font-size: 0.75em;
+            color: #666666;
+        }
+        .legend-square {
+            width: 1em;
+            height: 1em;
+            margin-right: 5px;
+        }
+        #chart {
+            width: 70%;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
         .tooltip {
             position: absolute;
             text-align: center;
+            color: white; 
             width: auto;
             height: auto;
             padding: 5px;
             font: 12px sans-serif;
-            background: lightsteelblue;
+            background: black;
             border: 0px;
             border-radius: 8px;
             pointer-events: none;
@@ -31,7 +68,39 @@
     </style>
 </head>
 <body>
-    <div id="chart"></div>
+    <div class="container">
+        <div class="legend-container">
+            <div class="legend-item">
+                <div class="legend-square" style="background-color: rgba(242, 105, 95, 1);"></div>
+                <span>Transitioning care</span>
+            </div>
+            <div class="legend-item">
+                <div class="legend-square" style="background-color: rgba(255, 165, 0, 1);"></div>
+                <span>Prescriptions</span>
+            </div>
+            <div class="legend-item">
+                <div class="legend-square" style="background-color: rgba(258, 206, 67, 1);"></div>
+                <span>Specialty care</span>
+            </div>
+            <div class="legend-item">
+                <div class="legend-square" style="background-color: rgba(126, 188, 100, 1);"></div>
+                <span>Primary care</span>
+            </div>
+            <div class="legend-item">
+                <div class="legend-square" style="background-color: rgba(12, 75, 126, 1);"></div>
+                <span>In-home health care</span>
+            </div>
+            <div class="legend-item">
+                <div class="legend-square" style="background-color: rgba(35, 153, 181, 1);"></div>
+                <span>Emergency or urgent care</span>
+            </div>
+            <div class="legend-item">
+                <div class="legend-square" style="background-color: rgba(238, 130, 238, 1);"></div>
+                <span>Mental health services</span>
+            </div>
+        </div>
+        <div id="chart"></div>
+    </div>
     <script>
         // Data preparation
         const data = [
@@ -51,7 +120,7 @@
         const chartDiv = d3.select("#chart");
         const svg = chartDiv.append("svg");
 
-        let width = window.innerWidth;
+        let width = window.innerWidth * 0.7;
         let height = window.innerHeight;
         const innerRadius = 10;
         let outerRadius = Math.min(width, height) / 2 - 50;
@@ -86,7 +155,7 @@
         function drawChart() {
             gChart.selectAll("*").remove();
 
-            outerRadius = Math.min(window.innerWidth, window.innerHeight) / 2 - 50;
+            outerRadius = Math.min(window.innerWidth * 0.7, window.innerHeight) / 2 - 50;
             y.range([innerRadius, outerRadius]);
 
             const arcs = gChart.append("g")
@@ -119,7 +188,7 @@
         drawChart();
 
         window.addEventListener("resize", function() {
-            width = window.innerWidth;
+            width = window.innerWidth * 0.7;
             height = window.innerHeight;
 
             svg.attr("width", width)
