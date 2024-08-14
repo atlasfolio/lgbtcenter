@@ -59,18 +59,24 @@ h2 {
     /* height: 100vh; */
     margin-left: 3%;
     padding-top: 5%;
+    flex-direction: row; 
 }
 
 
 
 .column {
     flex: 1 1 50%;       /* Flex-grow, Flex-shrink, Flex-basis */
-    padding: 0;
+    padding: 0 1%;
     box-sizing: border-box;
     min-width: 0;        /* Fixes issues with flexbox stretching */
     margin-bottom: 5%;
 }
 
+
+
+iframe {
+    display: block; /* Ensures the iframe is treated as a block element */
+}
 
 
 
@@ -79,6 +85,7 @@ canvas {
     width: 100%; /* or fixed size, ensures it fits within its container */
     height: auto; /* or fixed size, based on your design needs */
 }
+
 
 
 #column1 {
@@ -125,7 +132,8 @@ canvas {
         font-size: 1.5rem; /* Larger headers for mobile */
     }
 
-    .column, #column1, #column2 {
+
+    .column, #column1, #column2, #columnMap1, #columnMap2 {
         flex: 1 0 100%; /* Flex-grow, Flex-shrink, Flex-basis */
         width: 100%; /* Ensures each column takes full width */
         padding-right: 0; /* Adjust padding as needed */
@@ -837,7 +845,7 @@ section {
 
 
 
-<section id="section6"> 
+<section id="section6" style="margin-bottom: 10%; margin-top: 2%;">
 
 
 <div class="container">
@@ -882,10 +890,12 @@ section {
                       </div>
     
 
-</div> </section>
+</div> </section> 
+
+<br><br><br>
 
 
-<section id="section7"> 
+<section id="section7" style="margin-bottom: 10%; margin-top: 2%;">
 
 
     <div class="container">
