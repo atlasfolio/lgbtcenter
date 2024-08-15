@@ -72,9 +72,9 @@ h2 {
 
 
 canvas {
-    display: block; /* prevents bottom margin/padding issues */
-    width: 100%; /* or fixed size, ensures it fits within its container */
-    height: auto; /* or fixed size, based on your design needs */
+    display: block; 
+    width: 100%; 
+    height: auto; 
 }
 
 
@@ -91,7 +91,7 @@ canvas {
 
 
 #columnMap1 {
-    flex: 0 0 30%;       /* Do not grow, do not shrink, set the basis to 30% */
+    flex: 0 0 30%;       
     padding-right: 5%;
     
 
@@ -108,7 +108,7 @@ canvas {
 
 
 
-/* Media query for screens with a max width of 768px (tablets and mobile phones) */
+/* Media query for screens with a max width of 1024px (tablets and mobile phones) */
 @media (max-width: 1024px) {
     .container {
         flex-direction: column;
@@ -129,7 +129,7 @@ canvas {
         width: 100%; /* Ensures each column takes full width */
         padding-right: 0; /* Adjust padding as needed */
         padding-left: 0; /* Adjust padding for consistency */
-        padding-top: 0; /* Adjust top padding if needed */
+        padding-top: 0; 
         margin-bottom: 5%; /* Maintain bottom margin for spacing */
     }
 
@@ -143,14 +143,14 @@ canvas {
     }
 
     #igraph {
-        height: 500px; /* Adjust based on your needs */
+        height: 500px; 
     }
 
     .item {
         flex-direction: column; 
         align-items: flex-start;
-        padding: 10px;  /* Adjust this value as needed */
-        box-sizing: border-box; /* Ensures padding is included in the width calculation */
+        padding: 10px;  
+        box-sizing: border-box; 
     }
 
     .circle {
@@ -223,9 +223,9 @@ a:hover {
     
     margin: 0 0px 0px 0;    
     margin-left: 5%;      
-    width: 30%;  /* or 100% if you want it to be responsive */
-            height: auto; /* specify a height or make it responsive as needed */
-            border: none; /* just to show container boundaries, optional */
+    width: 30%;  
+            height: auto; 
+            border: none; 
         }
 
   
@@ -236,20 +236,20 @@ a:hover {
             
             margin: 0 0px 0px 0;    
             margin-left: 25%;      
-            width: auto;  /* or 100% if you want it to be responsive */
-                    height: 100%; /* specify a height or make it responsive as needed */
-                    border: none; /* just to show container boundaries, optional */
+            width: auto;  
+                    height: 100%; 
+                    border: none; 
                 }
         
                 .image-container img {
-                    max-width: 60%;  /* makes the image fill the container's width */
-                    max-height: auto; /* makes the image fill the container's height */
+                    max-width: 60%;  
+                    max-height: auto; 
                     border: solid 1px black; 
                 }
         
                 .image-container-2 img {
-                    max-width: 100%;  /* makes the image fill the container's width */
-                    max-height: 100%; /* makes the image fill the container's height */
+                    max-width: 100%;  
+                    max-height: 100%; 
                 }
         
 
@@ -292,132 +292,8 @@ a:hover {
     display: inline-block; /* Allow it to sit next to text */
     margin-right: 5px; /* Space between color box and text */
 }
-/* Style for the circles */
 
 
-.item {
-    display: flex;        /* Flexbox for horizontal alignment */
-    align-items: center;  /* Vertically center the content */
-    margin-bottom: 10px;  /* Space between items */
-}
-
-
-
-.grid {
-    display: flex;         /* Enables flexbox */
-    flex-wrap: wrap;       /* Allows items to wrap to the next line */
-    justify-content: space-around; /* Distributes space around items */
-    max-width: 960px;      /* Maximum width of the grid */
-    margin: 0 auto;        /* Centers the grid horizontally */
-}
-
-.item {
-    display: flex;         /* Flexbox for horizontal alignment */
-    align-items: center;   /* Vertically center the content */
-    width: 45%;            /* Each item takes up 45% of the grid width */
-    margin-bottom: 2vh;   /* Space between rows */
-}
-
-.circle {
-    display: flex;
-    align-items: center;   /* Center content vertically */
-    justify-content: center; /* Center content horizontally */
-    text-align: center;
-    color: white;          /* Text color inside the circle */
-    font-size: 1vw;        /* Adjust font size based on the viewport width */
-    border-radius: 50%;    /* Circular shape */
-    box-sizing: border-box;
-
-    margin-right: 1vw;    /* Space between the circle and the text */
-}
-
-
-.largest {
-    width: 6vw; 
-    height: 6vw; 
-    max-width: 175px; 
-    max-height: 175px;
-    min-width: 120px; /* Adjust minimum size for better visibility */
-    min-height: 120px;
-    font-size: 1.25em; /* Slightly larger text for larger circles */
-}
-
-
-.large {
-    width: 5vw; 
-    height: 5vw; 
-    max-width: 150px; 
-    max-height: 150px;
-    min-width: 100px; /* Adjust minimum size for better visibility */
-    min-height: 100px;
-    font-size: 1.25em; /* Slightly larger text for larger circles */
-}
-
-.medium {
-    width: 4.5vw; 
-    height: 4.5vw;
-    max-width: 135px; 
-    max-height: 135px;
-    min-width: 90px;
-    min-height: 90px;
-    font-size: 1.15em; /* Adjust font size proportionally */
-}
-
-.small {
-    width: 4vw; 
-    height: 4vw;
-    max-width: 120px; 
-    max-height: 120px;
-    min-width: 80px;
-    min-height: 80px;
-    font-size: 1em; /* Standard font size */
-}
-
-.smallest {
-    width: 3.5vw; 
-    height: 3.5vw;
-    max-width: 105px; 
-    max-height: 105px;
-    min-width: 70px;
-    min-height: 70px;
-    font-size: 1em; /* Standard font size */
-}
-
-
-.smallest2 {
-    width: 3vw; 
-    height: 3vw;
-    max-width: 105px; 
-    max-height: 105px;
-    min-width: 60px;
-    min-height: 60px;
-    font-size: 1em; /* Standard font size */
-}
-
-
-
-.text {
-    /* flex-grow: 1;        */
-    font-size: .9em; /* Responsive font size */
-    margin-left: 0;
-}
-
-
-
-
-
-
-
-
-
-    /* Style for the text inside the circles */
-    .circle span {
-        position: absolute;
-        font-size: 1em;
-        color: white;
-        z-index: 1;
-        align-items: center;
-    }
 
       /* Remove default bullet points */
       ul {
@@ -492,11 +368,9 @@ section {
     position: absolute;
     top: 10px;
     margin-left: -70px;
-    width: 50px;        /* Set the width to your desired square's side length */
-    height: 50px;       /* Set the height to the same as the width to make it a square */
-    text-align: center; /* Horizontally center the text inside the button */
-
-    /* Vertically center the text. The value should be approximately the button's height */
+    width: 50px;       
+    height: 50px;      
+    text-align: center; 
     line-height: 1px;
   }
 
@@ -506,8 +380,8 @@ section {
   #progressBarContainer {
     position: fixed;
     width: 100%;
-    height: 12px; /* Adjust height as needed */
-    background-color: #EECE43; /* Yellow background */
+    height: 12px; 
+    background-color: #EECE43; 
     top: 0;
     left: 0;
     z-index: 1000;
@@ -515,7 +389,7 @@ section {
 
 #progressBar {
     height: 100%;
-    background-color: #F2695F; /* Pink color for progress */
+    background-color: #F2695F;
     width: 0%; /* Initial state with no progress */
 }
 
@@ -529,8 +403,8 @@ section {
   }
 
   ul {
-            list-style-type: disc; /* Ensures bullet points are shown */
-            padding-left: 2%;    /* Adds padding to ensure bullets are inside the container */
+            list-style-type: disc; 
+            padding-left: 2%;    
         }
 
 
