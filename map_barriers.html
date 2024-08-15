@@ -6,8 +6,8 @@
     <script src="https://d3js.org/d3.v7.min.js"></script>
     <style>
       #map svg {
-        width: 80vw;   /* Use 80% of the viewport width */
-        height: 85vh;  /* Use 80% of the viewport height */
+        width: 80vw;   
+        height: 85vh;  
         max-width: 100%;
         max-height: 100%;
         font-family: Arial;
@@ -37,20 +37,20 @@
         top: 10px;
         left: 10px;
         z-index: 1000;
-        width: 65vw; /* Adjusted base width for most devices */
-        max-width: 100%; /* Ensures it doesn't exceed container width */
+        width: 65vw; 
+        max-width: 100%; 
     }
 
     /* Media queries for smaller screens */
     @media (max-width: 600px) {
         select {
-            width: 90vw; /* Increase width for smaller screens to ensure full text is visible */
+            width: 90vw; 
         }
     }
 
     @media (max-width: 400px) {
         select {
-            width: 95vw; /* Further increase width for very small screens */
+            width: 95vw; 
         }
     }
     </style>
@@ -98,7 +98,7 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 
     function updateSelectPosition() {
-        var selectX = 10, selectY = 10; // Adjust according to your design
+        var selectX = 10, selectY = 10; 
         d3.select("#dataColumnSelect").style("top", selectY + "px").style("left", selectX + "px");
     }
 
