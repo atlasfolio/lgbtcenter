@@ -1,10 +1,4 @@
-// window.addEventListener("load", function() {
-//     var iframe = document.getElementById('igraph');
-//     var iframeWin = iframe.contentWindow || iframe.contentDocument.parentWindow;
-//     if (iframeWin.document.body) {
-//       iframe.height = iframeWin.document.documentElement.scrollHeight || iframeWin.document.body.scrollHeight;
-//     }
-//   });
+
 
 window.addEventListener('load', function() {
     const iframe = document.getElementById('igraph');
@@ -112,7 +106,7 @@ const triangleChart = new Chart(triangleChartCtx, {
        
             {
                 label: 'Trans',
-                data: [11, 8, 8], // Hypothetical data for Trans across the 3 age groups
+                data: [11, 8, 8], 
                 backgroundColor: 'rgba(242, 105, 95, 0.2)',
                 borderColor: 'rgba(242, 105, 95, 1)',
                 pointBackgroundColor: 'rgba(242, 105, 95, 1)',
@@ -122,7 +116,7 @@ const triangleChart = new Chart(triangleChartCtx, {
             },
             {
                 label: 'Non-binary, other or multiple',
-                data: [45, 21, 7], // Hypothetical data for Other or multiple gender identities across the 3 age groups
+                data: [45, 21, 7], 
                 backgroundColor: 'rgba(35, 153, 181, 0.2)',
                 borderColor: 'rgba(35, 153, 181, 1)',
                 pointBackgroundColor: 'rgba(35, 153, 181, 1)',
@@ -132,7 +126,7 @@ const triangleChart = new Chart(triangleChartCtx, {
             },
             {
                 label: 'Straight, Gay, or Lesbian',
-                data: [29, 48, 76], // Hypothetical data for Straight, Gay, or Lesbian across the 3 age groups
+                data: [29, 48, 76], 
                 backgroundColor: 'rgba(126, 188, 100, 0.2)',
                 borderColor: 'rgba(126, 188, 100, 1)',
                 pointBackgroundColor: 'rgba(126, 188, 100, 1)',
@@ -142,7 +136,7 @@ const triangleChart = new Chart(triangleChartCtx, {
             },
             {
                 label: 'Bisexual, pansexual, queer, other',
-                data: [71, 52, 24], // Hypothetical data for Bisexual, pansexual, queer, other across the 3 age groups
+                data: [71, 52, 24], 
                 backgroundColor: 'rgba(153, 102, 255, 0.2)',
                 borderColor: 'rgba(153, 102, 255, 1)',
                 pointBackgroundColor: 'rgba(153, 102, 255, 1)',
@@ -152,7 +146,7 @@ const triangleChart = new Chart(triangleChartCtx, {
             },
             {
                 label: 'Cisgender',
-                data: [44, 72, 85], // Hypothetical data for Cisgender across the 3 age groups
+                data: [44, 72, 85], 
                 backgroundColor: 'rgba(258, 206, 67, 0.2)',
                 borderColor: 'rgba(258, 206, 67, 0.5)',
                 pointBackgroundColor: 'rgba(258, 206, 67, 0.2)',
@@ -163,8 +157,8 @@ const triangleChart = new Chart(triangleChartCtx, {
         ]
     },
     options: {
-        responsive: true, // The chart will grow to fill the container
-        maintainAspectRatio: false, // The chart will not maintain the aspect ratio
+        responsive: true, 
+        maintainAspectRatio: false, 
         layout: {
       
             padding: 0,
@@ -172,11 +166,10 @@ const triangleChart = new Chart(triangleChartCtx, {
         scales: {
             r: {
                 ticks: {
-                    // Adjust the font of the radial axis ticks (labels)
                     display: true,
                     font: {
-                        size: 10, // Sets the font size
-                        family: 'Arial', // Sets the font family
+                        size: 10, 
+                        family: 'Arial', 
                     }
                 },
                 angleLines: {
@@ -188,10 +181,9 @@ const triangleChart = new Chart(triangleChartCtx, {
                 suggestedMin: 0,
                 suggestedMax: 100,
                 pointLabels: {
-                    // This is where you adjust the font for the point labels around the radar
                     font: {
-                        size: 14, // Set the font size for the point labels
-                        family: 'Arial' // Set the font family for the point labels
+                        size: 14, 
+                        family: 'Arial' 
                     }, 
                 }
             }
@@ -208,7 +200,7 @@ const triangleChart = new Chart(triangleChartCtx, {
                             label += ': ';
                         }
                         const value = context.raw;
-                        label += value + '%'; // Append a '%' sign to each value
+                        label += value + '%'; 
                         return label;
                     }
                 }
@@ -244,13 +236,10 @@ const triangleChart = new Chart(triangleChartCtx, {
 function resizeCanvas() {
     var canvas = document.getElementById('triangleChart');
     if (!canvas) return;
-    // Set the dimensions explicitly, avoiding continuous growth or zero dimensions
     canvas.width = document.getElementById('column2').offsetWidth;
-    canvas.height = Math.min(window.innerHeight * 0.75, 400);  // Limiting height to avoid it becoming too large
-    // Re-instantiate the chart or update its size here if necessary
+    canvas.height = Math.min(window.innerHeight * 0.75, 400); 
 }
 
-// Ensure resize logic is called on appropriate events
 window.addEventListener('resize', resizeCanvas);
 window.addEventListener('DOMContentLoaded', resizeCanvas);
 
@@ -263,7 +252,6 @@ window.addEventListener('DOMContentLoaded', resizeCanvas);
 
 let currentCategory = 'mentalHealth';
 
-// Data for each category (simplified structure; expand according to your data)
 const dataCategories = {
     mentalHealth: [16.7, 9.1, 13, 8.5, 14.8, 6.5],
     chronicConditions: [8.3, 13, 7.8, 4.1, 4.2, 15.2], 
@@ -276,22 +264,18 @@ const dataCategories = {
 };
 
 function sortDataAndLabels(data, labels) {
-    // Combine the labels and data into an array of objects to keep them together during sorting
     const combined = labels.map((label, index) => {
         return { label, data: data[index] };
     });
 
-    // Sort the combined array based on the data, in descending order
     combined.sort((a, b) => b.data - a.data);
 
-    // Separate the combined array back into sorted labels and data arrays
     const sortedLabels = combined.map(item => item.label);
     const sortedData = combined.map(item => item.data);
 
     return { sortedLabels, sortedData };
 }
 
-// Use the function to sort the initial data and labels
 const sortedInitial = sortDataAndLabels(dataCategories[currentCategory], [
     'Asian, Asian American or Pacific Islander', 
     'Black, not Latinx/Hispanic', 
@@ -301,7 +285,6 @@ const sortedInitial = sortDataAndLabels(dataCategories[currentCategory], [
     'Multiracial, not including Black or Latinx/Hispanic'
 ]);
 
-// Define a function to find the max and min values in the dataset
 function findMinMaxValues(data) {
     let min = data[0], max = data[0];
     data.forEach(value => {
@@ -313,7 +296,6 @@ function findMinMaxValues(data) {
     return { min, max };
 }
 
-// Adjust getColorForValue to dynamically use max and min for normalization
 function getColorForValue(value, min, max, category) {
     const gradients = {
         mentalHealth: {start: {r: 35, g: 153, b: 181}, end: {r: 242, g: 105, b: 95} },
@@ -336,18 +318,15 @@ function getColorForValue(value, min, max, category) {
     return `rgb(${r},${g},${b})`;
 }
 
-// Initial setup for the bar chart
 const ctx = document.getElementById('accessToCareChart').getContext('2d');
-let accessToCareChart; // Define it here so it can be re-used/updated
+let accessToCareChart; 
 
 function setupOrUpdateChart(sortedData, sortedLabels, category) {
-    // Find the max and min values in the current dataset
     const { min, max } = findMinMaxValues(sortedData);
 
     // Generate gradient colors for the sorted data
     const initialBackgroundColors = sortedData.map(value => getColorForValue(value, min, max, category));
 
-    // Check if the chart exists, if so, update it, otherwise set it up
     if (accessToCareChart) {
         accessToCareChart.data.datasets[0].data = sortedData;
         accessToCareChart.data.labels = sortedLabels;
@@ -388,7 +367,6 @@ function setupOrUpdateChart(sortedData, sortedLabels, category) {
     }
 }
 
-// Call setupOrUpdateChart initially with sorted data and labels
 setupOrUpdateChart(sortedInitial.sortedData, sortedInitial.sortedLabels, currentCategory);
 
 function updateChart(category) {
@@ -419,7 +397,6 @@ function updateChart(category) {
     setupOrUpdateChart(sorted.sortedData, sorted.sortedLabels, category);
 }
 
-// Event listener for the dropdown menu
 document.getElementById('categorySelect').addEventListener('change', function() {
     currentCategory = this.value;
     updateChart(currentCategory);
@@ -509,7 +486,7 @@ const piechartdata = {
       cutout: '60%',
       plugins: {
         legend: {
-          display: false // This will turn off the default Chart.js legend
+          display: false 
         },
         tooltip: {
           callbacks: {
@@ -563,7 +540,7 @@ document.addEventListener("DOMContentLoaded", function() {
     const hivPrevalence = new Chart(hivctx, {
         type: 'bar',
         data: {
-            labels: originalData[0].values.map(v => v.location), // Assuming each category has the same locations
+            labels: originalData[0].values.map(v => v.location), 
             datasets: datasets
         },
         options: {
@@ -666,7 +643,7 @@ document.addEventListener("DOMContentLoaded", function() {
                     },
                     pointLabels: {
                         font: {
-                            size: 10 // Increase font size here
+                            size: 10 
                           
 
                         },
@@ -752,7 +729,7 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 
     function updateSelectPosition() {
-        var selectX = 10, selectY = 10; // Adjust according to your design
+        var selectX = 10, selectY = 10; 
         d3.select("#dataColumnSelect").style("top", selectY + "px").style("left", selectX + "px");
     }
 
@@ -830,8 +807,8 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 
     function drawLegend(svg, width) {
-        var legendX = width * 0.1, legendY = 10; // Adjusted to top-left corner
-        var legendWidth = width * 0.2, legendHeight = 20, legendMargin = 10; // Adjusted size
+        var legendX = width * 0.1, legendY = 10; 
+        var legendWidth = width * 0.2, legendHeight = 20, legendMargin = 10; 
 
         var gradients = svg.append("defs")
             .append("linearGradient")
