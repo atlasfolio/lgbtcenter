@@ -155,16 +155,14 @@ document.addEventListener('DOMContentLoaded', function() {
     function drawLegend(svg, width) {
         var legendX = width * 0.1, legendY = 10;
         var legendWidth = width * 0.2, legendHeight = 20, legendMargin = 10;
-        var sectionWidth = legendWidth / 9;  // There are 9 color sections
+        var sectionWidth = legendWidth / 9;  
 
         var colors = [
         "#7EBC64", "#8CBE60", "#9AC15C", "#A8C358", "#B6C553", "#C4C74F", "#D2CA4B", "#E0CC47", "#EECE43", "#EFC147", "#EFB44A", "#F0A84E", "#F09B51", "#F18E55", "#F18258", "#F2755C", "#F2695F"
     ];
 
- // Calculate section width dynamically based on the number of color categories
  var sectionWidth = legendWidth / colors.length;
 
-// Append color blocks to the legend
 colors.forEach((color, index) => {
     svg.append("rect")
         .attr("x", legendX + index * sectionWidth)
@@ -174,18 +172,15 @@ colors.forEach((color, index) => {
         .style("fill", color);
 });
 
-// Define the legend's scale
 var xLegendScale = d3.scaleLinear()
     .domain([52, 68])
     .range([0, legendWidth]);
 
-// Define the axis for the legend
 var legendAxis = d3.axisBottom(xLegendScale)
     .tickSize(5) // Size of the ticks
     .tickValues([52, 60, 68]) // Only show ticks at 50%, 75%, and 100%
     .tickFormat(d => `${d}%`); // Format ticks as percentages
 
-// Append the axis to the legend
 svg.append("g")
     .attr("class", "legend-axis")
     .attr("transform", `translate(${legendX}, ${legendY + legendHeight + legendMargin})`)
@@ -195,7 +190,7 @@ svg.append("g")
 
     function createCustomColorScale() {
         return d3.scaleThreshold()
-            .domain([52, 53, 54, 55, 56, 57, 58, 59, 60, 61, 62, 63, 64, 65, 66, 67, 68])  // Define breaks in the scale
+            .domain([52, 53, 54, 55, 56, 57, 58, 59, 60, 61, 62, 63, 64, 65, 66, 67, 68])  
             .range([
             "#7EBC64", "#8CBE60", "#9AC15C", "#A8C358", "#B6C553", "#C4C74F", "#D2CA4B", "#E0CC47", "#EECE43", "#EFC147", "#EFB44A", "#F0A84E", "#F09B51", "#F18E55", "#F18258", "#F2755C", "#F2695F"
 
