@@ -3,7 +3,7 @@
 window.addEventListener('load', function() {
     const iframe = document.getElementById('igraph');
     if (iframe.contentWindow) {
-        // Function to set size
+
         const resizeIframe = () => {
             try {
                 const body = iframe.contentWindow.document.body;
@@ -15,10 +15,8 @@ window.addEventListener('load', function() {
             }
         };
 
-        // Set initial size
         resizeIframe();
 
-        // Optional: Resize on window resize or orientation change
         window.addEventListener('resize', resizeIframe);
         window.addEventListener('orientationchange', resizeIframe);
     }
@@ -31,7 +29,6 @@ document.addEventListener('DOMContentLoaded', function () {
     const navbar = document.getElementById('navbar');
     const navLinks = navbar.querySelectorAll('a');
 
-    // Function to toggle navigation open/close
     toggleNavButton.addEventListener('click', function() {
         if (navbar.classList.contains('nav-closed')) {
             navbar.classList.remove('nav-closed');
@@ -42,20 +39,17 @@ document.addEventListener('DOMContentLoaded', function () {
         }
     });
 
-    // Function to handle navigation link clicks
     navLinks.forEach(link => {
         link.addEventListener('click', function(event) {
             event.preventDefault(); // Prevent default anchor click behavior
             const targetSection = document.querySelector(this.getAttribute('href'));
 
             if (targetSection) {
-                // Scroll to the section smoothly
                 window.scrollTo({
                     top: targetSection.offsetTop,
                     behavior: 'smooth'
                 });
 
-                // Close the navigation after clicking
                 navbar.classList.remove('nav-open');
                 navbar.classList.add('nav-closed');
             }
@@ -69,7 +63,6 @@ function updateProgress() {
     var total = sections.length;
     var currentSectionIndex = 0;
 
-    // Check which section the current scroll position is passing
     sections.forEach((section, index) => {
         if (scrollPosition >= section.offsetTop) {
             currentSectionIndex = index + 1;
